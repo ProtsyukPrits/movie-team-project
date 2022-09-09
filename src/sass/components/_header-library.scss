@@ -1,6 +1,46 @@
-.header__container {
-    background-color: aqua;
+.header {
+    margin-left: auto;
+    margin-right: auto;
 
+    background-color: $bg-header;
+    background-image: url(../images/header/header-library/bg-mobile/bg-mobile1x.jpg);
+
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    @media (min-device-pixel-ratio: 2),
+    (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+        background-image: url(../images/header/header-library/bg-mobile/bg-mobile2x.jpg);
+    }
+
+    @media screen and (min-width: 768px) {
+        background-image: url(../images/header/header-library/bg-tablet/bg-tablet1x.jpg);
+
+        @media (min-device-pixel-ratio: 2),
+        (-webkit-min-device-pixel-ratio: 2),
+        (min-resolution: 192dpi),
+        (min-resolution: 2dppx) {
+            background-image: url(../images/header/header-library/bg-tablet/bg-tablet2x.jpg);
+        }
+    }
+
+    @media screen and (min-width: 1280px) {
+        max-width: 1280px;
+        background-image: url(../images/header/header-library/bg-desktop/bg-desktop1x.jpg);
+
+        @media (min-device-pixel-ratio: 2),
+        (-webkit-min-device-pixel-ratio: 2),
+        (min-resolution: 192dpi),
+        (min-resolution: 2dppx) {
+            background-image: url(../images/header/header-library/bg-desktop/bg-desktop2x.jpg);
+        }
+    }
+}
+
+.header__container {
     padding-top: 40px;
     padding-bottom: 62px;
 
@@ -10,7 +50,6 @@
 }
 
 .nav {
-    background-color: chocolate;
     display: flex;
     align-items: center;
     margin-bottom: 60px;
@@ -49,15 +88,10 @@
     }
 }
 
-
-
-
-
 .nav__list {
     display: flex;
     margin-left: auto;
 }
-
 
 .nav__item {
     text-transform: uppercase;
