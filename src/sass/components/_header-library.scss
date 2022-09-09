@@ -1,0 +1,110 @@
+.header {
+    margin-left: auto;
+    margin-right: auto;
+
+    background-color: $bg-header;
+    background-image: url(../images/header/header-library/bg-mobile/bg-mobile1x.jpg);
+
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    @media (min-device-pixel-ratio: 2),
+    (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+        background-image: url(../images/header/header-library/bg-mobile/bg-mobile2x.jpg);
+    }
+
+    @media screen and (min-width: 768px) {
+        background-image: url(../images/header/header-library/bg-tablet/bg-tablet1x.jpg);
+
+        @media (min-device-pixel-ratio: 2),
+        (-webkit-min-device-pixel-ratio: 2),
+        (min-resolution: 192dpi),
+        (min-resolution: 2dppx) {
+            background-image: url(../images/header/header-library/bg-tablet/bg-tablet2x.jpg);
+        }
+    }
+
+    @media screen and (min-width: 1280px) {
+        max-width: 1280px;
+        background-image: url(../images/header/header-library/bg-desktop/bg-desktop1x.jpg);
+
+        @media (min-device-pixel-ratio: 2),
+        (-webkit-min-device-pixel-ratio: 2),
+        (min-resolution: 192dpi),
+        (min-resolution: 2dppx) {
+            background-image: url(../images/header/header-library/bg-desktop/bg-desktop2x.jpg);
+        }
+    }
+}
+
+.header__container {
+    padding-top: 40px;
+    padding-bottom: 62px;
+
+    @media screen and (min-width: 768px) {
+        padding-bottom: 60px;
+    }
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    margin-bottom: 60px;
+
+    @media screen and (min-width: 768px) {
+        margin-bottom: 40px;
+    }
+}
+
+.nav__logo {
+    display: flex;
+    align-items: center;
+
+    &-icon {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+
+    }
+
+    &-text {
+
+        @media screen and (max-width: 767.98px) {
+            display: none;
+        }
+
+        @media screen and (min-width: 768px) {
+            margin-left: 10px;
+        }
+
+        color: $text-color-secondary;
+        font-weight: 500;
+        font-size: 30px;
+        line-height: 1.17;
+
+    }
+}
+
+.nav__list {
+    display: flex;
+    margin-left: auto;
+}
+
+.nav__item {
+    text-transform: uppercase;
+
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.17;
+
+    &:not(:last-child) {
+        margin-right: 39px;
+    }
+
+    &>a {
+        color: $text-color-secondary;
+    }
+}
