@@ -1,0 +1,29 @@
+%button {
+    display: block;
+    font-family: inherit;
+    text-align: center;
+    border-radius: 5px;
+
+    transition: background-color $animation, border $animation, color $animation;
+}
+
+%button__primary {
+    min-width: 130px;
+    height: 44px;
+    text-transform: uppercase;
+    border: 0;
+
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.33;
+
+    @media screen and (min-width: 768px) {
+        min-width: 152px;
+    }
+
+    @media screen and (min-width: 1280px) {
+        min-width: 147px;
+        height: 42px;
+    }
+
+}

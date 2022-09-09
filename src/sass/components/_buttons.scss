@@ -1,0 +1,111 @@
+.header__button-wrap {
+    display: flex;
+    flex-wrap: wrap;
+
+    @media screen and (max-width: 767.98px) {
+        justify-content: space-between;
+    }
+
+    @media screen and (min-width: 768px) {
+        justify-content: center;
+    }
+
+}
+
+.button__primary-accent {
+    @extend %button;
+    @extend %button__primary;
+    @include btn-color($button-color-accent, $text-color-secondary);
+
+    &:hover,
+    &:focus {
+        background-color: $button-color-accent-hover;
+    }
+
+}
+
+.button__primary-light {
+    @extend %button;
+    @extend %button__primary;
+    @include btn-color($button-color, $text-color-secondary);
+    @include border($border-color-light);
+
+
+    &:hover,
+    &:focus {
+        background-color: $button-color-hover;
+    }
+
+}
+
+.header__button:not(:last-child) {
+
+    @media screen and (min-width: 768px) {
+        margin-right: 32px;
+    }
+
+    @media screen and (min-width: 1280px) {
+        margin-right: 16px;
+    }
+
+}
+
+// =====================КЛАСИ ТА РОЗМІТКА ДЛЯ КНОПОК КАРТКИ ФІЛЬМУ===========================
+
+// <ul class="card__button-wrap">
+//  <li class="card__button">
+//   <button type="button" class="button__secondary">add to watched</button>
+//  </li>
+//  <li class="card__button">
+//   <button type="button" class="button__secondary">add to queue</button>
+//  </li>
+// </ul>
+
+
+.card__button-wrap {
+    display: flex;
+    flex-wrap: wrap;
+
+    @media screen and (max-width: 767.98px) {
+        justify-content: space-between;
+    }
+
+}
+
+.button__secondary {
+    @extend %button;
+    @include btn-color($button-color, $text-color-primary);
+    @include border($border-color-dark);
+
+    min-width: 110px;
+    height: 44px;
+    text-transform: uppercase;
+
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.33;
+
+    &:hover,
+    &:focus {
+        border: 0;
+        color: $text-color-secondary;
+        background-color: $button-color-accent;
+    }
+
+    @media screen and (min-width: 768px) {
+        min-width: 125px;
+    }
+
+    @media screen and (min-width: 1280px) {
+        min-width: 136px;
+    }
+
+}
+
+.card__button:not(:last-child) {
+
+    @media screen and (min-width: 768px) {
+        margin-right: 15px;
+    }
+
+}

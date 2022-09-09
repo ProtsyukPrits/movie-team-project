@@ -1,0 +1,41 @@
+// На кнопки задані власні фокус і ховер 
+
+// ============Fonts-Family===============
+$primary-font-family: 'Roboto';
+
+// =============ANIMATION==============
+$animation: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+$animation-modal: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+
+// ==============COLORS================
+$text-color-primary: #000000;
+$text-color-secondary: #ffffff;
+$text-color-dark: #545454;
+$text-color-light: #8C8C8C;
+$text-color-accent: #FF6B08;
+$text-color-error: #FF001B;
+
+// ==============Icons-COLORS==================
+$icon-color-primary: #ffffff;
+$icon-color-dark: #000000;
+$icon-color-accent: #FF6B08;
+
+// ==============BACKGROUND-COLORS=============
+$bg-primary: #ffffff;
+$bg-header: rgba(0, 0, 0, 0.56);
+$bg-footer: #F7F7F7;
+$bg-modal: rgba(0, 0, 0, 0.25);
+
+
+// =============Border-COLORS======================
+$border-color-light: #ffffff;
+$border-color-dark: #000000;
+$border-color-accent: #FF001B;
+
+// ==============Buttons-COLORS================
+$button-color: transparent;
+$button-color-accent: #FF6B01;
+$button-color-hover: rgba(0, 0, 0, 0.1);
+$button-color-accent-hover: #e56204;
+$button-color-light-number: #F7F7F7;
+$button-color-accent-number: #FF6B08;
