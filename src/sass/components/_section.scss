@@ -1,0 +1,11 @@
+//  з секцією для мобліки поки що непонятно на зідзвоні уточнимо!
+.section {
+  padding-top: 40px;
+  padding-bottom: 40px;
+
+ @media screen and (min-width: 768px) {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+
+}
