@@ -1,11 +1,41 @@
-.header {
-    padding-top: 40px;
-    padding-bottom: 92px;
-    height: 230px;
+.header__home {
+    margin-left: auto;
+    margin-right: auto;
 
-    background-image: linear-gradient(90deg, rgba(0, 0, 0, .56), rgba(0, 0, 0, .56)), url(/src/images/header-mob.jpg);
+    background-image: linear-gradient(90deg, rgba(0, 0, 0, .56), rgba(0, 0, 0, .56)), url(../images/header-mob.jpg);
+    background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+
+    @media (min-device-pixel-ratio: 2),
+    (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+        background-image: linear-gradient(90deg, rgba(0, 0, 0, .56), rgba(0, 0, 0, .56)), url(../images/header-mob2x.jpg);
+    }
+
+    @media screen and (min-width: 768px) {
+        background-image: linear-gradient(90deg, rgba(0, 0, 0, .56), rgba(0, 0, 0, .56)), url(../images/header-mob.jpg);
+
+        @media (min-device-pixel-ratio: 2),
+        (-webkit-min-device-pixel-ratio: 2),
+        (min-resolution: 192dpi),
+        (min-resolution: 2dppx) {
+            background-image: linear-gradient(90deg, rgba(0, 0, 0, .56), rgba(0, 0, 0, .56)), url(../images/header-mob2x.jpg);
+        }
+    }
+
+    @media screen and (min-width: 1280px) {
+        max-width: 1280px;
+        background-image: linear-gradient(90deg, rgba(0, 0, 0, .56), rgba(0, 0, 0, .56)), url(../images/header-mob.jpg);
+
+        @media (min-device-pixel-ratio: 2),
+        (-webkit-min-device-pixel-ratio: 2),
+        (min-resolution: 192dpi),
+        (min-resolution: 2dppx) {
+            background-image: linear-gradient(90deg, rgba(0, 0, 0, .56), rgba(0, 0, 0, .56)), url(../images/header-mob.jpg);
+        }
+    }
 }
 
 .header__wrapper {
@@ -21,7 +51,18 @@
 }
 
 .header__name {
-    margin-left: 8px;
+    @media screen and (max-width: 767px) {
+        display: none;
+    }
+
+    @media screen and (min-width: 768px) {
+        margin-left: 10px;
+    }
+
+    color: $text-color-secondary;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 1.17;
 }
 
 .header__nav-list {
@@ -31,6 +72,14 @@
 .header__nav-item {
     margin-left: auto;
     margin-right: 30px;
+
+    text-transform: uppercase;
+
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.17;
+
+    
 }
 
 
@@ -90,14 +139,20 @@
     margin-left: auto;
     margin-right: 30px;
     width: 150px;
+
+    background-color: inherit;
 }
 
 .header__filter-votes {
     width: 150px;
+
+    background-color: inherit;
 }
 
 .header__filter-years {
     margin-left: 30px;
     margin-right: auto;
     width: 150px;
+
+    background-color: inherit;
 }
