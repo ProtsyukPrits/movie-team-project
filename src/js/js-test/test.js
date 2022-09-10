@@ -37,20 +37,20 @@ render();
 const cardsMarkup = function (items) {
   return items
     .map(
-      ({ backdrop_path, title, vote_average, release_date, id }) => `
+      ({ poster_path, title, vote_average, release_date, id }) => `
       <li class='movie__card' data-movie-cart-ID='${id}'>
         <a href='#' class='movie__card-link'>
         <picture>
             <source
-            srcset="https://image.tmdb.org/t/p/w1280${backdrop_path}"
+            srcset="https://image.tmdb.org/t/p/w1280${poster_path}"
             media='(min-width: 1280px)'
             />
             <source
-            srcset="https://image.tmdb.org/t/p/w780${backdrop_path}"
+            srcset="https://image.tmdb.org/t/p/w780${poster_path}"
             media='(min-width: 768px)'
             />
             <source
-            srcset="https://image.tmdb.org/t/p/w300${backdrop_path}"
+            srcset="https://image.tmdb.org/t/p/w300${poster_path}"
             media='(min-width: 320px)'
             />
             <img
