@@ -1,0 +1,34 @@
+{{#each this}}
+  <li class='movie__card' data-movie-cart-ID=''>
+    <a href='#' class='movie__card-link'>
+      <picture>
+        <source
+          srcset='/src/images/card1.jpg 1x, /src/images/card1.jpg 2x'
+          media='(min-width: 1200px)'
+        />
+        <source
+          srcset='/src/images/card1.jpg 1x, /src/images/card1.jpg 2x'
+          media='(min-width: 768px)'
+        />
+        <source
+          srcset='/src/images/card1.jpg 1x, /src/images/card1.jpg 2x'
+          media='(min-width: 320px)'
+        />
+        <img
+          class='movie__card-img'
+          src='/src/images/card1.jpg'
+          alt='description'
+          loading='lazy'
+          width=''
+          height=''
+        />
+      </picture>
+      <p class='movie__card-title'>Greyhound 2020</p>
+      <div class='movie__card-details'>
+        <p class='movie__card-genre'>Drama, Action</p>
+        <p class='movie__card-year'>2020</p>
+        <p class='movie__card-rating'>10.0</p>
+      </div>
+    </a>
+  </li>
+{{/each}}
