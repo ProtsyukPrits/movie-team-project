@@ -1,39 +1,3 @@
-import MovieApiService from './test-api';
-// import renderHomeGalleryBySearchQuery from './render-by-search-query';
-
-// const element = document.querySelector('.movies__gallery');
-
-const API = new MovieApiService();
-
-// API.searchMovie();
-API.getСonfiguration();
-
-// renderHomeGalleryBySearchQuery(element);
-
-import axios from 'axios';
-
-const API_KEY = '68dd2d07f1b8d9799366e4d9411e689b';
-const BASE_URL = 'https://api.themoviedb.org/3/';
-const page = 1;
-const perPage = 40;
-let items = [];
-
-async function trendingFetch() {
-  const { data } = await axios.get(`${BASE_URL}trending/all/day?api_key=${API_KEY}&${page}`);
-  return data;
-}
-
-const gallery = document.querySelector('.movies__gallery');
-async function render() {
-  const data = await trendingFetch();
-  items = data.results;
-  console.log('items', items);
-  const createGAl = cardsMarkup(items);
-  gallery.innerHTML = createGAl;
-}
-
-render();
-
 const cardsMarkup = function (items) {
   return items
     .map(
@@ -74,3 +38,6 @@ const cardsMarkup = function (items) {
     )
     .join('');
 };
+
+// Сюди додавайте ваші розмітки і незабудьте змінити ще import
+export { cardsMarkup };
