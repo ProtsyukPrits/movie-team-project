@@ -14,16 +14,16 @@ const gallery = document.querySelector('.movies__gallery');
 const searchForm = document.querySelector('.header__search');
 const searchInput = document.querySelector('.header__search-input');
 
+// Тут додаємо ваші глобальні змінні
+let items = [];
 // Тут додаємо слухачі подій
 
 searchInput.addEventListener('input', e => {
   queryString = e.target.value;
-  console.log(queryString);
 });
 
 searchForm.addEventListener('submit', e => {
   e.preventDefault();
-  console.log(getMoviesByQueryKey(queryString));
   return getMoviesByQueryKey(queryString);
 });
 
