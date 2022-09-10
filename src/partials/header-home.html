@@ -1,121 +1,133 @@
 <header class="header__home" id="header">
-    <div class="header__container">
-        <div class="header__wrapper">
-            <!--LOGO-->
-            <a href="#en" class="header__link">
-                <!--<svg class="header__icon"
+  <div class="header__container">
+    <div class="header__wrapper">
+      <!--LOGO-->
+      <a href="#en" class="header__link">
+        <!--<svg class="header__icon"
                     width="24"
                     height="24"
                 >
                    <use href=""></use>
-                </svg>--> 
-                <span class="header__name">FILMOTEKA</span>
-            </a>
-            <!--NAVIGATION-->
-            <nav class="header__nav">
-                <ul class="header__nav-list">
-                    <li class="header__nav-item">
-                        <button data-lang="home" class="header__nav-home" type="button">
-                        HOME
-                        </button>
-                    </li>
-                    <li class="header__nav-item">
-                        <button
-                        data-lang="library"
-                        class="header__nav-library"
-                        type="button"
-                        >
-                        MY LIBRARY
-                        </button>
-                    </li>
-                    <li class="header__nav-item">
-                        <button data-lang="log" class="header__nav-login" type="button">
-                        LOG IN
-                        </button>
-                    </li>
-                    <li class="header__nav-item is-hidden">
-                        <button class="header__nav-logout" type="button" data-lang="logoutBtn">LOG OUT</button>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-        <div class="header__btns">
-            <!--NIGHT MODE-->
-        <div class="header__nightmode">
-            <button class="header__nightmode-btn"></button>
-        </div>
-        <!--LANGUAGE-->
-        <div class="header__lang">
-            <select class="header__lang-select" name="select" id="select">
-                <a href="#" class="header__lang-en">
-                    <option value="en">EN</option>
-                </a>
-                <a href="#" class="header__lang-uk">
-                    <option value="uk">UA</option>
-                </a>
-            </select>
-        </div>
-        </div>
-        <!--SEARCHER-->
-        <form class="header__search">
-            <input
-                class="header__search-input"
-                type="text"
-                placeholder="Search movie"
-                name="headerInput"
-            />
-            <button class="header__search-btn" type="submit">
-                <!--<svg class="header__search-icon" 
-                    width="12" 
-                    height="12">
-                <use href=""></use>
                 </svg>-->
+        <span class="header__name">FILMOTEKA</span>
+      </a>
+      <!--NAVIGATION-->
+      <nav class="header__nav">
+        <ul class="header__nav-list">
+          <li class="header__nav-item">
+            <button data-lang="home" class="header__nav-btn" type="button">
+              HOME
             </button>
-        </form>
-          <!--FILTER-->
-        <form class="header__filter">
-            <!--GENRES-->
-                <select
-                    class="header__filter-genres"
-                    name="genre"
-                    id="genre_choice"
-                >
-                    <option class="header__filter-genres-option" value="">Genre</option>
-                    <option class="header__filter-genres-option" value="28">Action</option>
-                    <option class="header__filter-genres-option" value="12">Adventure</option>
-                    <option class="header__filter-genres-option" value="16">Animation</option>
-                    <option class="header__filter-genres-option" value="35">Comedy</option>
-                    <option class="header__filter-genres-option" value="80">Crime</option>
-                    <option class="header__filter-genres-option" value="99">Documentary</option>
-                    <option class="header__filter-genres-option" value="18">Drama</option>
-                    <option class="header__filter-genres-option" value="10751">Family</option>
-                    <option class="header__filter-genres-option" value="14">Fantasy</option>
-                    <option class="header__filter-genres-option" value="36">History</option>
-                    <option class="header__filter-genres-option" value="27">Horror</option>
-                    <option class="header__filter-genres-option" value="10402">Music</option>
-                    <option class="header__filter-genres-option" value="9648">Mystery</option>
-                    <option class="header__filter-genres-option" value="10749">Romance</option>
-                    <option class="header__filter-genres-option" value="878">Science Fiction</option>
-                    <option class="header__filter-genres-option" value="10770">TV Movie</option>
-                    <option class="header__filter-genres-option" value="53">Thriller</option>
-                    <option class="header__filter-genres-option" value="10752">War</option>
-                    <option class="header__filter-genres-option" value="37">Western</option>
-                </select>
-            <!--VOTES-->
-            <select class="header__filter-votes" name="votes" id="votes_choice">
-                <option value="">Don't sort</option>
-                <option value="header__filter-votes-average">Sort by Average voite</option>
-                <option value="header__filter-votes-count">Sort by Voite count</option>
-                <option value="header__filter-votes-popularity">Sort by Popularity</option>
-            </select>
-            <!--YEAR-->
-            <select
-                class="header__filter-years"
-                name="year"
-                id="year_choice"
-            >
-            <option value="">All years</option>
-            </select>
-        </form>
+          </li>
+          <li class="header__nav-item">
+            <button data-lang="library" class="header__nav-btn" type="button">
+              MY LIBRARY
+            </button>
+          </li>
+          <li class="header__nav-item">
+            <button data-lang="log" class="header__nav-btn" type="button">
+              LOG IN
+            </button>
+          </li>
+          <li class="header__nav-item is-hidden">
+            <button class="header__nav-btn" type="button" data-lang="logoutBtn">
+              LOG OUT
+            </button>
+          </li>
+        </ul>
+      </nav>
     </div>
+    <div class="header__btns">
+      <!--NIGHT MODE-->
+      <div class="header__nightmode">
+        <button class="header__nightmode-btn"></button>
+      </div>
+      <!--LANGUAGE-->
+      <div class="header__lang">
+        <select class="header__lang-select" name="select" id="select">
+          <a href="#" class="header__lang-en">
+            <option value="en">EN</option>
+          </a>
+          <a href="#" class="header__lang-uk">
+            <option value="uk">UA</option>
+          </a>
+        </select>
+      </div>
+    </div>
+    <!--SEARCHER-->
+    <form class="header__search">
+      <input
+        class="header__search-input"
+        type="text"
+        placeholder="Movie search"
+        name="headerInput"
+      />
+      <button class="header__search-btn" type="submit">
+        <svg class="header__search-icon" width="12" height="12">
+          <use href="./images/header/search-icon.svg"></use>
+        </svg>
+      </button>
+    </form>
+    <!--FILTER-->
+    <form class="header__filter">
+      <!--GENRES-->
+      <select class="header__filter-genres" name="genre" id="genre_choice">
+        <option class="header__filter-genres-option" value="">Genre</option>
+        <option class="header__filter-genres-option" value="28">Action</option>
+        <option class="header__filter-genres-option" value="12">
+          Adventure
+        </option>
+        <option class="header__filter-genres-option" value="16">
+          Animation
+        </option>
+        <option class="header__filter-genres-option" value="35">Comedy</option>
+        <option class="header__filter-genres-option" value="80">Crime</option>
+        <option class="header__filter-genres-option" value="99">
+          Documentary
+        </option>
+        <option class="header__filter-genres-option" value="18">Drama</option>
+        <option class="header__filter-genres-option" value="10751">
+          Family
+        </option>
+        <option class="header__filter-genres-option" value="14">Fantasy</option>
+        <option class="header__filter-genres-option" value="36">History</option>
+        <option class="header__filter-genres-option" value="27">Horror</option>
+        <option class="header__filter-genres-option" value="10402">
+          Music
+        </option>
+        <option class="header__filter-genres-option" value="9648">
+          Mystery
+        </option>
+        <option class="header__filter-genres-option" value="10749">
+          Romance
+        </option>
+        <option class="header__filter-genres-option" value="878">
+          Science Fiction
+        </option>
+        <option class="header__filter-genres-option" value="10770">
+          TV Movie
+        </option>
+        <option class="header__filter-genres-option" value="53">
+          Thriller
+        </option>
+        <option class="header__filter-genres-option" value="10752">War</option>
+        <option class="header__filter-genres-option" value="37">Western</option>
+      </select>
+      <!--VOTES-->
+      <select class="header__filter-votes" name="votes" id="votes_choice">
+        <option value="">Don't sort</option>
+        <option value="header__filter-votes-average">
+          Sort by Average voite
+        </option>
+        <option value="header__filter-votes-count">Sort by Voite count</option>
+        <option value="header__filter-votes-popularity">
+          Sort by Popularity
+        </option>
+      </select>
+      <!--YEAR-->
+      <select class="header__filter-years" name="year" id="year_choice">
+        <option value="">All years</option>
+      </select>
+    </form>
+  </div>
 </header>
