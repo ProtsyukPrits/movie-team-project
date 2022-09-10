@@ -1,0 +1,41 @@
+.movie__card:not(:last-child) {
+  margin-bottom: 20px;
+}
+.movie__card-link {
+}
+.movie__card-img {
+  margin-bottom: 8px;
+}
+.movie__card-title {
+  text-transform: uppercase;
+
+  margin-bottom: 5px;
+}
+.movie__card-details {
+  display: flex;
+}
+.movie__card-genre {
+}
+.movie__card-genre::after {
+  content: '';
+
+  margin: 0 5px;
+
+  border-right: 2px solid tomato;
+}
+.movie__card-year {
+  margin-right: 8px;
+}
+.movie__card-rating {
+  display: inline-block;
+
+  width: 36px;
+  height: 16px;
+
+  text-align: center;
+  vertical-align: middle;
+
+  border-radius: 5px;
+
+  background-color: tomato;
+}
