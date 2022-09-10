@@ -93,20 +93,8 @@
     margin-left: auto;
 }
 
-.nav__item {
-    text-transform: uppercase;
-
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 1.17;
-
-    &:not(:last-child) {
-        margin-right: 39px;
-    }
-
-    &>a {
-        color: $text-color-secondary;
-    }
+.nav__item:not(:last-child) {
+    margin-right: 39px;
 }
 
 .nav__button {
