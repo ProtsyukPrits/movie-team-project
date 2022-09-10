@@ -1,0 +1,224 @@
+.login-modal-backdrop {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: $bg-modal;
+
+  transition: opacity $animation-modal;
+}
+.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.login-modal {
+  width: 350px;
+  background-color: $bg-primary;
+  padding: 40px 30px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+
+  & input {
+    width: 100%;
+    border-radius: 5px;
+    padding: 5px 10px;
+    border: 1px solid $text-color-dark;
+    margin-bottom: 20px;
+
+    &:focus,
+    &:hover {
+      border: 1px solid $text-color-accent;
+      outline: none;
+    }
+  }
+  & label {
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+
+  & h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+}
+.login-btn,
+.signup-btn {
+  @extend %button;
+  @extend %button__primary;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+
+  &:hover,
+  &:focus {
+    background-color: $button-color-accent-hover;
+    border: 1px solid $border-color-light;
+    color: $button-color-light-number;
+  }
+}
+.signup-show-btn,
+.login-show-btn {
+  background-color: transparent;
+  border: none;
+  color: $text-color-accent;
+  text-decoration: underline;
+}
+.signup-text,
+.login-text {
+  text-align: center;
+}
+
+.signup-form {
+  display: none;
+}
+
+.login-modal-close-btn {
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+
+.login-modal-close-icon {
+  fill: black;
+}
+
+// .modal {
+//   position: fixed;
+//   top: 50%;
+//   left: 50%;
+//   transform: translate(-50%, -50%) scale(1);
+//   width: 100%;
+
+//   padding: 40px;
+
+//   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+//     0px 2px 1px rgba(0, 0, 0, 0.2);
+//   border-radius: 4px;
+
+//   .backdrop.is-hidden & {
+//     transform: translate(-50%, -50%) scale(0.5);
+//   }
+//   @media screen and (min-width: 480px) {
+//     width: 450px;
+//   }
+//   @media screen and (min-width: 1200px) {
+//     width: 528px;
+//   }
+// }
+
+// .modal__heading {
+//   margin-bottom: 12px;
+
+//   text-align: center;
+//   color: $header-text-color;
+//   @media screen and (min-width: 1200px) {
+//     @include font(20px, 700, 1.15);
+//   }
+// }
+
+// .contact-form__form-field {
+//   margin-bottom: 10px;
+//   position: relative;
+//   &:last-of-type {
+//     margin-bottom: 30px;
+//   }
+// }
+
+// .contact-form__text-field {
+//   width: 100%;
+//   height: 40px;
+//   padding-left: 42px;
+
+//   border: 1px solid rgba(33, 33, 33, 0.2);
+//   border-radius: 4px;
+
+//   @include transition(border);
+
+//   &:focus {
+//     border: 1px solid #2196f3;
+//     outline: none;
+//   }
+// }
+
+// .contact-form__label {
+//   display: block;
+//   margin-bottom: 4px;
+
+//   @include font(12px, inherit, 1.17, 0.01em);
+
+// }
+
+// .contact-form__icon {
+//   position: absolute;
+//   top: 29px;
+//   left: 12px;
+
+// }
+// .contact-form__form-area {
+//   margin-bottom: 20px;
+// }
+// .contact-form__comment {
+//   width: 100%;
+//   height: 120px;
+//   resize: none;
+//   padding: 12px 16px;
+
+//   border: 1px solid rgba(33, 33, 33, 0.2);
+//   border-radius: 4px;
+
+//   &:focus {
+//     border: 1px solid #2196f3;
+//     outline: none;
+//   }
+// }
+
+// .agreement-link {
+//   text-decoration: underline;
+
+// }
+// .contact-form__checkbox {
+//   position: absolute;
+//   left: 0;
+//   top: 50%;
+//   transform: translateY(-50%);
+// }
+// .contact-form__icon-checkbox {
+//   position: absolute;
+//   left: 0;
+//   top: 50%;
+//   transform: translateY(-50%);
+
+//   opacity: 1;
+
+//   .contact-form__checkbox:focus ~ & {
+
+//   }
+//   .contact-form__chekcbox:checked + & {
+//     opacity: 0;
+//   }
+// }
+// .contact-form__icon-checked {
+//   position: absolute;
+//   left: 0;
+//   top: 50%;
+//   transform: translateY(-50%);
+
+//   opacity: 0;
+
+//   .contact-form__checkbox:checked ~ & {
+//     opacity: 1;
+//   }
+// }
+
+// .contact-form__label-agreement {
+//   display: block;
+//   margin-left: 24px;
+
+//   }
+// }
