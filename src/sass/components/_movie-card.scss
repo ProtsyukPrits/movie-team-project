@@ -1,41 +1,120 @@
+.movie__card {
+  transform: scale(1);
+  transition: transform $animation;
+  border-radius: 5px;
+
+  @media screen and (min-width: 768px) {
+    flex-basis: calc((100% - 64px) / 2);
+
+    margin: 16px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    flex-basis: calc((100% - 96px) / 3);
+
+    margin: 16px;
+  }
+}
+
+.movie__card:hover,
+.movie__card:focus {
+  transform: scale(1.03);
+
+  box-shadow: 0px 4px 4px rgba(255, 107, 8, 0.12), 0px 4px 4px rgba(255, 107, 8, 0.12),
+    1px 4px 6px rgba(255, 107, 8, 0.12);
+}
+
 .movie__card:not(:last-child) {
-  margin-bottom: 20px;
+  @media screen and (max-width: 767.9px) {
+    margin-bottom: 20px;
+  }
 }
+
 .movie__card-link {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.35;
+
+  color: inherit;
 }
+
 .movie__card-img {
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+
+  @media screen and (min-width: 768px) {
+    margin-bottom: 8px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    margin-bottom: 12px;
+  }
 }
+
 .movie__card-title {
   text-transform: uppercase;
 
   margin-bottom: 5px;
+
+  @media screen and (min-width: 1280px) {
+    font-size: 20px;
+    line-height: 1.2;
+  }
 }
-.movie__card-details {
+
+.movie__card-meta {
   display: flex;
 }
+
+.movie__card-details {
+  display: flex;
+  align-items: flex-end;
+
+  color: $text-color-accent;
+}
+
 .movie__card-genre {
+  margin-right: 5px;
+  @media screen and (min-width: 1280px) {
+    font-size: 20px;
+    line-height: 1.2;
+  }
 }
-.movie__card-genre::after {
-  content: '';
 
-  margin: 0 5px;
+// .movie__card-genre::after {
+//   content: '';
 
-  border-right: 2px solid tomato;
-}
+//   margin: 0 5px;
+
+//   border-right: 1px solid $text-color-accent;
+// }
+
 .movie__card-year {
   margin-right: 8px;
+
+  @media screen and (min-width: 1280px) {
+    font-size: 20px;
+    line-height: 1.2;
+  }
 }
+
 .movie__card-rating {
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
 
   width: 36px;
   height: 16px;
 
   text-align: center;
-  vertical-align: middle;
 
   border-radius: 5px;
 
-  background-color: tomato;
+  color: $text-color-secondary;
+  background-color: $text-color-accent;
+
+  @media screen and (min-width: 1280px) {
+    width: 40px;
+    height: 20px;
+  }
 }

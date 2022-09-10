@@ -41,7 +41,7 @@ export default class MovieApiService {
         return response.json();
       })
       .then(data => {
-        console.log(data);
+        // console.log(data);
       });
   }
 
@@ -51,7 +51,7 @@ export default class MovieApiService {
         return response.json();
       })
       .then(data => {
-        console.log(data);
+        // console.log(data);
       });
   }
 
@@ -61,13 +61,14 @@ export default class MovieApiService {
         return response.json();
       })
       .then(data => {
-        console.log(data);
+        // console.log(data);
       });
   }
 
   async getСonfiguration() {
     return await fetch(
-      'https://api.themoviedb.org/3/configuration?api_key=68dd2d07f1b8d9799366e4d9411e689b'
+      // 'https://api.themoviedb.org/3/configuration?api_key=68dd2d07f1b8d9799366e4d9411e689b'
+      'https://api.themoviedb.org/3/genre/movie/list?api_key=68dd2d07f1b8d9799366e4d9411e689b&language=en-US'
     )
       .then(response => {
         return response.json();
