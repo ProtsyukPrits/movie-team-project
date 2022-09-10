@@ -8,7 +8,7 @@ import { cardsMarkup } from './movie-cards-markup';
 const gallery = document.querySelector('.movies__gallery');
 
 // Тут додаємо ваші глобальні змінні
-
+let items = [];
 // Тут додаємо слухачі подій
 
 
