@@ -1,7 +1,7 @@
 const cardsMarkup = function (items) {
   return items
     .map(
-      ({ movieImgPath, movieName, movieRating, movieYear, movieID }) => `
+      ({ movieImgPath, movieName, movieRating, movieYear, movieID, movieGenres }) => `
       <li class='movie__card' data-movie-cart-ID='${movieID}'>
         <a href='#' class='movie__card-link'>
         <picture>
@@ -28,7 +28,7 @@ const cardsMarkup = function (items) {
         <p class='movie__card-title'>${movieName}</p>
         <div class='movie__card-meta'>
             <div class='movie__card-details'>
-                <p class='movie__card-genre'>Drama, Action</p>
+                <p class='movie__card-genre'>${movieGenres}</p>
                 <p class='movie__card-year'>| ${movieYear}</p>
             </div>
             <p class='movie__card-rating'>${movieRating}</p>

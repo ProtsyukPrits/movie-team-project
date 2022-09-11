@@ -1,23 +1,29 @@
-import MovieApiService from './testAPI';
+import makeMovieGenres from './make-movie-genres';
 
-const movieApiService = new MovieApiService();
+const OTHER_GENRES = 'Other';
 
-function prepareApiData(data) {
-  console.log('movieData', data);
+function prepareMovieData(data) {
   const moviesArr = [];
 
   const isDataArray = Array.isArray(data);
 
   if (!isDataArray) {
-    console.log('prepareApiData HERE data is array', data);
     const bufferData = data;
     data = [];
     data.push(bufferData);
-    console.log('prepareApiData', data);
   }
 
   data.forEach(movie => {
     const movieObj = new Object();
+
+    const movieGenreIds = movie.genre_ids || movie.genres;
+    const movieGenreNamesArr = makeMovieGenres(movieGenreIds);
+
+    if (movieGenreNamesArr.length >= 3) {
+      movieGenreNamesArr.splice(2, movieGenreNamesArr.length - 2, OTHER_GENRES);
+    }
+
+    const movieGenres = movieGenreNamesArr.join(', ');
 
     movieObj.movieID = movie.id;
     movieObj.movieName = movie.title || movie.name;
@@ -27,22 +33,12 @@ function prepareApiData(data) {
     movieObj.moviePopularity = movie.popularity.toFixed(1);
     movieObj.movieAbout = movie.overview;
     movieObj.movieImgPath = movie.poster_path;
-
-    // const genreIds = movie.genre_ids;
-    // if (genreIds.length > 2) {
-    //   console.log('genreIds', genreIds);
-    // }
-
-    movieObj.movieGenres = movie.genre_ids || movie.genres;
+    movieObj.movieGenres = movieGenres;
 
     moviesArr.push(movieObj);
   });
 
-  console.log('movieArr', moviesArr);
   return moviesArr;
 }
 
-movieApiService.getСonfiguration();
-// movieApiService.getMovieDetails();
-
-export { prepareApiData };
+export { prepareMovieData };
