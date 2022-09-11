@@ -1,0 +1,96 @@
+.login-modal-backdrop {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: $bg-modal;
+
+  transition: opacity $animation-modal;
+}
+.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.login-modal {
+  width: 320px;
+  background-color: $bg-primary;
+  padding: 40px 30px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+
+  & input {
+    width: 100%;
+    border-radius: 5px;
+    padding: 5px 10px;
+    border: 1px solid $text-color-dark;
+    margin-bottom: 20px;
+
+    &:focus,
+    &:hover {
+      border: 1px solid $text-color-accent;
+      outline: none;
+    }
+  }
+  & label {
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+
+  & h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+}
+.login-btn,
+.signup-btn {
+  @extend %button;
+  @extend %button__primary;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+
+  &:hover,
+  &:focus {
+    background-color: $button-color-accent-hover;
+    border: 1px solid $border-color-light;
+    color: $button-color-light-number;
+  }
+}
+.signup-show-btn,
+.login-show-btn {
+  background-color: transparent;
+  border: none;
+  color: $text-color-accent;
+  text-decoration: underline;
+}
+.signup-text,
+.login-text {
+  text-align: center;
+}
+
+.signup-form {
+  display: none;
+}
+
+.login-modal-close-btn {
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+
+  &:hover,
+  &:focus {
+    .login-modal-close-icon {
+      fill: $icon-color-accent;
+    }
+  }
+}
+
+.login-modal-close-icon {
+  fill: black;
+}

@@ -93,16 +93,7 @@
     margin-left: auto;
 }
 
-.nav__item:not(:last-child) {
-    margin-right: 39px;
-}
-
-.nav__button {
-    padding: 0;
-    border: 0;
-    color: $text-color-secondary;
-    background-color: inherit;
-
+.nav__item {
     text-transform: uppercase;
 
 
@@ -110,10 +101,18 @@
     font-size: 12px;
     line-height: 1.17;
 
+    &:not(:last-child) {
+        margin-right: 39px;
+    }
 
 }
 
-.nav__button--current {
+.nav__link {
+    color: $text-color-secondary;
+}
+
+
+.nav__link--current {
     position: relative;
 
     &::after {

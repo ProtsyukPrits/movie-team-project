@@ -2,7 +2,7 @@ const cardsMarkup = function (items) {
   return items
     .map(
       ({ poster_path, title, vote_average, release_date, id }) => `
-      <li class='movie__card' data-movie-cart-ID='${id}'>
+      <li class='movie__card' data-movieID='${id}'>
         <a href='#' class='movie__card-link'>
         <picture>
             <source

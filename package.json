@@ -29,7 +29,8 @@
     "parcel-reporter-clean-dist": "^1.0.4",
     "parcel-transformer-hbs": "^1.0.4",
     "posthtml-include": "^1.7.4",
-    "process": "^0.11.10"
+    "process": "^0.11.10",
+    "tui-pagination": "^3.4.1"
   },
   "browserslist": "> 0.5%, last 2 versions, not dead"
 }
