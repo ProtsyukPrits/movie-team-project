@@ -26,7 +26,7 @@ searchInput.addEventListener('input', e => {
 
 searchForm.addEventListener('submit', e => {
   e.preventDefault();
-  return getMoviesByQueryKey(queryString);
+  return getMoviesByQueryKey(queryString).then(data => renderByQuery(data));
 });
 
 // ========_____Пишемо сюди основні функції_____===============
@@ -50,3 +50,9 @@ async function render() {
   gallery.innerHTML = createGAl;
 }
 render();
+
+// Функція для виклику карток за ключовим словом
+function renderByQuery(filteredList) {
+  const listOfCards = cardsMarkup(filteredList);
+  return gallery.insertAdjacentHTML('afterbegin', listOfCards);
+}
