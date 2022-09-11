@@ -22,6 +22,7 @@
     "modern-normalize": "^1.1.0"
   },
   "devDependencies": {
+    "@parcel/css": "^1.14.0",
     "@parcel/transformer-sass": "^2.6.0",
     "axios": "^0.27.2",
     "buffer": "^6.0.3",
