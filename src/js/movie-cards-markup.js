@@ -39,8 +39,8 @@ const cardsMarkup = function (items) {
     .join('');
 };
 
-function modalOneFilmMarkup ({ poster_path, original_title, title, vote_average, vote_count, popularity, genres, overview }) {
-    return `<div class="backdrop is-hidden">
+function modalOneFilmMarkup ({ poster_path, original_title, title, vote_average, vote_count, popularity, genres, overview, id }) {
+    return `<div class="backdrop">
                 <div class="modal__onefilm">
                 <button class="onefilm__icon--close" data-modal-close>
                     <svg width="30" height="30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -72,8 +72,14 @@ function modalOneFilmMarkup ({ poster_path, original_title, title, vote_average,
                             <p class="about__text">${overview}</p>
                         </div>
                         <div class="actions">
-                            <button type="button" class="wached">add to Watched</button>
-                            <button type="button" class="wachlist">add to queue</button>
+                        <ul class="card__button-wrap">
+                            <li class="card__button">
+                                <button type="button" class="button__secondary" data-movieID='${id}'>add to watched</button>
+                            </li>
+                            <li class="card__button">
+                                <button type="button" class="button__secondary" data-movieID='${id}'>add to queue</button>
+                            </li>
+                        </ul>
                         </div>
                     </div>
                 </div>
