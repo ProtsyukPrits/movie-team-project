@@ -4,18 +4,26 @@
 
 // Імпорти сюди
 import { trendingFetch } from './apies';
+import { fetchByID } from './apies';
+
 import { cardsMarkup } from './movie-cards-markup';
+import { modalOneFilmMarkup } from './movie-cards-markup';
+
+
 
 import Pagination from 'tui-pagination';
 
 // Тут додаємо ваші глобальні змінні
 let items = [];
 
+
 // Наш реф по якому ми звертаємось!
 const gallery = document.querySelector('.movies__gallery');
 const container = document.getElementById('pagination');
 
+
 // Тут додаємо слухачі подій
+gallery.addEventListener('click', onClickModalOpen);
 
 // ========_____Пишемо сюди основні функції_____===============
 const pagination = new Pagination(container, {
@@ -38,3 +46,23 @@ async function render() {
   gallery.innerHTML = createGAl;
 }
 render();
+
+// Функція для рендеру модального вікна ОДНОГО ФІЛЬМУ
+async function renderOneFilmModal (id) {
+  const data = await fetchByID(id);
+  // console.log(data.genres[0].name);
+  gallery.insertAdjacentHTML('afterend', modalOneFilmMarkup(data));
+}
+
+// Функція-колбек для рендеру модалки по кліку
+async function onClickModalOpen(e) {
+  e.preventDefault();
+  const movieId = e.target.dataset.movieCartId;
+  if (!movieId) return;
+
+  await renderOneFilmModal(movieId);
+  // console.log(movieId);
+  const modalEl = document.querySelector('.backdrop');
+  // console.log(modalEl)
+  modalEl.classList.toggle("is-hidden");
+}

@@ -10,6 +10,12 @@ async function trendingFetch() {
     return data
 }
 
+// 
+async function fetchByID(movie_id) {
+  const { data }  = await axios.get(`${BASE_URL}movie/${movie_id}?api_key=${API_KEY}`)
+  return data;
+}
+
 
 // Сюди додавайте ваші функції і незабудьте змінити ще import
-export { trendingFetch }
+export { trendingFetch, fetchByID }
