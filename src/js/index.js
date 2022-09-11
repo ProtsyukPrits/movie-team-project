@@ -5,8 +5,7 @@
 // Імпорти сюди
 
 import { trendingFetch, getMoviesByQueryKey, fetchByID } from './apies';
-import { cardsMarkup } from './movie-cards-markup';
-import { modalOneFilmMarkup } from './movie-cards-markup';
+import { cardsMarkup, modalOneFilmMarkup } from './movie-cards-markup';
 import Pagination from 'tui-pagination';
 
 // Тут додаємо ваші глобальні змінні
