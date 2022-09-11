@@ -1,4 +1,4 @@
-refs = {
+const refs = {
   loginBtn: document.querySelector('[data-lang = "log"]'),
   showSignupFormBtn: document.querySelector('.signup-show-btn'),
   loginForm: document.querySelector('.login-form'),

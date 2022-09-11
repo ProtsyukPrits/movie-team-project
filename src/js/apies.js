@@ -6,7 +6,7 @@ const page = 1;
 
 
 async function trendingFetch() {
-  const { data }  = await axios.get(`${BASE_URL}trending/all/day?api_key=${API_KEY}`)
+  const { data }  = await axios.get(`${BASE_URL}trending/all/day?api_key=${API_KEY}&page=${page}`)
     return data
 }
 

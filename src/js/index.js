@@ -1,14 +1,25 @@
 // поки що зшиваємо тут, пізніше будемо все впорядковувати
 
 // =========____ЯКЩО КОД ЗАКРУЧЕНИЙ КОМЕНТУЄМО ВСЕ____==========
+
+// Імпорти сюди
 import { trendingFetch } from './apies';
 import { cardsMarkup } from './movie-cards-markup';
+
 import Pagination from 'tui-pagination';
 // Наш реф по якому ми звертаємось!
 const gallery = document.querySelector('.movies__gallery');
 const container = document.getElementById('pagination');
+
+
+
 // Тут додаємо ваші глобальні змінні
 let items = [];
+
+// Наш реф по якому ми звертаємось!
+const gallery = document.querySelector('.movies__gallery');
+
+
 // Тут додаємо слухачі подій
 
 // ========_____Пишемо сюди основні функції_____===============
