@@ -11,6 +11,7 @@ import Pagination from 'tui-pagination';
 // Тут додаємо ваші глобальні змінні
 let queryString = '';
 let items = [];
+let page = 1;
 
 // Наш реф по якому ми звертаємось!
 const gallery = document.querySelector('.movies__gallery');
@@ -31,26 +32,34 @@ searchForm.addEventListener('submit', e => {
 });
 
 // ========_____Пишемо сюди основні функції_____===============
+
+// Pagination
+// ==============================================================
+// створюємо pagination event на  основі коструктора, та додаємо опції
 const pagination = new Pagination(container, {
-  totalItems: 100,
+  totalItems: 1000,
   itemsPerPage: 10,
   visiblePages: 5,
   centerAlign: true,
 });
 
-pagination.getCurrentPage(2);
-console.log(pagination);
+// Отримуємо номер сторінки яку обрав коистувач за допомогою (блок пагінації)
+pagination.on('afterMove', event => {
+  const currentPage = event.page;
+  // console.log(currentPage);
+  render(currentPage);
+});
+// ==================================================================
 
 // Функція для виклику карток за популярним рейтингом
-async function render() {
-  const data = await trendingFetch();
+async function render(currentPage) {
+  const data = await trendingFetch(currentPage);
   items = data.results;
-  // console.log(items);
   // console.log('items', items);
   const createGAl = cardsMarkup(items);
   gallery.innerHTML = createGAl;
 }
-render();
+render(page);
 
 // Функція для виклику карток за ключовим словом
 function renderByQuery(filteredList) {
