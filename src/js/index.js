@@ -7,18 +7,13 @@ import { trendingFetch } from './apies';
 import { cardsMarkup } from './movie-cards-markup';
 
 import Pagination from 'tui-pagination';
-// Наш реф по якому ми звертаємось!
-const gallery = document.querySelector('.movies__gallery');
-const container = document.getElementById('pagination');
-
-
 
 // Тут додаємо ваші глобальні змінні
 let items = [];
 
 // Наш реф по якому ми звертаємось!
 const gallery = document.querySelector('.movies__gallery');
-
+const container = document.getElementById('pagination');
 
 // Тут додаємо слухачі подій
 
