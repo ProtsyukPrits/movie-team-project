@@ -1,8 +1,8 @@
 const refs = {
   loginBtn: document.querySelector('[data-lang = "log"]'),
   showSignupFormBtn: document.querySelector('.signup-show-btn'),
-  loginForm: document.querySelector('.login-container'),
-  signupForm: document.querySelector('.signup-container'),
+  loginForm: document.querySelector('.login-form'),
+  signupForm: document.querySelector('.signup-form'),
   showLoginFormBtn: document.querySelector('.login-show-btn'),
   loginModal: document.querySelector('.login-modal-backdrop'),
   closeModalBtn: document.querySelector('.login-modal-close-btn'),
@@ -26,27 +26,27 @@ function showLoginForm() {
   refs.signupForm.style.display = 'none';
 }
 
-export function closeLoginModalOnClick(e) {
+function closeLoginModal(e) {
   if (
     e.target.closest('.login-modal-close-btn') ||
     !e.target.closest('.login-modal')
   ) {
-    closeLoginModal();
+    refs.loginModal.classList.add('is-hidden');
+    document.removeEventListener('click', closeLoginModal);
+    document.removeEventListener('keydown', closeLoginModal);
+    showLoginForm();
   }
 }
 function closeLoginModalOnEsc(e) {
   if (e.code === 'Escape') {
-    closeLoginModal();
+    refs.loginModal.classList.add('is-hidden');
+    document.removeEventListener('click', closeLoginModal);
+    document.removeEventListener('keydown', closeLoginModal);
+    showLoginForm();
   }
 }
 
 function addDocumentClickListener() {
-  document.addEventListener('click', closeLoginModalOnClick);
+  document.addEventListener('click', closeLoginModal);
   document.addEventListener('keydown', closeLoginModalOnEsc);
-}
-export function closeLoginModal() {
-  refs.loginModal.classList.add('is-hidden');
-  document.removeEventListener('click', closeLoginModalOnClick);
-  document.removeEventListener('keydown', closeLoginModalOnEsc);
-  showLoginForm();
 }
