@@ -3,8 +3,10 @@
 // =========____ЯКЩО КОД ЗАКРУЧЕНИЙ КОМЕНТУЄМО ВСЕ____==========
 
 // Імпорти сюди
-import { trendingFetch, getMoviesByQueryKey } from './apies';
+
+import { trendingFetch, getMoviesByQueryKey, fetchByID } from './apies';
 import { cardsMarkup } from './movie-cards-markup';
+import { modalOneFilmMarkup } from './movie-cards-markup';
 import Pagination from 'tui-pagination';
 
 // Тут додаємо ваші глобальні змінні
@@ -14,11 +16,11 @@ let items = [];
 // Наш реф по якому ми звертаємось!
 const gallery = document.querySelector('.movies__gallery');
 const container = document.getElementById('pagination');
-
 const searchForm = document.querySelector('.header__search');
 const searchInput = document.querySelector('.header__search-input');
 
 // Тут додаємо слухачі подій
+gallery.addEventListener('click', onClickModalOpen);
 
 searchInput.addEventListener('input', e => {
   queryString = e.target.value;
@@ -55,4 +57,24 @@ render();
 function renderByQuery(filteredList) {
   const listOfCards = cardsMarkup(filteredList);
   return gallery.insertAdjacentHTML('afterbegin', listOfCards);
+}
+
+// Функція для рендеру модального вікна ОДНОГО ФІЛЬМУ
+async function renderOneFilmModal(id) {
+  const data = await fetchByID(id);
+  // console.log(data.genres[0].name);
+  gallery.insertAdjacentHTML('afterend', modalOneFilmMarkup(data));
+}
+
+// Функція-колбек для рендеру модалки по кліку
+async function onClickModalOpen(e) {
+  e.preventDefault();
+  const movieId = e.target.dataset.movieCartId;
+  if (!movieId) return;
+
+  await renderOneFilmModal(movieId);
+  // console.log(movieId);
+  const modalEl = document.querySelector('.backdrop');
+  // console.log(modalEl)
+  modalEl.classList.toggle('is-hidden');
 }

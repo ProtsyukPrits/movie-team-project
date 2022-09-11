@@ -11,6 +11,7 @@ async function trendingFetch() {
   return data;
 }
 
+//
 const getMoviesByQueryKey = queryString => {
   return axios
     .get(
@@ -21,5 +22,13 @@ const getMoviesByQueryKey = queryString => {
     });
 };
 
+//
+async function fetchByID(movie_id) {
+  const { data } = await axios.get(
+    `${BASE_URL}movie/${movie_id}?api_key=${API_KEY}`
+  );
+  return data;
+}
+
 // Сюди додавайте ваші функції і незабудьте змінити ще import
-export { trendingFetch, getMoviesByQueryKey };
+export { trendingFetch, fetchByID, getMoviesByQueryKey };
