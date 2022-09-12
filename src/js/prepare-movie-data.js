@@ -1,4 +1,4 @@
-import makeMovieGenres from './make-movie-genres';
+import { genreIdName } from './config/genre-id-name';
 
 const OTHER_GENRES = 'Other';
 
@@ -39,6 +39,21 @@ function prepareMovieData(data) {
   });
 
   return moviesArr;
+}
+
+function makeMovieGenres(movieGenreIds) {
+  const movieGenreNamesArr = [];
+
+  for (const movieGenreID of movieGenreIds) {
+    for (let i = 0; i < genreIdName.length; i += 1) {
+      if (movieGenreID === genreIdName[i].id) {
+        const movieGenre = genreIdName[i].name;
+        movieGenreNamesArr.push(movieGenre);
+      }
+    }
+  }
+
+  return movieGenreNamesArr;
 }
 
 export { prepareMovieData };
