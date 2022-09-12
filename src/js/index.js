@@ -32,7 +32,7 @@ searchInput.addEventListener('input', e => {
 
 searchForm.addEventListener('submit', e => {
   e.preventDefault();
-
+  pagination.movePageTo(page);
   if (queryString === '') {
     searchForm.style.borderBottomColor = 'red';
     return Notify.info(
@@ -51,6 +51,7 @@ const pagination = new Pagination(container, {
   totalItems: 1000,
   itemsPerPage: 10,
   visiblePages: 5,
+  page: 1,
   centerAlign: true,
 });
 
@@ -60,6 +61,7 @@ pagination.on('afterMove', event => {
   // console.log(currentPage);
   render(currentPage);
 });
+
 // ==================================================================
 
 // Функція для виклику карток за популярним рейтингом
