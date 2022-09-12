@@ -6,6 +6,7 @@
 
 import { trendingFetch, getMoviesByQueryKey, fetchByID } from './apies';
 import { cardsMarkup, modalOneFilmMarkup } from './movie-cards-markup';
+import { prepareMovieData } from './prepare-movie-data';
 import Pagination from 'tui-pagination';
 
 // Тут додаємо ваші глобальні змінні
@@ -56,14 +57,16 @@ async function render(currentPage) {
   const data = await trendingFetch(currentPage);
   items = data.results;
   // console.log('items', items);
-  const createGAl = cardsMarkup(items);
+  const validMovieData = prepareMovieData(items);
+  const createGAl = cardsMarkup(validMovieData);
   gallery.innerHTML = createGAl;
 }
 render(page);
 
 // Функція для виклику карток за ключовим словом
 function renderByQuery(filteredList) {
-  const listOfCards = cardsMarkup(filteredList);
+  const validFilteredList = prepareMovieData(filteredList);
+  const listOfCards = cardsMarkup(validFilteredList);
   return gallery.insertAdjacentHTML('afterbegin', listOfCards);
 }
 

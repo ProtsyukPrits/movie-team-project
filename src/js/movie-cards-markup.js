@@ -1,37 +1,38 @@
 const cardsMarkup = function (items) {
   return items
     .map(
-      ({ poster_path, title, vote_average, release_date, id }) => `
-      <li class='movie__card' data-movieID='${id}'>
+      ({ movieImgPath, movieName, movieRating, movieYear, movieID, movieGenres }) => `
+      <li class='movie__card' data-movieID='${movieID}'>
         <a href='#' class='movie__card-link'>
         <picture>
             <source
-            srcset="https://image.tmdb.org/t/p/w1280${poster_path}"
+            srcset="https://image.tmdb.org/t/p/w1280${movieImgPath}"
             media='(min-width: 1280px)'
             />
             <source
-            srcset="https://image.tmdb.org/t/p/w780${poster_path}"
+            srcset="https://image.tmdb.org/t/p/w780${movieImgPath}"
             media='(min-width: 768px)'
             />
             <source
-            srcset="https://image.tmdb.org/t/p/w300${poster_path}"
+            srcset="https://image.tmdb.org/t/p/w300${movieImgPath}"
             media='(min-width: 320px)'
             />
             <img
             class='movie__card-img'
             src='/src/images/card1.jpg'
-            alt='description'
+            onerror="this.onerror=null;this.src='https://www.successforumedu.com/uploads/logo/default.png?tr=fo-auto,di-';"
+            alt='${movieName}'
             loading='lazy'
             sizes="(min-width: 1280px) 33.3vw, (min-width: 768px) 50vw, 100vw"
             />
         </picture>
-        <p class='movie__card-title'>${title}</p>
+        <h2 class='movie__card-title'>${movieName}</h2>
         <div class='movie__card-meta'>
             <div class='movie__card-details'>
-                <p class='movie__card-genre'>Drama, Action</p>
-                <p class='movie__card-year'>| ${release_date}</p>
+                <p class='movie__card-genre'>${movieGenres}</p>
+                <p class='movie__card-year'>| ${movieYear}</p>
             </div>
-            <p class='movie__card-rating'>${vote_average}</p>
+            <p class='movie__card-rating'>${movieRating}</p>
         </div>
         </a>
     </li>`
@@ -39,8 +40,18 @@ const cardsMarkup = function (items) {
     .join('');
 };
 
-function modalOneFilmMarkup ({ poster_path, original_title, title, vote_average, vote_count, popularity, genres, overview, id }) {
-    return `<div class="backdrop">
+function modalOneFilmMarkup({
+  poster_path,
+  original_title,
+  title,
+  vote_average,
+  vote_count,
+  popularity,
+  genres,
+  overview,
+  id,
+}) {
+  return `<div class="backdrop">
                 <div class="modal__onefilm">
                 <button class="onefilm__icon--close" data-modal-close>
                     <svg width="30" height="30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -64,7 +75,9 @@ function modalOneFilmMarkup ({ poster_path, original_title, title, vote_average,
                                 <p class="facts__value"><span class="facts__value-vote">${vote_average}</span>${vote_count}</p>
                                 <p class="facts__value">${popularity}</p>
                                 <p class="facts__value">${original_title}</p>
-                                <p class="facts__value">${genres.map((genr) => genr.name).join(', ')}</p>
+                                <p class="facts__value">${genres
+                                  .map(genr => genr.name)
+                                  .join(', ')}</p>
                             </div>
                         </div>                
                         <div class="onefilm__about">
@@ -83,10 +96,8 @@ function modalOneFilmMarkup ({ poster_path, original_title, title, vote_average,
                         </div>
                     </div>
                 </div>
-            </div>`
-};
-
+            </div>`;
+}
 
 // Сюди додавайте ваші розмітки і незабудьте змінити ще import
 export { cardsMarkup, modalOneFilmMarkup };
-
