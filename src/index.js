@@ -5,4 +5,6 @@ import './js/footer-team-modal';
 
 import './js/firebase/index';
 
-import './js/spinner'
+import './js/spinner';
+
+import './js/dark-mode';
