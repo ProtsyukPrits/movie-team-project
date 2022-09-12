@@ -38,9 +38,21 @@
     </div>
     <div class="header__btns">
       <!--NIGHT MODE-->
-      <div class="header__nightmode">
-        <button class="header__nightmode-btn"></button>
-      </div>
+      <label class="header-form__switch">
+        <input class="header-form__checkbox" type="checkbox" />
+        <span class="header-form__slider header-form__slider--round">
+          <p class="header-slider__box">
+            <svg class="header-slider__icon" width="16" height="16">
+              <use href="./images/header/sprite.svg#icon-sun"></use>
+            </svg>
+          </p>
+          <p class="header-slider__box">
+            <svg class="header-slider__icon" width="16" height="16">
+              <use href="./images/header/sprite.svg#icon-moon"></use>
+            </svg>
+          </p>
+        </span>
+      </label>
       <!--LANGUAGE-->
       <div class="header__lang">
         <select class="header__lang-select" name="select" id="select">
