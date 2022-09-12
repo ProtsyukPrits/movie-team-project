@@ -6,6 +6,7 @@
 
 import { trendingFetch, getMoviesByQueryKey, fetchByID } from './apies';
 import { cardsMarkup, modalOneFilmMarkup } from './movie-cards-markup';
+import { prepareMovieData } from './prepare-movie-data';
 import Pagination from 'tui-pagination';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
@@ -63,7 +64,8 @@ async function render(currentPage) {
   const data = await trendingFetch(currentPage);
   items = data.results;
   // console.log('items', items);
-  const createGAl = cardsMarkup(items);
+  const validMovieData = prepareMovieData(items);
+  const createGAl = cardsMarkup(validMovieData);
   gallery.innerHTML = createGAl;
 }
 render(page);
@@ -83,7 +85,8 @@ function renderByQuery(filteredList) {
   if (noResultsCard) {
     noResultsCard.classList.add('hidden');
   }
-  const listOfCards = cardsMarkup(filteredList);
+  const validFilteredList = prepareMovieData(filteredList);
+  const listOfCards = cardsMarkup(validFilteredList);
   return gallery.insertAdjacentHTML('afterbegin', listOfCards);
 }
 

@@ -9,6 +9,8 @@
 }
 .footer__link {
   color: #545454;
+  background-color: #f7f7f7;
+  border: transparent;
 }
 
 @media screen and (max-width: 767px) {
@@ -33,10 +35,6 @@
   }
 }
 
-.begdrop {
-  position: absolute;
-  display: none;
-}
 .modal {
   display: flex;
   justify-content: center;
@@ -48,13 +46,13 @@
   top: 50%;
   left: 50%;
   border-radius: 25px;
-  background-image: url('../images/footer/8574.jpg_wh860.jpg');
+  background-color: #fff;
   background-size: cover;
   transform: translate(-50%, -50%);
 }
 @media screen and (min-width: 1200px) {
   .modal {
-    width: 1100px;
+    width: 100%;
   }
 }
 
@@ -68,16 +66,23 @@
 //   height: 100%;
 // }
 
-.position {
+.begdrop {
   position: absolute;
+  display: none;
+  height: 100vh;
+  width: 100%;
+  overflow-y: scroll;
+}
+
+.position {
+  position: fixed;
   opacity: 1;
   top: 0;
   left: 0;
-  background-color: rgba($color: #4e4e4e, $alpha: 0.5);
-  width: 100%;
-  height: 100%;
+  background-color: rgba($color: #000000, $alpha: 0.9);
   z-index: 5;
-  display: inline;
+  display: none;
+  display: inline-block;
 }
 
 //person
@@ -88,14 +93,16 @@
   transform: translate(-50%, -50%);
   position: relative;
   width: 300px;
-  border: 1px solid #000;
   border-radius: 10px;
   text-align: center;
   overflow: hidden;
   background-color: #fff;
-  padding-bottom: 30px;
+  padding: 10px 0 10px 0;
   cursor: pointer;
-  // transition: transform 400ms ease-out;
+
+  box-shadow: 0px 0px 8px 9px rgba(255, 152, 0, 1);
+  -webkit-box-shadow: 0px 0px 8px 9px rgba(255, 152, 0, 1);
+  -moz-box-shadow: 0px 0px 8px 9px rgba(255, 152, 0, 1);
 }
 
 .footer__img {
@@ -112,29 +119,37 @@
   transform: scale(1.1);
   transition-duration: 400ms;
   filter: grayscale(0);
+  box-shadow: 0px 0px 8px 9px rgba(255, 152, 0, 1);
+  -webkit-box-shadow: 0px 0px 8px 9px rgba(255, 152, 0, 1);
+  -moz-box-shadow: 0px 0px 8px 9px rgba(255, 152, 0, 1);
 }
 
 .person__name {
-  font-size: 18px;
-  font-weight: 500;
+  font-size: 24px;
+  font-weight: 700;
   columns: #333;
   margin-bottom: 20px;
 }
 .person__info {
-  font-size: 14px;
-  color: #707070;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+
+  font-size: 24px;
+  color: $icon-color-accent;
+  font-weight: bold;
   margin-bottom: 20px;
-  height: 60px;
 }
 .footer-img-content {
   display: flex;
+  margin-bottom: 20px;
   justify-content: center;
   padding: 10px;
   left: 0;
   top: 0;
   height: 100%;
   width: 100%;
-  background-color: #507fff;
+
   border-radius: 0 0 0 25px;
 }
 
@@ -142,23 +157,24 @@
   position: relative;
   padding: 10px;
 }
-.person__span {
-  position: absolute;
-  height: 40px;
-  width: 40px;
-  background-color: #507fff;
-  right: 0;
-  top: 0;
-}
-.person__spanTwo {
-  position: absolute;
-  height: 45px;
-  width: 45px;
-  background-color: #ffffff;
-  right: 0;
-  top: 0;
-  border-radius: 0 50% 0 0;
-}
+// .person__span {
+//   position: absolute;
+//   height: 40px;
+//   width: 40px;
+//   background-color: $icon-color-accent;
+//   right: 0;
+//   top: -20px;
+//   border-radius: 0 0 0 80%;
+// }
+// .person__spanTwo {
+//   position: absolute;
+//   height: 45px;
+//   width: 45px;
+//   background-color: #ffffff;
+//   right: 0;
+//   top: -20px;
+//   border-radius: 0 50% 0 80%;
+// }
 
 //Social
 
@@ -202,7 +218,8 @@
 }
 
 .foorer__modal-svg {
-  fill: rgb(11, 6, 255);
+  width: 100%;
+  height: 100%;
 }
 
 .social-link {
@@ -212,12 +229,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid rgb(10, 61, 201);
+
   text-decoration: none;
   font-size: 2em;
   border-radius: 10px;
   align-items: center;
-  box-shadow: 2px 1px 1px rgb(0, 162, 255);
+
   backdrop-filter: blur(2px);
   transition: 0.5s;
   overflow: hidden;
@@ -232,7 +249,7 @@
   left: -100px;
   width: 30px;
   height: 100%;
-  background: rgba(0, 56, 241, 0.5);
+  background: $icon-color-accent;
   transform: skewX(45deg) translateX(155px);
   transition: 0.5s;
 }
@@ -247,12 +264,12 @@
 }
 
 .swiper-navBtn {
-  color: #6e93f7;
+  color: $icon-color-accent;
   transition: color 0.3s ease;
 }
 
 .swiper-navBtn:hover {
-  color: #265df2;
+  color: $icon-color-accent;
 }
 
 .swiper-navBtn::before,
@@ -268,10 +285,10 @@
 }
 
 .swiper-pagination-bullet {
-  background-color: #6e93f7;
+  background-color: #fa9451;
   opacity: 1;
 }
 
 .swiper-pagination-bullet-active {
-  background-color: #265df2;
+  background-color: $icon-color-accent;
 }
