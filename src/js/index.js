@@ -7,6 +7,7 @@
 import { trendingFetch, getMoviesByQueryKey, fetchByID } from './apies';
 import { cardsMarkup, modalOneFilmMarkup } from './movie-cards-markup';
 import Pagination from 'tui-pagination';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 // Тут додаємо ваші глобальні змінні
 let queryString = '';
@@ -18,6 +19,7 @@ const gallery = document.querySelector('.movies__gallery');
 const container = document.getElementById('pagination');
 const searchForm = document.querySelector('.header__search');
 const searchInput = document.querySelector('.header__search-input');
+const moviesContainer = document.querySelector('.movies__container');
 
 // Тут додаємо слухачі подій
 // document.addEventListener('click', onClickModalOpen);
@@ -28,6 +30,11 @@ searchInput.addEventListener('input', e => {
 
 searchForm.addEventListener('submit', e => {
   e.preventDefault();
+  if (queryString === '') {
+    return Notify.info(
+      'Please, type the title of the film, and click the search button'
+    );
+  }
   return getMoviesByQueryKey(queryString).then(data => renderByQuery(data));
 });
 
@@ -63,8 +70,28 @@ render(page);
 
 // Функція для виклику карток за ключовим словом
 function renderByQuery(filteredList) {
+  const noResultsCard = document.querySelector('.movies__not-found');
+  if (filteredList.length === 0) {
+    if (noResultsCard) {
+      noResultsCard.classList.add('hidden');
+    }
+    gallery.innerHTML = '';
+    render(page);
+    return createNoResultsCard();
+  }
+  gallery.innerHTML = '';
+  if (noResultsCard) {
+    noResultsCard.classList.add('hidden');
+  }
   const listOfCards = cardsMarkup(filteredList);
   return gallery.insertAdjacentHTML('afterbegin', listOfCards);
+}
+
+// Функція створення noResults вікна
+function createNoResultsCard() {
+  const noResults =
+    '<div class="movies__not-found"> <h3 class="not-found-title">We have searched, but could not find it</h3 ><p class="not-found-text">Try to change your request, or choose something interesting from our selections</p></div>';
+  return moviesContainer.insertAdjacentHTML('afterbegin', noResults);
 }
 
 // Функція для рендеру модального вікна ОДНОГО ФІЛЬМУ
