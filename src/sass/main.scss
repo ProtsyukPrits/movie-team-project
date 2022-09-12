@@ -4,6 +4,7 @@
 @import './utils/root';
 @import './utils/placeholders';
 @import './utils/mixins';
+@import './utils/visually-hidden';
 // =======================
 @import './components/container';
 @import './components/section';
@@ -19,3 +20,5 @@
 @import './components/footer';
 @import './components/spinner';
 @import './components/dark-mode';
+
+
