@@ -5,7 +5,7 @@
 // Імпорти сюди
 
 import { trendingFetch, getMoviesByQueryKey, fetchByID } from './apies';
-import { cardsMarkup, modalOneFilmMarkup } from './movie-cards-markup';
+import { git, modalOneFilmMarkup } from './movie-cards-markup';
 import Pagination from 'tui-pagination';
 
 // Тут додаємо ваші глобальні змінні
@@ -20,7 +20,7 @@ const searchForm = document.querySelector('.header__search');
 const searchInput = document.querySelector('.header__search-input');
 
 // Тут додаємо слухачі подій
-document.addEventListener('click', onClickModalOpen);
+// gallery.addEventListener('click', onClickModalOpen);
 
 searchInput.addEventListener('input', e => {
   queryString = e.target.value;
@@ -28,7 +28,7 @@ searchInput.addEventListener('input', e => {
 
 searchForm.addEventListener('submit', e => {
   e.preventDefault();
-  return getMoviesByQueryKey(queryString).then(data => renderByQuery(data));
+  return f(queryString).then(data => renderByQuery(data));
 });
 
 // ========_____Пишемо сюди основні функції_____===============
@@ -69,28 +69,20 @@ function renderByQuery(filteredList) {
 
 // Функція для рендеру модального вікна ОДНОГО ФІЛЬМУ
 async function renderOneFilmModal(id) {
-  const data = await fetchByID(id);  
-  // console.log(data);
+  const data = await fetchByID(id);
+  // console.log(data.genres[0].name);
   gallery.insertAdjacentHTML('afterend', modalOneFilmMarkup(data));
 }
 
 // Функція-колбек для рендеру модалки по кліку
 async function onClickModalOpen(e) {
   e.preventDefault();
-  if (!e.target.closest('.movie__card')) return;
-  const movieID = (e.target.closest('.movie__card')).dataset.movieid; 
-  // console.log(movieID);
-  openModalOneFilm(movieID);
-}
+  const movieId = e.target.dataset.movieCartId;
+  if (!movieId) return;
 
-async function openModalOneFilm(movieID) {
-  await renderOneFilmModal(movieID);  
-  // const buton = document.querySelector('.button__secondary');
-  // buton.addEventListener('click', onClickButon);
+  await renderOneFilmModal(movieId);
+  // console.log(movieId);
+  const modalEl = document.querySelector('.backdrop');
+  // console.log(modalEl)
+  modalEl.classList.toggle('is-hidden');
 }
-
-// async function onClickButon(e) {
-//   // console.log(e.target.dataset.movieid); 
-//   const data = await fetchByID(e.target.dataset.movieid);
-//   console.log(data);
-// }
