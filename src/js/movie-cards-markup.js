@@ -42,14 +42,12 @@ const cardsMarkup = function (items) {
 
  
 function modalOneFilmMarkup ({ poster_path, original_title, title, vote_average, vote_count, popularity, genres, overview, id }) {
-    return `<div class="backdrop active">
-
-
+    return `
                 <div class="modal__onefilm">
-                <button class="onefilm__icon--close" data-modal-close>
-                    <svg class="icon--close" width="30" height="30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8 8L22 22" stroke="black" stroke-width="2"/>
-                    <path d="M8 22L22 8" stroke="black" stroke-width="2"/>
+                <button class="onefilm__icon--close">
+                    <svg class="icon--close" width="30" height="30" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 8L22 22"  stroke-width="2"/>
+                    <path d="M8 22L22 8"  stroke-width="2"/>
                     </svg>
                 </button>
                 <div class ="onefilm__all">
@@ -89,7 +87,7 @@ function modalOneFilmMarkup ({ poster_path, original_title, title, vote_average,
                     </div>
                     </div>
                 </div>
-            </div>`;
+            `;
 }
 
 // Сюди додавайте ваші розмітки і незабудьте змінити ще import
