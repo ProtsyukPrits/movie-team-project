@@ -23,7 +23,7 @@ const searchInput = document.querySelector('.header__search-input');
 const moviesContainer = document.querySelector('.movies__container');
 
 // Тут додаємо слухачі подій
-// document.addEventListener('click', onClickModalOpen);
+gallery.addEventListener('click', onClickModalOpen);
 
 searchInput.addEventListener('input', e => {
   queryString = e.target.value;
@@ -69,8 +69,8 @@ async function render(currentPage) {
   const data = await trendingFetch(currentPage);
   items = data.results;
   // console.log('items', items);
-  const validMovieData = prepareMovieData(items);
-  const createGAl = cardsMarkup(validMovieData);
+  // const validMovieData = prepareMovieData(items);
+  const createGAl = cardsMarkup(items);
   gallery.innerHTML = createGAl;
 }
 render(page);
@@ -90,8 +90,8 @@ function renderByQuery(filteredList) {
   if (noResultsCard) {
     noResultsCard.classList.add('hidden');
   }
-  const validFilteredList = prepareMovieData(filteredList);
-  const listOfCards = cardsMarkup(validFilteredList);
+  // const validFilteredList = prepareMovieData(filteredList);
+  const listOfCards = cardsMarkup(filteredList);
   return gallery.insertAdjacentHTML('afterbegin', listOfCards);
 }
 
