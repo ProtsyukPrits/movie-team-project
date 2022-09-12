@@ -8,6 +8,22 @@ import {
   signOut,
   onAuthStateChanged,
 } from 'firebase/auth';
+import {
+  getFirestore,
+  collection,
+  onSnapshot,
+  addDoc,
+  deleteDoc,
+  doc,
+  query,
+  where,
+  orderBy,
+  serverTimestamp,
+  updateDoc,
+  getDocs,
+  setDoc,
+  getDoc,
+} from 'firebase/firestore';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { closeLoginModal } from '../login-signup-modal';
 
@@ -25,6 +41,7 @@ initializeApp(firebaseConfig);
 // init services
 
 const auth = getAuth();
+const db = getFirestore();
 
 // inner references
 const refs = {
@@ -37,6 +54,29 @@ const refs = {
   loginBtn: document.querySelector('[data-lang = "log"]'),
   //   libraryLink: document.querySelector('.mylibrary-link'),
 };
+// collection reference
+const colRef = collection(db, 'users');
+let docRef;
+// queries
+getDocs(colRef)
+  .then(snapshot => {
+    let users = [];
+    snapshot.docs.forEach(doc => {
+      users.push({ ...doc.data(), id: doc.id });
+    });
+    console.log(users);
+  })
+  .catch(err => console.log(err.message));
+
+//  getDoc(doc(db, 'users', auth.currentUser.uid)).then(doc => {
+//    console.log(doc.data());
+//  });
+
+// adding documents to the collection
+
+function addUserCols() {
+  setDoc(doc(colRef, auth.currentUser.uid), { watched: {}, queue: {} }).then();
+}
 
 // signing users up
 refs.signupForm.addEventListener('submit', e => {
@@ -47,9 +87,10 @@ refs.signupForm.addEventListener('submit', e => {
   const name = refs.signupForm.name.value;
 
   createUserWithEmailAndPassword(auth, email, password)
-    .then(cred => {
+    .then(() => {
       sendEmailVerification(auth.currentUser);
       refs.signupForm.reset();
+      addUserCols();
       updateProfile(auth.currentUser, { displayName: name }).then(() => {
         Notify.success(
           `Thank you for registration, ${auth.currentUser.displayName}. We've send you verification email. Please follow the link inside`
@@ -78,6 +119,7 @@ refs.logoutBtn.addEventListener('click', () => {
   signOut(auth)
     .then(() => {
       console.log('user signed out');
+      docRef = null;
     })
     .catch(err => {
       console.log(err.message);
@@ -91,12 +133,13 @@ refs.loginForm.addEventListener('submit', e => {
   const password = refs.loginForm.password.value;
 
   signInWithEmailAndPassword(auth, email, password)
-    .then(cred => {
+    .then(() => {
       refs.loginForm.reset();
       Notify.success(
         `Hello, ${auth.currentUser.displayName}! Have a nice time!`
       );
       closeLoginModal();
+      docRef = doc(colRef, auth.currentUser.uid);
     })
     .catch(err => {
       refs.loginContainer.insertAdjacentHTML(
