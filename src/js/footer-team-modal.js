@@ -23,8 +23,6 @@ document.addEventListener('keydown', function (e) {
 });
 
 refsFooter.modal.addEventListener('click', el => {
-  console.log(el.target);
-
   if (el.target === refsFooter.modal) {
     refsFooter.modal.classList.remove('position');
   }
