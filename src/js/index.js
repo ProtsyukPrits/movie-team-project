@@ -20,7 +20,7 @@ const searchForm = document.querySelector('.header__search');
 const searchInput = document.querySelector('.header__search-input');
 
 // Тут додаємо слухачі подій
-document.addEventListener('click', onClickModalOpen);
+// document.addEventListener('click', onClickModalOpen);
 
 searchInput.addEventListener('input', e => {
   queryString = e.target.value;
@@ -69,7 +69,7 @@ function renderByQuery(filteredList) {
 
 // Функція для рендеру модального вікна ОДНОГО ФІЛЬМУ
 async function renderOneFilmModal(id) {
-  const data = await fetchByID(id);  
+  const data = await fetchByID(id);
   // console.log(data);
   gallery.insertAdjacentHTML('afterend', modalOneFilmMarkup(data));
 }
@@ -78,19 +78,19 @@ async function renderOneFilmModal(id) {
 async function onClickModalOpen(e) {
   e.preventDefault();
   if (!e.target.closest('.movie__card')) return;
-  const movieID = (e.target.closest('.movie__card')).dataset.movieid; 
+  const movieID = e.target.closest('.movie__card').dataset.movieid;
   // console.log(movieID);
   openModalOneFilm(movieID);
 }
 
 async function openModalOneFilm(movieID) {
-  await renderOneFilmModal(movieID);  
+  await renderOneFilmModal(movieID);
   // const buton = document.querySelector('.button__secondary');
   // buton.addEventListener('click', onClickButon);
 }
 
 // async function onClickButon(e) {
-//   // console.log(e.target.dataset.movieid); 
+//   // console.log(e.target.dataset.movieid);
 //   const data = await fetchByID(e.target.dataset.movieid);
 //   console.log(data);
 // }
