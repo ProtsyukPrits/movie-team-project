@@ -25,22 +25,24 @@ const moviesContainer = document.querySelector('.movies__container');
 // Тут додаємо слухачі подій
 // document.addEventListener('click', onClickModalOpen);
 
-searchInput.addEventListener('input', e => {
-  queryString = e.target.value;
-  searchForm.style.borderBottomColor = '#ffffff';
-});
+if (searchInput) {
+  searchInput.addEventListener('input', e => {
+    queryString = e.target.value;
+    searchForm.style.borderBottomColor = '#ffffff';
+  });
 
-searchForm.addEventListener('submit', e => {
-  e.preventDefault();
+  searchForm.addEventListener('submit', e => {
+    e.preventDefault();
 
-  if (queryString === '') {
-    searchForm.style.borderBottomColor = 'red';
-    return Notify.info(
-      'Please, type the title of the film, and click the search button'
-    );
-  }
-  return getMoviesByQueryKey(queryString).then(data => renderByQuery(data));
-});
+    if (queryString === '') {
+      searchForm.style.borderBottomColor = 'red';
+      return Notify.info(
+        'Please, type the title of the film, and click the search button'
+      );
+    }
+    return getMoviesByQueryKey(queryString).then(data => renderByQuery(data));
+  });
+}
 
 // ========_____Пишемо сюди основні функції_____===============
 
