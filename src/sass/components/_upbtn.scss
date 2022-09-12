@@ -1,0 +1,33 @@
+.back-to-top-btn {
+    position: fixed;
+    right: 3%;
+    bottom: 3%;
+    opacity: 0.9;
+    padding: 12px;
+    border: none;
+    border-radius: 100%;
+    background: $cl-accent;
+    box-shadow: $cl-modal-text 0px 3px 8px;
+    cursor: pointer;
+    transition: opacity 250ms $cl-transition-animation, transform 300ms $cl-transition-animation;
+
+    &:hover,
+    &:focus {  
+        box-shadow: $cl-modal-text 0px 5px 15px;
+        opacity: 1;
+    };
+
+    &.is-hidden {
+        opacity: 0;
+        pointer-events: none;
+        transform: translate(50%, 50%) scale(1.2);
+    };
+
+    
+}
+.back-to-top-icon {
+    width: 35px;
+    height: 35px;
+    fill: $cl-white-primary;
+
+}
