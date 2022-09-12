@@ -26,7 +26,7 @@ const cardsMarkup = function (items) {
             sizes="(min-width: 1280px) 33.3vw, (min-width: 768px) 50vw, 100vw"
             />
         </picture>
-        <p class='movie__card-title'>${movieName}</p>
+        <h2 class='movie__card-title'>${movieName}</h2>
         <div class='movie__card-meta'>
             <div class='movie__card-details'>
                 <p class='movie__card-genre'>${movieGenres}</p>
