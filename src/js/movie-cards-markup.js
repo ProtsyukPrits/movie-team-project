@@ -1,38 +1,60 @@
+// import { genreIdName } from './config/genre-id-name'
+// function createGenres() {
+//     return genreIdName.filter(arr => arr.id).map(arr => arr.name).join(', ')
+// }
+
+
+
 const cardsMarkup = function (items) {
-  return items
+   return items
     .map(
-      ({ movieImgPath, movieName, movieRating, movieYear, movieID, movieGenres }) => `
-      <li class='movie__card' data-movieID='${movieID}'>
+      ({
+        poster_path,
+        title,
+        vote_average,
+        first_air_date,
+        release_date,
+        id,
+        name,
+          genre_ids,
+        genres,
+        }) =>`
+      <li class='movie__card' data-movieID='${id}'>
         <a href='#' class='movie__card-link'>
         <picture>
             <source
-            srcset="https://image.tmdb.org/t/p/w1280${movieImgPath}"
+            srcset="https://image.tmdb.org/t/p/w1280${poster_path}"
             media='(min-width: 1280px)'
             />
             <source
-            srcset="https://image.tmdb.org/t/p/w780${movieImgPath}"
+            srcset="https://image.tmdb.org/t/p/w780${poster_path}"
             media='(min-width: 768px)'
             />
             <source
-            srcset="https://image.tmdb.org/t/p/w300${movieImgPath}"
+            srcset="https://image.tmdb.org/t/p/w300${poster_path}"
             media='(min-width: 320px)'
             />
             <img
             class='movie__card-img'
             src='/src/images/card1.jpg'
             onerror="this.onerror=null;this.src='https://www.successforumedu.com/uploads/logo/default.png?tr=fo-auto,di-';"
-            alt='${movieName}'
+            alt='${title ? title : name}'
             loading='lazy'
             sizes="(min-width: 1280px) 33.3vw, (min-width: 768px) 50vw, 100vw"
             />
         </picture>
-        <h2 class='movie__card-title'>${movieName}</h2>
+        <h2 class='movie__card-title'>${title ? title : name}</h2>
         <div class='movie__card-meta'>
             <div class='movie__card-details'>
-                <p class='movie__card-genre'>${movieGenres}</p>
-                <p class='movie__card-year'>| ${movieYear}</p>
+                <p class='movie__card-genre'></p>
+                <p class='movie__card-year'>| ${(release_date
+                  ? release_date
+                  : first_air_date && first_air_date
+                  ? first_air_date
+                  : ''
+                ).slice(0, 4)}</p>
             </div>
-            <p class='movie__card-rating'>${movieRating}</p>
+            <p class='movie__card-rating'>${vote_average.toFixed(1)}</p>
         </div>
         </a>
     </li>`
@@ -40,9 +62,18 @@ const cardsMarkup = function (items) {
     .join('');
 };
 
- 
-function modalOneFilmMarkup ({ poster_path, original_title, title, vote_average, vote_count, popularity, genres, overview, id }) {
-    return `<div class="backdrop active">
+function modalOneFilmMarkup({
+  poster_path,
+  original_title,
+  title,
+  vote_average,
+  vote_count,
+  popularity,
+  genres,
+  overview,
+  id,
+}) {
+  return `<div class="backdrop active">
 
 
                 <div class="modal__onefilm">
@@ -69,7 +100,9 @@ function modalOneFilmMarkup ({ poster_path, original_title, title, vote_average,
                                 <p class="facts__value"><span class="facts__value-vote">${vote_average}</span> / ${vote_count}</p>
                                 <p class="facts__value facts__value-vot">${popularity}</p>
                                 <p class="facts__value facts__value-vo">${original_title}</p>
-                                <p class="facts__value facts__value-v">${genres.map((genr) => genr.name).join(', ')}</p>
+                                <p class="facts__value facts__value-v">${genres
+                                  .map(genr => genr.name)
+                                  .join(', ')}</p>
                             </div>
                         </div>                
                         <div class="onefilm__about">
