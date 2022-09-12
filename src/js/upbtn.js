@@ -1,29 +1,31 @@
-const showOnPx = 300;
+const showOnPx = 100;
+const backToTopButton = document.querySelector('.back-to-top-btn');
+const pageProgressBar = document.querySelector('.progress-bar');
 
 const scrollContainer = () => {
-    return document.documentElement || document.body;
+  return document.documentElement || document.body;
 };
 
 const goToTop = () => {
-    document.body.scrollIntoView({
-        behavior: 'smooth'
-    });
+  document.body.scrollIntoView({
+    behavior: 'smooth',
+  });
 };
 
-export const onScrollFunction = () => {
-    const scrolledPercentage = (scrollContainer().scrollTop / (scrollContainer().scrollHeight - scrollContainer().clientHeight)) * 100;
+document.addEventListener('scroll', () => {
 
-    refs.pageProgressBar.style.height = `${scrolledPercentage}%`;
+  const scrolledPercentage =
+    (scrollContainer().scrollTop /
+      (scrollContainer().scrollHeight - scrollContainer().clientHeight)) *
+    100;
 
-    if (scrollContainer().scrollTop > showOnPx) {
-        refs.backToTopBtn.classList.remove('is-hidden');
-    } else {
-        refs.backToTopBtn.classList.add('is-hidden');
-    };
-};
+  pageProgressBar.style.height = `${scrolledPercentage}%`;
 
-document.onscroll = onScrollFunction;
-refs.backToTopBtn.addEventListener('click', goToTop);
-refs.paginationWatched.addEventListener('click', goToTop);
-refs.paginationQueue.addEventListener('click', goToTop);
+  if (scrollContainer().scrollTop > showOnPx) {
+    backToTopButton.classList.remove('is-hidden');
+  } else {
+    backToTopButton.classList.add('is-hidden');
+  }
+});
 
+backToTopButton.addEventListener('click', goToTop);
