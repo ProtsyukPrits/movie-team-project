@@ -24,11 +24,7 @@ const searchInput = document.querySelector('.header__search-input');
 const moviesContainer = document.querySelector('.movies__container');
 
 // Тут додаємо слухачі подій
-<<<<<<< HEAD
 gallery.addEventListener('click', onClickOneFilmCard);
-=======
-gallery.addEventListener('click', onClickModalOpen);
->>>>>>> main
 
 searchInput.addEventListener('input', e => {
   queryString = e.target.value;
