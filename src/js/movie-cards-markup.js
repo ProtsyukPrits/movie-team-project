@@ -1,7 +1,14 @@
 const cardsMarkup = function (items) {
   return items
     .map(
-      ({ movieImgPath, movieName, movieRating, movieYear, movieID, movieGenres }) => `
+      ({
+        movieImgPath,
+        movieName,
+        movieRating,
+        movieYear,
+        movieID,
+        movieGenres,
+      }) => `
       <li class='movie__card' data-movieID='${movieID}'>
         <a href='#' class='movie__card-link'>
         <picture>
@@ -40,9 +47,18 @@ const cardsMarkup = function (items) {
     .join('');
 };
 
- 
-function modalOneFilmMarkup ({ poster_path, original_title, title, vote_average, vote_count, popularity, genres, overview, id }) {
-    return `<div class="backdrop active">
+function modalOneFilmMarkup({
+  poster_path,
+  original_title,
+  title,
+  vote_average,
+  vote_count,
+  popularity,
+  genres,
+  overview,
+  id,
+}) {
+  return `<div class="backdrop active">
 
 
                 <div class="modal__onefilm">
@@ -69,7 +85,9 @@ function modalOneFilmMarkup ({ poster_path, original_title, title, vote_average,
                                 <p class="facts__value"><span class="facts__value-vote">${vote_average}</span> / ${vote_count}</p>
                                 <p class="facts__value facts__value-vot">${popularity}</p>
                                 <p class="facts__value facts__value-vo">${original_title}</p>
-                                <p class="facts__value facts__value-v">${genres.map((genr) => genr.name).join(', ')}</p>
+                                <p class="facts__value facts__value-v">${genres
+                                  .map(genr => genr.name)
+                                  .join(', ')}</p>
                             </div>
                         </div>                
                         <div class="onefilm__about">

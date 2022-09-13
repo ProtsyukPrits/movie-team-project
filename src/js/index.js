@@ -12,6 +12,7 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 // Тут додаємо ваші глобальні змінні
 let queryString = '';
+let genreValue = 0;
 let items = [];
 let page = 1;
 
@@ -21,6 +22,7 @@ const container = document.getElementById('pagination');
 const searchForm = document.querySelector('.header__search');
 const searchInput = document.querySelector('.header__search-input');
 const moviesContainer = document.querySelector('.movies__container');
+const searchByGenres = document.querySelector('.header__filter-genres');
 
 // Тут додаємо слухачі подій
 // document.addEventListener('click', onClickModalOpen);
@@ -40,8 +42,12 @@ if (searchInput) {
         'Please, type the title of the film, and click the search button'
       );
     }
-    return getMoviesByQueryKey(queryString).then(data => renderByQuery(data));
+    return getMoviesByQueryKey(queryString)
+      .then(data => filterByGenres(data))
+      .then(data => renderByQuery(data));
   });
+
+  searchByGenres.addEventListener('change', onChangeByGenres);
 }
 
 // ========_____Пишемо сюди основні функції_____===============
@@ -93,6 +99,26 @@ function renderByQuery(filteredList) {
   const validFilteredList = prepareMovieData(filteredList);
   const listOfCards = cardsMarkup(validFilteredList);
   return gallery.insertAdjacentHTML('afterbegin', listOfCards);
+}
+
+// Function searchByGenres
+
+function onChangeByGenres(e) {
+  genreValue = Number(e.target.value);
+}
+
+function filterByGenres(data) {
+  if (genreValue !== 0) {
+    const filteredDataByGenres = data.filter(film => {
+      const { genre_ids } = film;
+      console.log(genreValue);
+      return (findGenre = genre_ids.includes(genreValue));
+    });
+    console.log(filteredDataByGenres);
+    return filteredDataByGenres;
+  }
+  console.log(data);
+  return data;
 }
 
 // Функція створення noResults вікна

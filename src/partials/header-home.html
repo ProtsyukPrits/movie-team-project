@@ -15,10 +15,17 @@
             <a href="./index.html" class="lang-home" id="home">home</a>
           </li>
           <li class="header__nav-item">
-            <a href="./library.html" class="lang-library" id="library">my library</a>
+            <a href="./library.html" class="lang-library" id="library"
+              >my library</a
+            >
           </li>
           <li class="header__nav-item">
-            <button data-lang="log" class="header__nav-btn lang-login" id="login" type="button">
+            <button
+              data-lang="log"
+              class="header__nav-btn lang-login"
+              id="login"
+              type="button"
+            >
               LOG IN
             </button>
           </li>
@@ -55,8 +62,8 @@
       <!--LANGUAGE-->
       <div class="header__lang">
         <select class="header__lang-select">
-            <option value="en">EN</option>
-            <option value="ua">UA</option>
+          <option value="en">EN</option>
+          <option value="ua">UA</option>
         </select>
       </div>
     </div>
@@ -78,55 +85,171 @@
     <form class="header__filter">
       <!--GENRES-->
       <select class="header__filter-genres" name="genre" id="genre_choice">
-        <option class="header__filter-genres-option lang-genre" id="genre" value="">Genre</option>
-        <option class="header__filter-genres-option lang-action" id="action" value="28">Action</option>
-        <option class="header__filter-genres-option lang-adventure" id="adventure" value="12">
+        <option
+          class="header__filter-genres-option lang-genre"
+          id="genre"
+          value="0"
+        >
+          All genres
+        </option>
+        <option
+          class="header__filter-genres-option lang-action"
+          id="action"
+          value="28"
+        >
+          Action
+        </option>
+        <option
+          class="header__filter-genres-option lang-adventure"
+          id="adventure"
+          value="12"
+        >
           Adventure
         </option>
-        <option class="header__filter-genres-option lang-animation" id="animation" value="16">
+        <option
+          class="header__filter-genres-option lang-animation"
+          id="animation"
+          value="16"
+        >
           Animation
         </option>
-        <option class="header__filter-genres-option lang-comedy" id="comedy" value="35">Comedy</option>
-        <option class="header__filter-genres-option lang-crime" id="crime" value="80">Crime</option>
-        <option class="header__filter-genres-option lang-documentary" id="documentary" value="99">
+        <option
+          class="header__filter-genres-option lang-comedy"
+          id="comedy"
+          value="35"
+        >
+          Comedy
+        </option>
+        <option
+          class="header__filter-genres-option lang-crime"
+          id="crime"
+          value="80"
+        >
+          Crime
+        </option>
+        <option
+          class="header__filter-genres-option lang-documentary"
+          id="documentary"
+          value="99"
+        >
           Documentary
         </option>
-        <option class="header__filter-genres-option lang-drama" id="drama" value="18">Drama</option>
-        <option class="header__filter-genres-option lang-family" id="family" value="10751">
+        <option
+          class="header__filter-genres-option lang-drama"
+          id="drama"
+          value="18"
+        >
+          Drama
+        </option>
+        <option
+          class="header__filter-genres-option lang-family"
+          id="family"
+          value="10751"
+        >
           Family
         </option>
-        <option class="header__filter-genres-option lang-fantasy" id="fantasy" value="14">Fantasy</option>
-        <option class="header__filter-genres-option lang-history" id="history" value="36">History</option>
-        <option class="header__filter-genres-option lang-horror" id="horror" value="27">Horror</option>
-        <option class="header__filter-genres-option lang-music" id="music" value="10402">
+        <option
+          class="header__filter-genres-option lang-fantasy"
+          id="fantasy"
+          value="14"
+        >
+          Fantasy
+        </option>
+        <option
+          class="header__filter-genres-option lang-history"
+          id="history"
+          value="36"
+        >
+          History
+        </option>
+        <option
+          class="header__filter-genres-option lang-horror"
+          id="horror"
+          value="27"
+        >
+          Horror
+        </option>
+        <option
+          class="header__filter-genres-option lang-music"
+          id="music"
+          value="10402"
+        >
           Music
         </option>
-        <option class="header__filter-genres-option lang-mystery" id="mystery" value="9648">
+        <option
+          class="header__filter-genres-option lang-mystery"
+          id="mystery"
+          value="9648"
+        >
           Mystery
         </option>
-        <option class="header__filter-genres-option lang-romance" id="romance" value="10749">
+        <option
+          class="header__filter-genres-option lang-romance"
+          id="romance"
+          value="10749"
+        >
           Romance
         </option>
-        <option class="header__filter-genres-option lang-science-fiction" id="science-fiction" value="878">
+        <option
+          class="header__filter-genres-option lang-science-fiction"
+          id="science-fiction"
+          value="878"
+        >
           Science Fiction
         </option>
-        <option class="header__filter-genres-option lang-tv-movie" id="tv-movie" value="10770">
+        <option
+          class="header__filter-genres-option lang-tv-movie"
+          id="tv-movie"
+          value="10770"
+        >
           TV Movie
         </option>
-        <option class="header__filter-genres-option lang-thriller" id="thriller" value="53">
+        <option
+          class="header__filter-genres-option lang-thriller"
+          id="thriller"
+          value="53"
+        >
           Thriller
         </option>
-        <option class="header__filter-genres-option lang-war" id="war" value="10752">War</option>
-        <option class="header__filter-genres-option lang-western" id="western" value="37">Western</option>
+        <option
+          class="header__filter-genres-option lang-war"
+          id="war"
+          value="10752"
+        >
+          War
+        </option>
+        <option
+          class="header__filter-genres-option lang-western"
+          id="western"
+          value="37"
+        >
+          Western
+        </option>
       </select>
       <!--VOTES-->
       <select class="header__filter-votes" name="votes" id="votes_choice">
-        <option class="lang-don't-sort" id="don't-sort" value="">Don't sort</option>
-        <option class="lang-sortaverage" id="sortaverage" value="header__filter-votes-average">
+        <option class="lang-don't-sort" id="don't-sort" value="">
+          Don't sort
+        </option>
+        <option
+          class="lang-sortaverage"
+          id="sortaverage"
+          value="header__filter-votes-average"
+        >
           Sort by Average voite
         </option>
-        <option class="lang-sortvoite" id="sortvoite" value="header__filter-votes-count">Sort by Voite count</option>
-        <option class="lang-sortpop" id="sortpop" value="header__filter-votes-popularity">
+        <option
+          class="lang-sortvoite"
+          id="sortvoite"
+          value="header__filter-votes-count"
+        >
+          Sort by Voite count
+        </option>
+        <option
+          class="lang-sortpop"
+          id="sortpop"
+          value="header__filter-votes-popularity"
+        >
           Sort by Popularity
         </option>
       </select>
