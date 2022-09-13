@@ -5,7 +5,12 @@
 // Імпорти сюди
 
 import { trendingFetch, getMoviesByQueryKey, fetchByID } from './apies';
-import { cardsMarkup, modalOneFilmMarkup } from './movie-cards-markup';
+import {
+  cardsMarkup,
+  modalOneFilmMarkup,
+  modalOneFilmMarkupQueue,
+  modalOneFilmMarkupWatched,
+} from './movie-cards-markup';
 import { prepareMovieData } from './prepare-movie-data';
 import Pagination from 'tui-pagination';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
@@ -293,64 +298,62 @@ async function onToWatchedBtn(e) {
 //
 // =============================== LIBRARY ==============================================
 
-// const btnQueueEl = document.querySelector('[data-library-queue]');
-// const btnWatchedEl = document.querySelector('[data-library-watched]');
-// const galleryLibraryEl = document.querySelector('.library__gallery');
-// console.log(galleryLibraryEl);
+const btnQueueEl = document.querySelector('[data-library-queue]');
+const btnWatchedEl = document.querySelector('[data-library-watched]');
+const galleryLibraryEl = document.querySelector('.library__gallery');
 
-// btnQueueEl.addEventListener('click', onQueueBtn);
-// btnWatchedEl.addEventListener('click', onWatchedBtn);
-// console.log(btnQueueEl);
+btnQueueEl.addEventListener('click', onQueueBtn);
+btnWatchedEl.addEventListener('click', onWatchedBtn);
 
-// btnWatchedEl.classList.add('button__primary-accent');
+btnWatchedEl.classList.add('button__primary-accent');
+renderLibraryWatched();
 
-// // Функція створення галереї списку "Watched"
-
-// function onWatchedBtn(e) {
-//   e.preventDefault();
-//   galleryLibraryEl.innerHTML = '';
-
-//   btnWatchedEl.classList.add('button__primary-accent');
-//   btnQueueEl.classList.remove('button__primary-accent');
-
-//   renderLibraryWatched();
-//   console.log();
-// }
-
-// // Функція створення галереї списку  "Queue"
-
-// function onQueueBtn(e) {
-//   e.preventDefault();
-//   galleryLibraryEl.innerHTML = '';
-
-//   btnWatchedEl.classList.remove('button__primary-accent');
-//   btnQueueEl.classList.add('button__primary-accent');
-
-//   renderLibraryQueue();
-//   console.log();
-// }
-// // ========================================================================
-// // Функція рендеру карток за "Watched" списком
-
-// function renderLibraryWatched() {
-//   // буде заміна фукції забору
-//   let savedListWatched = localStorage.getItem('list-watched');
-//   // console.log(savedListWatched);
-//   console.log(1);
-//   let parsedListWatched = JSON.parse(savedListWatched);
-//   console.log(savedListWatched);
-
-//   // console.log('items', items);
-//   const createGAl = cardsMarkup(parsedListWatched);
-//   galleryLibraryEl.innerHTML = createGAl;
-// }
 // renderLibraryWatched();
 
-// // Функція рендеру карток за "Queue" списком
-// async function renderLibraryQueue() {
-//   let savedListQueue = localStorage.getItem('list-queue');
-//   let parsedListQueue = JSON.parse(savedListQueue);
-//   // console.log('items', items);
-//   const createGAl = await cardsMarkupLibrary(parsedListQueue);
-//   galleryLibraryEl.innerHTML = createGAl;
-// }
+// Функція створення галереї списку "Watched"
+
+function onWatchedBtn(e) {
+  e.preventDefault();
+  galleryLibraryEl.innerHTML = '';
+
+  btnWatchedEl.classList.add('button__primary-accent');
+  btnQueueEl.classList.remove('button__primary-accent');
+
+  renderLibraryWatched();
+}
+
+// Функція створення галереї списку  "Queue"
+
+function onQueueBtn(e) {
+  e.preventDefault();
+  galleryLibraryEl.innerHTML = '';
+
+  btnWatchedEl.classList.remove('button__primary-accent');
+  btnQueueEl.classList.add('button__primary-accent');
+
+  renderLibraryQueue();
+}
+// ========================================================================
+// Функція рендеру карток за "Watched" списком
+
+function renderLibraryWatched() {
+  // буде заміна фукції забору
+  let savedListWatched = localStorage.getItem('list-watched');
+  let parsedListWatched = JSON.parse(savedListWatched);
+
+  const createGAl = cardsMarkup(parsedListWatched);
+  galleryLibraryEl.innerHTML = createGAl;
+
+  // galleryLibraryEl.addEventListener('click', onClickOneFilmCardWatched);
+}
+
+// Функція рендеру карток за "Queue" списком
+async function renderLibraryQueue() {
+  let savedListQueue = localStorage.getItem('list-queue');
+  let parsedListQueue = JSON.parse(savedListQueue);
+
+  const createGAl = await cardsMarkup(parsedListQueue);
+  galleryLibraryEl.innerHTML = createGAl;
+
+  galleryLibraryEl.addEventListener('click', onClickOneFilmCardQueue);
+}
