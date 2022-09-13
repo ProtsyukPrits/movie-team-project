@@ -13,9 +13,7 @@ const cardsMarkup = function (items) {
         first_air_date,
         release_date,
         id,
-        name,
-        genre_ids,
-        genres,
+        name
       }) => `
         <li class='movie__card' data-movieID='${id}'>
         <a href='#' class='movie__card-link'>
