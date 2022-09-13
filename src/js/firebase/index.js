@@ -57,14 +57,14 @@ const refs = {
 // collection reference
 const colRef = collection(db, 'users');
 // queries
-// getDocs(colRef)
-//   .then(snapshot => {
-//     let users = [];
-//     snapshot.docs.forEach(doc => {
-//       users.push({ ...doc.data(), id: doc.id });
-//     });
-//   })
-//   .catch(err => console.log(err.message));
+getDocs(colRef)
+  .then(snapshot => {
+    let users = [];
+    snapshot.docs.forEach(doc => {
+      users.push({ ...doc.data(), id: doc.id });
+    });
+  })
+  .catch(err => console.log(err.message));
 
 //  getDoc(doc(db, 'users', auth.currentUser.uid)).then(doc => {
 //    console.log(doc.data());
@@ -81,7 +81,6 @@ export function addFilmToWatched(filmData) {
     Notify.failure('You must login to add films');
     return;
   }
-  const userCol = doc(db, 'users', auth.currentUser.uid);
   setDoc(
     doc(colRef, auth.currentUser.uid, 'watched', filmData.id.toString()),
     filmData
@@ -93,7 +92,6 @@ export function addFilmToQueue(filmData) {
     Notify.failure('You must login to add films');
     return;
   }
-  const userCol = doc(db, 'users', auth.currentUser.uid);
   setDoc(
     doc(colRef, auth.currentUser.uid, 'queue', filmData.id.toString()),
     filmData
