@@ -6,6 +6,7 @@
 
 import { trendingFetch, getMoviesByQueryKey, fetchByID } from './apies';
 import { cardsMarkup, modalOneFilmMarkup } from './movie-cards-markup';
+// import { onToQueueBtn, onToWatchedBtn } from './callback-buttons';
 import { prepareMovieData } from './prepare-movie-data';
 import Pagination from 'tui-pagination';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
@@ -149,8 +150,8 @@ async function onClickOneFilmCard(e) {
 
   btnToWatchedEl.addEventListener('click', onToWatchedBtn);
   btnToQueueEl.addEventListener('click', onToQueueBtn);
-  console.log(btnToWatchedEl);
-  console.log(btnToQueueEl);
+  // console.log(btnToWatchedEl);
+  // console.log(btnToQueueEl);
 
   ///Закриваємо модалку по кнопці
   const buttonModalClose = document.querySelector('.onefilm__icon--close');
@@ -169,6 +170,55 @@ async function onClickOneFilmCard(e) {
     window.removeEventListener('keydown', closeByKey);
     btnToWatchedEl.removeEventListener('click', onToWatchedBtn);
     btnToQueueEl.removeEventListener('click', onToQueueBtn);
+  }
+
+  function onToQueueBtn(e) {
+    e.preventDefault();
+
+    let savedListQueue = localStorage.getItem('list-queue');
+
+    if (savedListQueue) {
+      savedListQueue = JSON.parse(savedListQueue);
+    } else {
+      savedListQueue = [];
+    }
+
+    for (const item of savedListQueue) {
+      if (item.id === data.id) {
+        closeByClick();
+        return Notify.info('This movie is already on this list');
+      }
+    }
+    savedListQueue.push(data);
+
+    localStorage.setItem('list-queue', JSON.stringify(savedListQueue));
+
+    // Закриваємо модалку
+    closeByClick();
+  }
+
+  async function onToWatchedBtn(e) {
+    e.preventDefault();
+
+    let savedListWatched = localStorage.getItem('list-watched');
+    if (savedListWatched) {
+      savedListWatched = JSON.parse(savedListWatched);
+    } else {
+      savedListWatched = [];
+    }
+
+    for (const item of savedListWatched) {
+      if (item.id === data.id) {
+        closeByClick();
+        return Notify.info('This movie is already on this list');
+      }
+    }
+    savedListWatched.push(data);
+
+    localStorage.setItem('list-watched', JSON.stringify(savedListWatched));
+
+    // Закриваємо модалку
+    closeByClick();
   }
 }
 // function onClickOneFilmCard(e) {
@@ -192,3 +242,29 @@ async function onClickOneFilmCard(e) {
 // =============================== LIBRARY ==============================================
 
 // Функція-колбек на кнопку
+
+// async function onToQueueBtn(e) {
+//   e.preventDefault();
+
+//   const currentObjectData = await fetchByID(e.target.dataset.movieid);
+//   console.log(currentObjectData);
+
+//   let savedListQueue = localStorage.getItem('list-queue');
+
+//   if (savedListQueue) {
+//     savedListQueue = JSON.parse(savedListQueue);
+//   } else {
+//     savedListQueue = [];
+//   }
+
+//   for (const item of savedListQueue) {
+//     if (item.id === currentObjectData.id) {
+//       return alert('You have this movie in the list');
+//     }
+//   }
+//   savedListQueue.push(currentObjectData);
+
+//   localStorage.setItem('list-queue', JSON.stringify(savedListQueue));
+
+//   // Зробити закриття модалки
+// }
