@@ -2,23 +2,25 @@
   <div class="header__container">
     <div class="header__wrapper">
       <!--LOGO-->
-      <a href="#en" class="header__link">
-        <svg class="header__icon" width="24" height="24">
-          <use href="./images/header/sprite.svg#icon-film"></use>
-        </svg>
+      <a href="./index.html" class="header__link">
+        <svg class="header__icon"
+            width="24"
+            height="24">
+            <use href="./images/header/sprite.svg#icon-film"></use>
+            </svg> 
         <span class="header__name">FILMOTEKA</span>
       </a>
       <!--NAVIGATION-->
       <nav class="header__nav">
         <ul class="header__nav-list">
           <li class="header__nav-item">
-            <a href="./index.html" class="lang-home" id="home">home</a>
+            <a href="./index.html" class="lang-home nav-text nav__link--current" id="home">home</a>
           </li>
           <li class="header__nav-item">
-            <a href="./library.html" class="lang-library" id="library">my library</a>
+            <a href="./library.html" class="lang-library nav-text" id="library">my library</a>
           </li>
           <li class="header__nav-item">
-            <button data-lang="log" class="header__nav-btn lang-login" id="login" type="button">
+            <button data-lang="log" class="nav-text header__nav-btn lang-login" id="login" type="button">
               LOG IN
             </button>
           </li>
@@ -121,18 +123,18 @@
       </select>
       <!--VOTES-->
       <select class="header__filter-votes" name="votes" id="votes_choice">
-        <option class="lang-don't-sort" id="don't-sort" value="">Don't sort</option>
-        <option class="lang-sortaverage" id="sortaverage" value="header__filter-votes-average">
+        <option class="header__filter-sort lang-don't-sort" id="don't-sort" value="">Don't sort</option>
+        <option class="header__filter-sort lang-sortaverage" id="sortaverage" value="header__filter-votes-average">
           Sort by Average voite
         </option>
-        <option class="lang-sortvoite" id="sortvoite" value="header__filter-votes-count">Sort by Voite count</option>
-        <option class="lang-sortpop" id="sortpop" value="header__filter-votes-popularity">
+        <option class="header__filter-sort lang-sortvoite" id="sortvoite" value="header__filter-votes-count">Sort by Voite count</option>
+        <option class="header__filter-sort lang-sortpop" id="sortpop" value="header__filter-votes-popularity">
           Sort by Popularity
         </option>
       </select>
       <!--YEAR-->
       <select class="header__filter-years" name="year" id="year_choice">
-        <option class="lang-years" id="years" value="">All years</option>
+        <option class="header-years lang-years" id="years" value="">All years</option>
       </select>
     </form>
   </div>

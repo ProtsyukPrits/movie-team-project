@@ -29,11 +29,11 @@
 .tui-pagination .tui-page-btn {
     display: inline-block;
     position: relative;
-    width: 28px;
+    width: 30px;
     padding: 8px 0 6px;
     margin-left: 0;
-    color: #333;
-    font-size: 12px;
+    color: $text-color-light;
+    font-size: 15px;
     font-weight: normal;
     line-height: 1;
     text-decoration: none;
@@ -43,7 +43,7 @@
 }
 
 .tui-pagination .tui-page-btn:hover {
-    background-color: $bg-primary;
+    background-color: #f3ddcf;
 }
 
 .tui-pagination .tui-is-selected,

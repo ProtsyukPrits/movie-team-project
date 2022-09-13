@@ -24,7 +24,11 @@ const searchInput = document.querySelector('.header__search-input');
 const moviesContainer = document.querySelector('.movies__container');
 
 // Тут додаємо слухачі подій
+<<<<<<< HEAD
 gallery.addEventListener('click', onClickOneFilmCard);
+=======
+gallery.addEventListener('click', onClickModalOpen);
+>>>>>>> main
 
 searchInput.addEventListener('input', e => {
   queryString = e.target.value;
@@ -33,7 +37,7 @@ searchInput.addEventListener('input', e => {
 
 searchForm.addEventListener('submit', e => {
   e.preventDefault();
-
+  pagination.movePageTo(page);
   if (queryString === '') {
     searchForm.style.borderBottomColor = 'red';
     return Notify.info(
@@ -52,6 +56,7 @@ const pagination = new Pagination(container, {
   totalItems: 1000,
   itemsPerPage: 10,
   visiblePages: 5,
+  page: 1,
   centerAlign: true,
 });
 
@@ -61,6 +66,7 @@ pagination.on('afterMove', event => {
   // console.log(currentPage);
   render(currentPage);
 });
+
 // ==================================================================
 
 // Функція для виклику карток за популярним рейтингом
@@ -68,8 +74,8 @@ async function render(currentPage) {
   const data = await trendingFetch(currentPage);
   items = data.results;
   // console.log('items', items);
-  const validMovieData = prepareMovieData(items);
-  const createGAl = cardsMarkup(validMovieData);
+  // const validMovieData = prepareMovieData(items);
+  const createGAl = cardsMarkup(items);
   gallery.innerHTML = createGAl;
 }
 render(page);
@@ -89,8 +95,8 @@ function renderByQuery(filteredList) {
   if (noResultsCard) {
     noResultsCard.classList.add('hidden');
   }
-  const validFilteredList = prepareMovieData(filteredList);
-  const listOfCards = cardsMarkup(validFilteredList);
+  // const validFilteredList = prepareMovieData(filteredList);
+  const listOfCards = cardsMarkup(filteredList);
   return gallery.insertAdjacentHTML('afterbegin', listOfCards);
 }
 
