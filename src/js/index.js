@@ -139,8 +139,18 @@ async function onClickOneFilmCard(e) {
   const data = await fetchByID(movieID);
   // Створюємо модалку
   const modalOneFilm = basicLightbox.create(modalOneFilmMarkup(data));
+
   // Показуємо модалку
   modalOneFilm.show();
+
+  // Вішаємо слухачів на кнопки
+  const btnToWatchedEl = document.querySelector('[data-to-watched]');
+  const btnToQueueEl = document.querySelector('[data-to-queue]');
+
+  btnToWatchedEl.addEventListener('click', onToWatchedBtn);
+  btnToQueueEl.addEventListener('click', onToQueueBtn);
+  console.log(btnToWatchedEl);
+  console.log(btnToQueueEl);
 
   ///Закриваємо модалку по кнопці
   const buttonModalClose = document.querySelector('.onefilm__icon--close');
@@ -148,6 +158,8 @@ async function onClickOneFilmCard(e) {
   function closeByClick() {
     modalOneFilm.close();
     window.removeEventListener('keydown', closeByKey);
+    btnToWatchedEl.removeEventListener('click', onToWatchedBtn);
+    btnToQueueEl.removeEventListener('click', onToQueueBtn);
   }
 
   ///Закриваємо модалку по 'Escape'
@@ -155,6 +167,8 @@ async function onClickOneFilmCard(e) {
   function closeByKey(e) {
     modalOneFilm.close();
     window.removeEventListener('keydown', closeByKey);
+    btnToWatchedEl.removeEventListener('click', onToWatchedBtn);
+    btnToQueueEl.removeEventListener('click', onToQueueBtn);
   }
 }
 // function onClickOneFilmCard(e) {
@@ -174,3 +188,7 @@ async function onClickOneFilmCard(e) {
 //   // gallery.insertAdjacentHTML('afterend', modalOneFilmMarkup(data));
 //   const instance = basicLightbox.create(modalOneFilmMarkup(data));
 // }
+//
+// =============================== LIBRARY ==============================================
+
+// Функція-колбек на кнопку
