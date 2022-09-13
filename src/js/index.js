@@ -15,7 +15,11 @@ import { prepareMovieData } from './prepare-movie-data';
 import Pagination from 'tui-pagination';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import * as basicLightbox from 'basiclightbox';
-import { addFilmToWatched, addFilmToQueue } from './firebase/index';
+import {
+  addFilmToWatched,
+  addFilmToQueue,
+  showCurrentUser,
+} from './firebase/index';
 // Тут додаємо ваші глобальні змінні
 let queryString = '';
 let yearValue = 0;
@@ -302,10 +306,14 @@ const btnQueueEl = document.querySelector('[data-library-queue]');
 const btnWatchedEl = document.querySelector('[data-library-watched]');
 const galleryLibraryEl = document.querySelector('.library__gallery');
 
-btnQueueEl.addEventListener('click', onQueueBtn);
-btnWatchedEl.addEventListener('click', onWatchedBtn);
-
-btnWatchedEl.classList.add('button__primary-accent');
+if (btnQueueEl) {
+  btnQueueEl.addEventListener('click', onQueueBtn);
+}
+if (btnWatchedEl) {
+  btnWatchedEl.addEventListener('click', showCurrentUser);
+  btnWatchedEl.classList.add('button__primary-accent');
+}
+//onWatchedBtn
 renderLibraryWatched();
 
 // renderLibraryWatched();
@@ -342,7 +350,9 @@ function renderLibraryWatched() {
   let parsedListWatched = JSON.parse(savedListWatched);
 
   const createGAl = cardsMarkup(parsedListWatched);
-  galleryLibraryEl.innerHTML = createGAl;
+  if (galleryLibraryEl) {
+    galleryLibraryEl.innerHTML = createGAl;
+  }
 
   // galleryLibraryEl.addEventListener('click', onClickOneFilmCardWatched);
 }
