@@ -21,6 +21,9 @@ import {
   addFilmToQueue,
   getUserWatched,
   getUserQueue,
+  getFilmById,
+  addtoWatchedAndDeleteFromQueue,
+  deleteMovieFromQueue,
 } from './firebase/index';
 // Тут додаємо ваші глобальні змінні
 let queryString = '';
@@ -43,9 +46,9 @@ const searchByYears = document.querySelector('.header__filter-years');
 const searchByVotes = document.querySelector('.header__filter-votes');
 
 // Тут додаємо слухачі подій
-gallery
-  ? gallery.addEventListener('click', onClickOneFilmCard)
-  : libraryGallery.addEventListener('click', onClickOneFilmCard);
+if (gallery) {
+  gallery.addEventListener('click', onClickOneFilmCard);
+}
 
 if (searchInput) {
   searchInput.addEventListener('input', e => {
@@ -257,7 +260,7 @@ function onToQueueBtn(e) {
   localStorage.setItem('list-queue', JSON.stringify(savedListQueue));
 
   // Закриваємо модалку
-  // closeByClick();
+  closeByClick();
 }
 
 async function onToWatchedBtn(e) {
@@ -272,7 +275,7 @@ async function onToWatchedBtn(e) {
 
   for (const item of savedListWatched) {
     if (item.id === currentFilmData.id) {
-      // closeByClick();
+      closeByClick();
       return Notify.info('This movie is already on this list');
     }
   }
@@ -281,7 +284,7 @@ async function onToWatchedBtn(e) {
   localStorage.setItem('list-watched', JSON.stringify(savedListWatched));
 
   // Закриваємо модалку
-  // closeByClick();
+  closeByClick();
 }
 
 // function onClickOneFilmCard(e) {
@@ -317,66 +320,137 @@ if (btnWatchedEl) {
 }
 //onWatchedBtn
 // setTimeout(renderLibraryWatched(), 3000);
-setTimeout(onWatchedBtn, 500);
+if (window.location.pathname === '/library.html') {
+  setTimeout(onWatchedBtn, 1000);
+}
 // Функція створення галереї списку "Watched"
 
 function onWatchedBtn() {
-  getUserWatched().then(result => {
-    console.log(result);
-    if (result.length === 0) {
-      if (galleryLibraryEl) {
-        galleryLibraryEl.innerHTML =
-          '<h2 style="margin-top:20px; margin-left:auto; margin-right:auto;">You have not added any films yet</h2>';
-      }
-    } else {
-      const createGAl = cardsMarkup(result);
-      if (galleryLibraryEl) {
-        galleryLibraryEl.innerHTML = createGAl;
-      }
-    }
-  });
+  getUserWatched().then(result => renderLibraryWatched(result));
+  btnWatchedEl.classList.add('button__primary-accent');
+  btnQueueEl.classList.remove('button__primary-accent');
 }
 
 // Функція створення галереї списку  "Queue"
 
-function onQueueBtn(e) {
+function onQueueBtn() {
   getUserQueue().then(result => {
-    console.log(result);
-    if (result.length === 0) {
-      if (galleryLibraryEl) {
-        galleryLibraryEl.innerHTML =
-          '<h2 style="margin-top:20px; margin-left:auto; margin-right:auto;">You have not added any films yet</h2>';
-      }
-    } else {
-      const createGAl = cardsMarkup(result);
-      if (galleryLibraryEl) {
-        galleryLibraryEl.innerHTML = createGAl;
-      }
-    }
+    renderLibraryQueue(result);
   });
+  btnQueueEl.classList.add('button__primary-accent');
+  btnWatchedEl.classList.remove('button__primary-accent');
 }
 // ========================================================================
 // Функція рендеру карток за "Watched" списком
 
-function renderLibraryWatched() {
-  // буде заміна фукції забору
-  getUserWatched().then(() => {
-    const createGAl = cardsMarkup(savedListWatched);
+async function renderLibraryWatched(films) {
+  if (films.length === 0) {
+    if (galleryLibraryEl) {
+      galleryLibraryEl.innerHTML =
+        '<h2 style="margin-top:20px; margin-left:auto; margin-right:auto;">You have not added any films yet</h2>';
+    }
+  } else {
+    const createGAl = cardsMarkup(films);
     if (galleryLibraryEl) {
       galleryLibraryEl.innerHTML = createGAl;
+
+      galleryLibraryEl.addEventListener('click', renderWatchedFilmModal);
     }
-  });
+  }
 }
 
-// galleryLibraryEl.addEventListener('click', onClickOneFilmCardWatched);
-
 // Функція рендеру карток за "Queue" списком
-async function renderLibraryQueue() {
-  let savedListQueue = localStorage.getItem('list-queue');
-  let parsedListQueue = JSON.parse(savedListQueue);
+async function renderLibraryQueue(films) {
+  if (films.length === 0) {
+    if (galleryLibraryEl) {
+      galleryLibraryEl.innerHTML =
+        '<h2 style="margin-top:20px; margin-left:auto; margin-right:auto;">You have not added any films yet</h2>';
+    }
+  } else {
+    const createGAl = cardsMarkup(films);
+    if (galleryLibraryEl) {
+      galleryLibraryEl.innerHTML = createGAl;
+      // galleryLibraryEl.removeEventListener('click', renderWatchedFilmModal);
+      galleryLibraryEl.addEventListener('click', renderQueueFilmModal);
+    }
+  }
+}
 
-  const createGAl = await cardsMarkup(parsedListQueue);
-  galleryLibraryEl.innerHTML = createGAl;
+async function renderWatchedFilmModal(e) {
+  e.preventDefault();
 
-  galleryLibraryEl.addEventListener('click', onClickOneFilmCardQueue);
+  const filmCardElement = e.target.closest('.movie__card');
+  if (!filmCardElement) return;
+  const movieID = filmCardElement.dataset.movieid;
+  // Забираємо обєкт фільму по ID
+  const data = await getFilmById(movieID, 'watched');
+  // currentFilmData = data;
+  // // Створюємо модалку
+  const modalOneFilm = basicLightbox.create(modalOneFilmMarkupWatched(data));
+  modalOneFilm.show();
+
+  ///Закриваємо модалку по кнопці
+  const buttonModalClose = document.querySelector('.onefilm__icon--close');
+  buttonModalClose.addEventListener('click', closeByClick);
+  function closeByClick() {
+    modalOneFilm.close();
+    window.removeEventListener('keydown', closeByKey);
+  }
+
+  ///Закриваємо модалку по 'Escape'
+  window.addEventListener('keydown', closeByKey);
+  function closeByKey(e) {
+    modalOneFilm.close();
+    window.removeEventListener('keydown', closeByKey);
+  }
+}
+
+async function renderQueueFilmModal(e) {
+  e.preventDefault();
+  const filmCardElement = e.target.closest('.movie__card');
+  if (!filmCardElement) return;
+  const movieID = filmCardElement.dataset.movieid;
+  // Забираємо обєкт фільму по ID
+  const data = await getFilmById(movieID, 'queue');
+  console.log(data);
+  // // Створюємо модалку
+  const modalOneFilm = basicLightbox.create(modalOneFilmMarkupQueue(data));
+  modalOneFilm.show();
+  const addtoWatchedBtn = document.querySelector('[data-to-watched-library]');
+  const deleteMovieBtn = document.querySelector('[data-to-delete]');
+
+  ///Закриваємо модалку по кнопці
+  const buttonModalClose = document.querySelector('.onefilm__icon--close');
+  buttonModalClose.addEventListener('click', closeByClick);
+  function closeByClick() {
+    modalOneFilm.close();
+    window.removeEventListener('keydown', closeByKey);
+  }
+
+  ///Закриваємо модалку по 'Escape'
+  window.addEventListener('keydown', closeByKey);
+  function closeByKey(e) {
+    modalOneFilm.close();
+    window.removeEventListener('keydown', closeByKey);
+  }
+
+  addtoWatchedBtn.addEventListener(
+    'click',
+    () => {
+      addtoWatchedAndDeleteFromQueue(data);
+      modalOneFilm.close();
+      onQueueBtn();
+    },
+    { once: true }
+  );
+
+  deleteMovieBtn.addEventListener(
+    'click',
+    () => {
+      deleteMovieFromQueue(data);
+      modalOneFilm.close();
+      onQueueBtn();
+    },
+    { once: true }
+  );
 }
