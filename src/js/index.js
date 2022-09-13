@@ -9,6 +9,7 @@ import { cardsMarkup, modalOneFilmMarkup } from './movie-cards-markup';
 import { prepareMovieData } from './prepare-movie-data';
 import Pagination from 'tui-pagination';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import * as basicLightbox from 'basiclightbox';
 
 // Тут додаємо ваші глобальні змінні
 let queryString = '';
@@ -25,7 +26,7 @@ const moviesContainer = document.querySelector('.movies__container');
 const searchByGenres = document.querySelector('.header__filter-genres');
 
 // Тут додаємо слухачі подій
-// document.addEventListener('click', onClickModalOpen);
+gallery.addEventListener('click', onClickOneFilmCard);
 
 if (searchInput) {
   searchInput.addEventListener('input', e => {
@@ -59,6 +60,7 @@ const pagination = new Pagination(container, {
   totalItems: 1000,
   itemsPerPage: 10,
   visiblePages: 5,
+  page: 1,
   centerAlign: true,
 });
 
@@ -68,6 +70,7 @@ pagination.on('afterMove', event => {
   // console.log(currentPage);
   render(currentPage);
 });
+
 // ==================================================================
 
 // Функція для виклику карток за популярним рейтингом
@@ -75,8 +78,8 @@ async function render(currentPage) {
   const data = await trendingFetch(currentPage);
   items = data.results;
   // console.log('items', items);
-  const validMovieData = prepareMovieData(items);
-  const createGAl = cardsMarkup(validMovieData);
+  // const validMovieData = prepareMovieData(items);
+  const createGAl = cardsMarkup(items);
   gallery.innerHTML = createGAl;
 }
 render(page);
@@ -96,8 +99,8 @@ function renderByQuery(filteredList) {
   if (noResultsCard) {
     noResultsCard.classList.add('hidden');
   }
-  const validFilteredList = prepareMovieData(filteredList);
-  const listOfCards = cardsMarkup(validFilteredList);
+  // const validFilteredList = prepareMovieData(filteredList);
+  const listOfCards = cardsMarkup(filteredList);
   return gallery.insertAdjacentHTML('afterbegin', listOfCards);
 }
 
@@ -111,13 +114,10 @@ function filterByGenres(data) {
   if (genreValue !== 0) {
     const filteredDataByGenres = data.filter(film => {
       const { genre_ids } = film;
-      console.log(genreValue);
       return (findGenre = genre_ids.includes(genreValue));
     });
-    console.log(filteredDataByGenres);
     return filteredDataByGenres;
   }
-  console.log(data);
   return data;
 }
 
@@ -128,30 +128,49 @@ function createNoResultsCard() {
   return moviesContainer.insertAdjacentHTML('afterbegin', noResults);
 }
 
-// Функція для рендеру модального вікна ОДНОГО ФІЛЬМУ
-async function renderOneFilmModal(id) {
-  const data = await fetchByID(id);
-  // console.log(data);
-  gallery.insertAdjacentHTML('afterend', modalOneFilmMarkup(data));
-}
-
 // Функція-колбек для рендеру модалки по кліку
-async function onClickModalOpen(e) {
+async function onClickOneFilmCard(e) {
   e.preventDefault();
-  if (!e.target.closest('.movie__card')) return;
-  const movieID = e.target.closest('.movie__card').dataset.movieid;
-  // console.log(movieID);
-  openModalOneFilm(movieID);
-}
 
-async function openModalOneFilm(movieID) {
-  await renderOneFilmModal(movieID);
-  // const buton = document.querySelector('.button__secondary');
-  // buton.addEventListener('click', onClickButon);
-}
+  const filmCardElement = e.target.closest('.movie__card');
+  if (!filmCardElement) return;
+  const movieID = filmCardElement.dataset.movieid;
+  // Забираємо обєкт фільму по ID
+  const data = await fetchByID(movieID);
+  // Створюємо модалку
+  const modalOneFilm = basicLightbox.create(modalOneFilmMarkup(data));
+  // Показуємо модалку
+  modalOneFilm.show();
 
-// async function onClickButon(e) {
-//   // console.log(e.target.dataset.movieid);
-//   const data = await fetchByID(e.target.dataset.movieid);
+  ///Закриваємо модалку по кнопці
+  const buttonModalClose = document.querySelector('.onefilm__icon--close');
+  buttonModalClose.addEventListener('click', closeByClick);
+  function closeByClick() {
+    modalOneFilm.close();
+    window.removeEventListener('keydown', closeByKey);
+  }
+
+  ///Закриваємо модалку по 'Escape'
+  window.addEventListener('keydown', closeByKey);
+  function closeByKey(e) {
+    modalOneFilm.close();
+    window.removeEventListener('keydown', closeByKey);
+  }
+}
+// function onClickOneFilmCard(e) {
+//   e.preventDefault();
+//   const oneFilmCard = e.target.closest('.movie__card')
+//   if (!oneFilmCard) return;
+
+//   fetchByID(oneFilmCard.dataset.movieid)
+
+//   console.log(fetchByID(oneFilmCard.dataset.movieid));
+// }
+
+// Функція для рендеру модального вікна ОДНОГО ФІЛЬМУ
+// async function renderOneFilmModal(id) {
+//   const data = await fetchByID(id);
 //   console.log(data);
+//   // gallery.insertAdjacentHTML('afterend', modalOneFilmMarkup(data));
+//   const instance = basicLightbox.create(modalOneFilmMarkup(data));
 // }
