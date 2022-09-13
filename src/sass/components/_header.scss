@@ -1,9 +1,7 @@
 .header__home {
-  background-image: linear-gradient(
-      90deg,
+  background-image: linear-gradient(90deg,
       rgba(0, 0, 0, 0.56),
-      rgba(0, 0, 0, 0.56)
-    ),
+      rgba(0, 0, 0, 0.56)),
     url(../images/header/home-mob.jpg);
   background-position: center;
   background-size: cover;
@@ -13,56 +11,46 @@
   margin-right: auto;
 
   @media (min-device-pixel-ratio: 2),
-    (-webkit-min-device-pixel-ratio: 2),
-    (min-resolution: 192dpi),
-    (min-resolution: 2dppx) {
-    background-image: linear-gradient(
-        90deg,
+  (-webkit-min-device-pixel-ratio: 2),
+  (min-resolution: 192dpi),
+  (min-resolution: 2dppx) {
+    background-image: linear-gradient(90deg,
         rgba(0, 0, 0, 0.56),
-        rgba(0, 0, 0, 0.56)
-      ),
+        rgba(0, 0, 0, 0.56)),
       url(../images/header/home-mob2x.jpg);
   }
 
   @media screen and (min-width: 768px) {
-    background-image: linear-gradient(
-        90deg,
+    background-image: linear-gradient(90deg,
         rgba(0, 0, 0, 0.56),
-        rgba(0, 0, 0, 0.56)
-      ),
+        rgba(0, 0, 0, 0.56)),
       url(../images/header/home-tab.jpg);
 
     @media (min-device-pixel-ratio: 2),
-      (-webkit-min-device-pixel-ratio: 2),
-      (min-resolution: 192dpi),
-      (min-resolution: 2dppx) {
-      background-image: linear-gradient(
-          90deg,
+    (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+      background-image: linear-gradient(90deg,
           rgba(0, 0, 0, 0.56),
-          rgba(0, 0, 0, 0.56)
-        ),
+          rgba(0, 0, 0, 0.56)),
         url(../images/header/home-tab2x.jpg);
     }
   }
 
   @media screen and (min-width: 1280px) {
-    max-width: 1280px;
-    background-image: linear-gradient(
-        90deg,
+    // max-width: 1280px;
+    background-image: linear-gradient(90deg,
         rgba(0, 0, 0, 0.56),
-        rgba(0, 0, 0, 0.56)
-      ),
+        rgba(0, 0, 0, 0.56)),
       url(../images/header/home-lap.jpg);
 
     @media (min-device-pixel-ratio: 2),
-      (-webkit-min-device-pixel-ratio: 2),
-      (min-resolution: 192dpi),
-      (min-resolution: 2dppx) {
-      background-image: linear-gradient(
-          90deg,
+    (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+      background-image: linear-gradient(90deg,
           rgba(0, 0, 0, 0.56),
-          rgba(0, 0, 0, 0.56)
-        ),
+          rgba(0, 0, 0, 0.56)),
         url(../images/header/home-lap2x.jpg);
     }
   }
@@ -79,20 +67,21 @@
 
   margin-right: auto;
 }
+
 .nav__link--current {
   position: relative;
-  
-    &::after {
-      position: absolute;
-      left: 0;
-      bottom: -3px;
-      content: '';
-      display: inline-block;
-      width: 100%;
-      height: 3px;
-      background-color: $border-color-accent;
-  
-    }
+
+  &::after {
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    content: '';
+    display: inline-block;
+    width: 100%;
+    height: 3px;
+    background-color: $border-color-accent;
+
+  }
 }
 
 .header__icon {
@@ -124,13 +113,15 @@
 }
 
 .header__log-btn {
-  background-color: inherit;
+  padding: 3px;
   font-weight: 500;
   font-size: 12px;
   line-height: 1.17;
   text-transform: uppercase;
   color: $text-color-secondary;
   border-color: transparent;
+  background-color: $border-color-accent;
+  border-radius: 5px;
   cursor: pointer;
 }
 
@@ -172,7 +163,7 @@
   border-bottom: 1px solid $text-color-secondary;
 }
 
-.nav-text{
+.nav-text {
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
@@ -194,7 +185,7 @@
 
 ::placeholder {
   color: $text-color-secondary
- }
+}
 
 .header__search-btn {
   display: flex;
@@ -239,13 +230,16 @@
     margin-right: 30px;
   }
 }
-.header__filter-genres-option{
+
+.header__filter-genres-option {
   color: $text-color-primary
 }
-.header__filter-sort{
+
+.header__filter-sort {
   color: $text-color-primary
 }
-.headere-years{
+
+.headere-years {
   color: $text-color-primary;
 }
 
