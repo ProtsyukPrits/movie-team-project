@@ -3,7 +3,7 @@
     <!-- Header Navigation -->
 
     <nav class="nav">
-      <a href="" class="nav__logo">
+      <a href="./index.html" class="nav__logo">
         <img class="nav__logo-icon" src="./images/header/logo.svg" alt="logo" width="24" height="24" >
         </img>
         <span class="nav__logo-text">Filmoteka</span>
@@ -11,22 +11,48 @@
 
       <ul class="nav__list">
         <li class="nav__item">
-          <a class="nav__link" href="./index.html">home</a>
+          <a class="nav__link lang-home" href="./index.html" id="home">home</a>
         </li>
         <li class="nav__item">
-          <a class="nav__link nav__link--current" href="./library.html">my library</a>
+          <a class="nav__link nav__link--current lang-library" href="./library.html" id="library">my library</a>
         </li>
       </ul>
     </nav>
+
+    <div class="header__btns">
+      <!--NIGHT MODE-->
+      <label class="header-form__switch">
+        <input class="header-form__checkbox" type="checkbox" />
+        <span class="header-form__slider header-form__slider--round">
+          <p class="header-slider__box">
+            <svg class="header-slider__icon" width="16" height="16">
+              <use href="./images/header/sprite.svg#icon-sun"></use>
+            </svg>
+          </p>
+          <p class="header-slider__box">
+            <svg class="header-slider__icon" width="16" height="16">
+              <use href="./images/header/sprite.svg#icon-moon"></use>
+            </svg>
+          </p>
+        </span>
+      </label>
+      <!--LANGUAGE-->
+      <div class="header__lang">
+        <select class="header__lang-select">
+          <option value="en">EN</option>
+          <option value="ua">UA</option>
+        </select>
+      </div>
+    </div>
 
     <!-- Header Search -->
 
     <ul class="header__button-wrap">
       <li class="header__button">
-        <button type="button" class="button__primary-light" data-library-watched>watched</button>
+        <button type="button" class="button__primary-light lang-watched" id="watched" data-library-watched>watched</button>
       </li>
       <li class="header__button">
-        <button type="button" class="button__primary-light" data-library-queue>queue</button>
+        <button type="button" class="button__primary-light lang-queue" id="queue" data-library-queue>queue</button>
       </li>
     </ul>
   </div>
