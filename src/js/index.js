@@ -6,7 +6,6 @@
 
 import { trendingFetch, getMoviesByQueryKey, fetchByID } from './apies';
 import { cardsMarkup, modalOneFilmMarkup } from './movie-cards-markup';
-// import { onToQueueBtn, onToWatchedBtn } from './callback-buttons';
 import { prepareMovieData } from './prepare-movie-data';
 import Pagination from 'tui-pagination';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
