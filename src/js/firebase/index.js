@@ -56,14 +56,29 @@ const refs = {
 // collection reference
 const colRef = collection(db, 'users');
 // queries
-getDocs(colRef)
-  .then(snapshot => {
-    let users = [];
-    snapshot.docs.forEach(doc => {
-      users.push({ ...doc.data(), id: doc.id });
-    });
-  })
-  .catch(err => console.log(err.message));
+export async function getUserWatched() {
+  let films = [];
+  await getDocs(collection(colRef, auth.currentUser.uid, 'watched'))
+    .then(snapshot => {
+      snapshot.docs.forEach(doc => {
+        films.push({ ...doc.data(), id: doc.id });
+      });
+    })
+    .catch(err => console.log(err.message));
+  return films;
+}
+
+export async function getUserQueue() {
+  let films = [];
+  await getDocs(collection(colRef, auth.currentUser.uid, 'queue'))
+    .then(snapshot => {
+      snapshot.docs.forEach(doc => {
+        films.push({ ...doc.data(), id: doc.id });
+      });
+    })
+    .catch(err => console.log(err.message));
+  return films;
+}
 
 //  getDoc(doc(db, 'users', auth.currentUser.uid)).then(doc => {
 //    console.log(doc.data());

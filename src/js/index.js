@@ -16,7 +16,12 @@ import { prepareMovieData } from './prepare-movie-data';
 import Pagination from 'tui-pagination';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import * as basicLightbox from 'basiclightbox';
-import { addFilmToWatched, addFilmToQueue } from './firebase/index';
+import {
+  addFilmToWatched,
+  addFilmToQueue,
+  getUserWatched,
+  getUserQueue,
+} from './firebase/index';
 // Тут додаємо ваші глобальні змінні
 let queryString = '';
 let yearValue = 0;
@@ -307,52 +312,63 @@ if (btnQueueEl) {
   btnQueueEl.addEventListener('click', onQueueBtn);
 }
 if (btnWatchedEl) {
-  btnWatchedEl.addEventListener('click', showCurrentUser);
+  btnWatchedEl.addEventListener('click', onWatchedBtn);
   btnWatchedEl.classList.add('button__primary-accent');
 }
 //onWatchedBtn
-renderLibraryWatched();
-
-// renderLibraryWatched();
-
+// setTimeout(renderLibraryWatched(), 3000);
+setTimeout(onWatchedBtn, 500);
 // Функція створення галереї списку "Watched"
 
-function onWatchedBtn(e) {
-  e.preventDefault();
-  galleryLibraryEl.innerHTML = '';
-
-  btnWatchedEl.classList.add('button__primary-accent');
-  btnQueueEl.classList.remove('button__primary-accent');
-
-  renderLibraryWatched();
+function onWatchedBtn() {
+  getUserWatched().then(result => {
+    console.log(result);
+    if (result.length === 0) {
+      if (galleryLibraryEl) {
+        galleryLibraryEl.innerHTML =
+          '<h2 style="margin-top:20px; margin-left:auto; margin-right:auto;">You have not added any films yet</h2>';
+      }
+    } else {
+      const createGAl = cardsMarkup(result);
+      if (galleryLibraryEl) {
+        galleryLibraryEl.innerHTML = createGAl;
+      }
+    }
+  });
 }
 
 // Функція створення галереї списку  "Queue"
 
 function onQueueBtn(e) {
-  e.preventDefault();
-  galleryLibraryEl.innerHTML = '';
-
-  btnWatchedEl.classList.remove('button__primary-accent');
-  btnQueueEl.classList.add('button__primary-accent');
-
-  renderLibraryQueue();
+  getUserQueue().then(result => {
+    console.log(result);
+    if (result.length === 0) {
+      if (galleryLibraryEl) {
+        galleryLibraryEl.innerHTML =
+          '<h2 style="margin-top:20px; margin-left:auto; margin-right:auto;">You have not added any films yet</h2>';
+      }
+    } else {
+      const createGAl = cardsMarkup(result);
+      if (galleryLibraryEl) {
+        galleryLibraryEl.innerHTML = createGAl;
+      }
+    }
+  });
 }
 // ========================================================================
 // Функція рендеру карток за "Watched" списком
 
 function renderLibraryWatched() {
   // буде заміна фукції забору
-  let savedListWatched = localStorage.getItem('list-watched');
-  let parsedListWatched = JSON.parse(savedListWatched);
-
-  const createGAl = cardsMarkup(parsedListWatched);
-  if (galleryLibraryEl) {
-    galleryLibraryEl.innerHTML = createGAl;
-  }
-
-  // galleryLibraryEl.addEventListener('click', onClickOneFilmCardWatched);
+  getUserWatched().then(() => {
+    const createGAl = cardsMarkup(savedListWatched);
+    if (galleryLibraryEl) {
+      galleryLibraryEl.innerHTML = createGAl;
+    }
+  });
 }
+
+// galleryLibraryEl.addEventListener('click', onClickOneFilmCardWatched);
 
 // Функція рендеру карток за "Queue" списком
 async function renderLibraryQueue() {
