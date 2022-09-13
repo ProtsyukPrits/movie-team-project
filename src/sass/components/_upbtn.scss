@@ -1,0 +1,22 @@
+.back-to-top-btn {
+    position: fixed;
+    bottom: 75px;
+    right: 30px;
+    border-radius: 100%;
+    background: $icon-color-accent;
+    padding: 0.5rem;
+    border: none;
+    cursor: pointer;
+    color: white;
+    opacity: 1;
+    transition: opacity 0.5s;
+  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+  
+.back-to-top:hover {
+    background: $text-color-dark;
+}
+
