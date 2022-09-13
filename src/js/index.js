@@ -10,16 +10,13 @@ import {
   modalOneFilmMarkup,
   modalOneFilmMarkupQueue,
   modalOneFilmMarkupWatched,
+  getUserWatchedMovies,
 } from './movie-cards-markup';
 import { prepareMovieData } from './prepare-movie-data';
 import Pagination from 'tui-pagination';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import * as basicLightbox from 'basiclightbox';
-import {
-  addFilmToWatched,
-  addFilmToQueue,
-  showCurrentUser,
-} from './firebase/index';
+import { addFilmToWatched, addFilmToQueue } from './firebase/index';
 // Тут додаємо ваші глобальні змінні
 let queryString = '';
 let yearValue = 0;
