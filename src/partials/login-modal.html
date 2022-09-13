@@ -12,9 +12,13 @@
         <label for="name">name:</label>
         <input type="name" name="name" />
         <label for="email">email:</label>
-        <input type="email" name="email" />
+        <input type="email" name="email" autocomplete="email" />
         <label for="password">password:</label>
-        <input type="password" name="password" />
+        <input
+          type="password"
+          name="password"
+          autocomplete="current-password"
+        />
         <button type="submit" class="signup-btn">signup</button>
       </form>
       <p class="login-text">
@@ -25,9 +29,13 @@
     <div class="login-container">
       <form class="login-form" method="POST">
         <label for="email">email:</label>
-        <input type="email" name="email" />
+        <input type="email" name="email" autocomplete="email" />
         <label for="password">password:</label>
-        <input type="password" name="password" />
+        <input
+          type="password"
+          name="password"
+          autocomplete="current-password"
+        />
         <button type="submit" class="login-btn">login</button>
         <p class="signup-text">
           Or <button type="button" class="signup-show-btn">sign up</button> if

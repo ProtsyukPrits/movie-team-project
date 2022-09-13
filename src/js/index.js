@@ -10,7 +10,7 @@ import { prepareMovieData } from './prepare-movie-data';
 import Pagination from 'tui-pagination';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import * as basicLightbox from 'basiclightbox';
-
+import { addFilmToWatched } from './firebase/index';
 // Тут додаємо ваші глобальні змінні
 let queryString = '';
 let yearValue = 0;
@@ -181,6 +181,7 @@ async function onClickOneFilmCard(e) {
   // Забираємо обєкт фільму по ID
   const data = await fetchByID(movieID);
   currentFilmData = data;
+  console.log(currentFilmData);
   // Створюємо модалку
   const modalOneFilm = basicLightbox.create(modalOneFilmMarkup(data));
 
@@ -191,7 +192,7 @@ async function onClickOneFilmCard(e) {
   const btnToWatchedEl = document.querySelector('[data-to-watched]');
   const btnToQueueEl = document.querySelector('[data-to-queue]');
 
-  btnToWatchedEl.addEventListener('click', onToWatchedBtn);
+  btnToWatchedEl.addEventListener('click', addFilmToWatched(currentFilmData));
   btnToQueueEl.addEventListener('click', onToQueueBtn);
 
   ///Закриваємо модалку по кнопці

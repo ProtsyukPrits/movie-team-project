@@ -64,7 +64,6 @@ getDocs(colRef)
     snapshot.docs.forEach(doc => {
       users.push({ ...doc.data(), id: doc.id });
     });
-    console.log(users);
   })
   .catch(err => console.log(err.message));
 
@@ -75,8 +74,13 @@ getDocs(colRef)
 // adding documents to the collection
 
 function addUserCols() {
-  setDoc(doc(colRef, auth.currentUser.uid), { watched: {}, queue: {} }).then();
+  setDoc(doc(colRef, auth.currentUser.uid), { watched: {}, queue: {} });
 }
+
+// export function addFilmToWatched() {
+//   // console.log();
+//   setDoc(doc(colRef, auth.currentUser.uid, 'watched', filmData.id), filmData);
+// }
 
 // signing users up
 refs.signupForm.addEventListener('submit', e => {
