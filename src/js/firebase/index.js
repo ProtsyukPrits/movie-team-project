@@ -8,6 +8,22 @@ import {
   signOut,
   onAuthStateChanged,
 } from 'firebase/auth';
+import {
+  getFirestore,
+  collection,
+  onSnapshot,
+  addDoc,
+  deleteDoc,
+  doc,
+  query,
+  where,
+  orderBy,
+  serverTimestamp,
+  updateDoc,
+  getDocs,
+  setDoc,
+  getDoc,
+} from 'firebase/firestore';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { closeLoginModal } from '../login-signup-modal';
 
@@ -25,6 +41,7 @@ initializeApp(firebaseConfig);
 // init services
 
 const auth = getAuth();
+const db = getFirestore();
 
 // inner references
 const refs = {
@@ -36,6 +53,49 @@ const refs = {
   logoutBtn: document.querySelector('[data-lang="logoutBtn"]'),
   loginBtn: document.querySelector('[data-lang = "log"]'),
 };
+// collection reference
+const colRef = collection(db, 'users');
+// queries
+getDocs(colRef)
+  .then(snapshot => {
+    let users = [];
+    snapshot.docs.forEach(doc => {
+      users.push({ ...doc.data(), id: doc.id });
+    });
+  })
+  .catch(err => console.log(err.message));
+
+//  getDoc(doc(db, 'users', auth.currentUser.uid)).then(doc => {
+//    console.log(doc.data());
+//  });
+
+// adding documents to the collection
+
+function addUserCols() {
+  setDoc(doc(colRef, auth.currentUser.uid), {});
+}
+
+export function addFilmToWatched(filmData) {
+  if (!auth.currentUser) {
+    Notify.failure('You must login to add films');
+    return;
+  }
+  setDoc(
+    doc(colRef, auth.currentUser.uid, 'watched', filmData.id.toString()),
+    filmData
+  );
+}
+
+export function addFilmToQueue(filmData) {
+  if (!auth.currentUser) {
+    Notify.failure('You must login to add films');
+    return;
+  }
+  setDoc(
+    doc(colRef, auth.currentUser.uid, 'queue', filmData.id.toString()),
+    filmData
+  );
+}
 
 // signing users up
 if (refs.signupForm) {
@@ -45,6 +105,7 @@ if (refs.signupForm) {
     const email = refs.signupForm.email.value;
     const password = refs.signupForm.password.value;
     const name = refs.signupForm.name.value;
+
 
     createUserWithEmailAndPassword(auth, email, password)
       .then(cred => {
@@ -68,12 +129,23 @@ if (refs.signupForm) {
         refs.signUpContainer.insertAdjacentHTML(
           'afterbegin',
           `<p style="color:#FF001B">${err.message}</p>`
+
+  createUserWithEmailAndPassword(auth, email, password)
+    .then(() => {
+      sendEmailVerification(auth.currentUser);
+      refs.signupForm.reset();
+      addUserCols();
+      updateProfile(auth.currentUser, { displayName: name }).then(() => {
+        Notify.success(
+          `Thank you for registration, ${auth.currentUser.displayName}. We've send you verification email. Please follow the link inside`
+
         );
       });
   });
 }
 
 // logging in and out
+
 
 if (refs.logoutBtn) {
   refs.logoutBtn.addEventListener('click', () => {
@@ -87,12 +159,25 @@ if (refs.logoutBtn) {
   });
 }
 
+refs.logoutBtn.addEventListener('click', () => {
+  signOut(auth)
+    .then(() => {
+      console.log('user signed out');
+      docRef = null;
+    })
+    .catch(err => {
+      console.log(err.message);
+    });
+});
+
+
 if (refs.loginForm) {
   refs.loginForm.addEventListener('submit', e => {
     e.preventDefault();
 
     const email = refs.loginForm.email.value;
     const password = refs.loginForm.password.value;
+
 
     signInWithEmailAndPassword(auth, email, password)
       .then(cred => {
@@ -110,6 +195,24 @@ if (refs.loginForm) {
       });
   });
 }
+
+  signInWithEmailAndPassword(auth, email, password)
+    .then(() => {
+      refs.loginForm.reset();
+      Notify.success(
+        `Hello, ${auth.currentUser.displayName}! Have a nice time!`
+      );
+      closeLoginModal();
+      docRef = doc(colRef, auth.currentUser.uid);
+    })
+    .catch(err => {
+      refs.loginContainer.insertAdjacentHTML(
+        'afterbegin',
+        `<p style="color:#FF001B">${err.message}</p>`
+      );
+    });
+});
+
 // signed-in user observer;
 onAuthStateChanged(auth, user => {
   if (user && refs.logoutBtn && refs.loginBtn) {
