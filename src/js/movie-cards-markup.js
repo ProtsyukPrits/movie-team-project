@@ -17,28 +17,14 @@ const cardsMarkup = function (items) {
       }) => `
         <li class='movie__card' data-movieID='${id}'>
         <a href='#' class='movie__card-link'>
-        <picture>
-            <source
-            srcset="https://image.tmdb.org/t/p/w1280${poster_path}"
-            media='(min-width: 1280px)'
-            />
-            <source
-            srcset="https://image.tmdb.org/t/p/w780${poster_path}"
-            media='(min-width: 768px)'
-            />
-            <source
-            srcset="https://image.tmdb.org/t/p/w300${poster_path}"
-            media='(min-width: 320px)'
-            />
-            <img
+        <img
             class='movie__card-img'
-            src='/src/images/card1.jpg'
-            onerror="this.onerror=null;this.src='https://www.successforumedu.com/uploads/logo/default.png?tr=fo-auto,di-';"
+            src="https://image.tmdb.org/t/p/w500/${poster_path}" 
+            onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg';"
             alt='${title ? title : name}'
-            loading='lazy'
-            sizes="(min-width: 1280px) 33.3vw, (min-width: 768px) 50vw, 100vw"
-            />
-        </picture>
+            loading="lazy"
+            width='500'
+        />       
         <h2 class='movie__card-title'>${title ? title : name}</h2>
         <div class='movie__card-meta'>
             <div class='movie__card-details'>
@@ -236,9 +222,4 @@ function modalOneFilmMarkupWatched({
 }
 
 // Сюди додавайте ваші розмітки і незабудьте змінити ще import
-export {
-  cardsMarkup,
-  modalOneFilmMarkup,
-  modalOneFilmMarkupQueue,
-  modalOneFilmMarkupWatched,
-};
+export { cardsMarkup, modalOneFilmMarkup, modalOneFilmMarkupQueue, modalOneFilmMarkupWatched };
