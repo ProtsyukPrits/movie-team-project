@@ -108,10 +108,10 @@ function modalOneFilmMarkup({
                         <div class="actions">
                         <ul class="card__button-wrap">
                             <li class="card__button">
-                                <button type="button" class="button__secondary" data-to-watched data-movieID='${id}'>add to watched</button>
+                                <button type="button" class="button__secondary lang-to-watched" id="to-watched" data-to-watched data-movieID='${id}'>add to watched</button>
                             </li>
                             <li class="card__button">
-                                <button type="button" class="button__secondary" data-to-queue data-movieID='${id}'>add to queue</button>
+                                <button type="button" class="button__secondary lang-to-queue" id="to-queue" data-to-queue data-movieID='${id}'>add to queue</button>
                             </li>
                         </ul>
                         </div>
@@ -168,10 +168,10 @@ function modalOneFilmMarkupQueue({
                         <div class="actions">
                         <ul class="card__button-wrap">
                             <li class="card__button">
-                                <button type="button" class="button__secondary" data-to-watched-library data-movieID='${id}'>add to watched</button>
+                                <button type="button" class="button__secondary lang-to-watched" id="to-watched" data-to-watched-library data-movieID='${id}'>add to watched</button>
                             </li>
                             <li class="card__button">
-                                <button type="button" class="button__secondary" data-to-delete data-movieID='${id}'>delete</button>
+                                <button type="button" class="button__secondary lang-to-delete" id="to-delete" data-to-delete data-movieID='${id}'>delete</button>
                             </li>
                         </ul>
                         </div>
