@@ -108,10 +108,10 @@ function modalOneFilmMarkup({
                         <div class="actions">
                         <ul class="card__button-wrap">
                             <li class="card__button">
-                                <button type="button" class="button__secondary" data-movieID='${id}'>add to watched</button>
+                                <button type="button" class="button__secondary" data-to-watched data-movieID='${id}'>add to watched</button>
                             </li>
                             <li class="card__button">
-                                <button type="button" class="button__secondary" data-movieID='${id}'>add to queue</button>
+                                <button type="button" class="button__secondary" data-to-queue data-movieID='${id}'>add to queue</button>
                             </li>
                         </ul>
                         </div>
