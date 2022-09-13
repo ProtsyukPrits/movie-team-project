@@ -6,9 +6,9 @@
 
 
 const cardsMarkup = function (items) {
-   return items
+    return items
     .map(
-      ({
+        ({
         poster_path,
         title,
         vote_average,
@@ -16,10 +16,10 @@ const cardsMarkup = function (items) {
         release_date,
         id,
         name,
-          genre_ids,
+            genre_ids,
         genres,
         }) =>`
-      <li class='movie__card' data-movieID='${id}'>
+        <li class='movie__card' data-movieID='${id}'>
         <a href='#' class='movie__card-link'>
         <picture>
             <source
@@ -48,10 +48,10 @@ const cardsMarkup = function (items) {
             <div class='movie__card-details'>
                 <p class='movie__card-genre'></p>
                 <p class='movie__card-year'>| ${(release_date
-                  ? release_date
-                  : first_air_date && first_air_date
-                  ? first_air_date
-                  : ''
+                    ? release_date
+                    : first_air_date && first_air_date
+                    ? first_air_date
+                    : ''
                 ).slice(0, 4)}</p>
             </div>
             <p class='movie__card-rating'>${vote_average.toFixed(1)}</p>
@@ -63,17 +63,17 @@ const cardsMarkup = function (items) {
 };
 
 function modalOneFilmMarkup({
-  poster_path,
-  original_title,
-  title,
-  vote_average,
-  vote_count,
-  popularity,
-  genres,
-  overview,
-  id,
+    poster_path,
+    original_title,
+    title,
+    vote_average,
+    vote_count,
+    popularity,
+    genres,
+    overview,
+    id,
 }) {
-  return `<div class="backdrop active">
+    return `<div class="backdrop active">
 
 
                 <div class="modal__onefilm">
@@ -101,8 +101,8 @@ function modalOneFilmMarkup({
                                 <p class="facts__value facts__value-vot">${popularity}</p>
                                 <p class="facts__value facts__value-vo">${original_title}</p>
                                 <p class="facts__value facts__value-v">${genres
-                                  .map(genr => genr.name)
-                                  .join(', ')}</p>
+                                    .map(genr => genr.name)
+                                    .join(', ')}</p>
                             </div>
                         </div>                
                         <div class="onefilm__about">
