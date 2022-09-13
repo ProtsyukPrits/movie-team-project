@@ -232,66 +232,51 @@
         </option>
       </select>
       <!--VOTES-->
-      <select class="header__filter-votes" name="votes" id="votes_choice">
-        <<<<<<< HEAD
-        <option class="lang-don't-sort" id="don't-sort" value="">
-          Don't sort
-        </option>
-        <option
-          class="lang-sortaverage"
-          id="sortaverage"
-          value="header__filter-votes-average"
-        >
-          Sort by Average voite
-        </option>
-        <option
-          class="lang-sortvoite"
-          id="sortvoite"
-          value="header__filter-votes-count"
-        >
-          Sort by Voite count
-        </option>
-        <option
-          class="lang-sortpop"
-          id="sortpop"
-          value="header__filter-votes-popularity"
-        >
-          =======
-        </option>
-
-        <option
-          class="header__filter-sort lang-don't-sort"
-          id="don't-sort"
-          value=""
-        >
-          Don't sort
-        </option>
+      <select class="header__filter-votes" name="votes" id="sortaverage">
         <option
           class="header__filter-sort lang-sortaverage"
-          id="sortaverage"
-          value="header__filter-votes-average"
+          id="don't-sort"
+          value="1"
         >
-          Sort by Average voite
+          Sort by Average
         </option>
         <option
+          class="header__filter-sort lang-don't-sort"
+          id="votes_choice"
+          value="0"
+        >
+          Don't sort
+        </option>
+        <!-- <option
           class="header__filter-sort lang-sortvoite"
           id="sortvoite"
           value="header__filter-votes-count"
         >
           Sort by Voite count
-        </option>
-        <option
-          class="header__filter-sort lang-sortpop"
-          id="sortpop"
-          value="header__filter-votes-popularity"
-        >
-          >>>>>>> main Sort by Popularity
-        </option>
+        </option> -->
       </select>
       <!--YEAR-->
       <select class="header__filter-years" name="year" id="year_choice">
-        <option class="header-years lang-years" id="years" value="">
+        <option class="header-years lang-years" id="years" value="0">
           All years
+        </option>
+        <option class="header-years lang-years" id="2017" value="2017">
+          2017
+        </option>
+        <option class="header-years lang-years" id="2018" value="2018">
+          2018
+        </option>
+        <option class="header-years lang-years" id="2019" value="2019">
+          2019
+        </option>
+        <option class="header-years lang-years" id="2020" value="2020">
+          2020
+        </option>
+        <option class="header-years lang-years" id="2021" value="2021">
+          2021
+        </option>
+        <option class="header-years lang-years" id="2022" value="2022">
+          2022
         </option>
       </select>
     </form>
