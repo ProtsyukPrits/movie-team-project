@@ -62,11 +62,7 @@ const cardsMarkup = function (items) {
     .join('');
 };
 
-<<<<<<< HEAD
- 
-function modalOneFilmMarkup ({ poster_path, original_title, title, vote_average, vote_count, popularity, genres, overview, id }) {
-    return `
-=======
+
 function modalOneFilmMarkup({
     poster_path,
     original_title,
@@ -79,9 +75,6 @@ function modalOneFilmMarkup({
     id,
 }) {
     return `<div class="backdrop active">
-
-
->>>>>>> main
                 <div class="modal__onefilm">
                 <button class="onefilm__icon--close">
                     <svg class="icon--close" width="30" height="30" xmlns="http://www.w3.org/2000/svg">
