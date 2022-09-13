@@ -52,7 +52,6 @@ const refs = {
   loginContainer: document.querySelector('.login-container'),
   logoutBtn: document.querySelector('[data-lang="logoutBtn"]'),
   loginBtn: document.querySelector('[data-lang = "log"]'),
-  //   libraryLink: document.querySelector('.mylibrary-link'),
 };
 // collection reference
 const colRef = collection(db, 'users');
@@ -99,12 +98,37 @@ export function addFilmToQueue(filmData) {
 }
 
 // signing users up
-refs.signupForm.addEventListener('submit', e => {
-  e.preventDefault();
+if (refs.signupForm) {
+  refs.signupForm.addEventListener('submit', e => {
+    e.preventDefault();
 
-  const email = refs.signupForm.email.value;
-  const password = refs.signupForm.password.value;
-  const name = refs.signupForm.name.value;
+    const email = refs.signupForm.email.value;
+    const password = refs.signupForm.password.value;
+    const name = refs.signupForm.name.value;
+
+
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(cred => {
+        sendEmailVerification(auth.currentUser);
+        refs.signupForm.reset();
+        updateProfile(auth.currentUser, { displayName: name }).then(() => {
+          Notify.success(
+            `Thank you for registration, ${auth.currentUser.displayName}. We've send you verification email. Please follow the link inside`
+          );
+          signOut(auth)
+            .then(() => {
+              console.log('user signed out');
+            })
+            .catch(err => {
+              console.log(err.message);
+            });
+          closeLoginModal();
+        });
+      })
+      .catch(err => {
+        refs.signUpContainer.insertAdjacentHTML(
+          'afterbegin',
+          `<p style="color:#FF001B">${err.message}</p>`
 
   createUserWithEmailAndPassword(auth, email, password)
     .then(() => {
@@ -114,26 +138,26 @@ refs.signupForm.addEventListener('submit', e => {
       updateProfile(auth.currentUser, { displayName: name }).then(() => {
         Notify.success(
           `Thank you for registration, ${auth.currentUser.displayName}. We've send you verification email. Please follow the link inside`
+
         );
-        signOut(auth)
-          .then(() => {
-            console.log('user signed out');
-          })
-          .catch(err => {
-            console.log(err.message);
-          });
-        closeLoginModal();
       });
-    })
-    .catch(err => {
-      refs.signUpContainer.insertAdjacentHTML(
-        'afterbegin',
-        `<p style="color:#FF001B">${err.message}</p>`
-      );
-    });
-});
+  });
+}
 
 // logging in and out
+
+
+if (refs.logoutBtn) {
+  refs.logoutBtn.addEventListener('click', () => {
+    signOut(auth)
+      .then(() => {
+        console.log('user signed out');
+      })
+      .catch(err => {
+        console.log(err.message);
+      });
+  });
+}
 
 refs.logoutBtn.addEventListener('click', () => {
   signOut(auth)
@@ -146,11 +170,31 @@ refs.logoutBtn.addEventListener('click', () => {
     });
 });
 
-refs.loginForm.addEventListener('submit', e => {
-  e.preventDefault();
 
-  const email = refs.loginForm.email.value;
-  const password = refs.loginForm.password.value;
+if (refs.loginForm) {
+  refs.loginForm.addEventListener('submit', e => {
+    e.preventDefault();
+
+    const email = refs.loginForm.email.value;
+    const password = refs.loginForm.password.value;
+
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then(cred => {
+        refs.loginForm.reset();
+        Notify.success(
+          `Hello, ${auth.currentUser.displayName}! Have a nice time!`
+        );
+        closeLoginModal();
+      })
+      .catch(err => {
+        refs.loginContainer.insertAdjacentHTML(
+          'afterbegin',
+          `<p style="color:#FF001B">${err.message}</p>`
+        );
+      });
+  });
+}
 
   signInWithEmailAndPassword(auth, email, password)
     .then(() => {
@@ -168,14 +212,15 @@ refs.loginForm.addEventListener('submit', e => {
       );
     });
 });
+
 // signed-in user observer;
 onAuthStateChanged(auth, user => {
-  if (user) {
+  if (user && refs.logoutBtn && refs.loginBtn) {
     refs.logoutBtn.classList.remove('is-hidden');
     refs.loginBtn.classList.add('is-hidden');
 
     // refs.libraryLink.classList.remove('is-hidden');
-  } else {
+  } else if (refs.logoutBtn && refs.loginBtn) {
     document;
     refs.logoutBtn.classList.add('is-hidden');
     refs.loginBtn.classList.remove('is-hidden');

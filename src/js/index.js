@@ -22,6 +22,7 @@ let currentFilmData = {};
 
 // Наш реф по якому ми звертаємось!
 const gallery = document.querySelector('.movies__gallery');
+const libraryGallery = document.querySelector('.library__gallery');
 const container = document.getElementById('pagination');
 const searchForm = document.querySelector('.header__search');
 const searchInput = document.querySelector('.header__search-input');
@@ -31,7 +32,9 @@ const searchByYears = document.querySelector('.header__filter-years');
 const searchByVotes = document.querySelector('.header__filter-votes');
 
 // Тут додаємо слухачі подій
-gallery.addEventListener('click', onClickOneFilmCard);
+gallery
+  ? gallery.addEventListener('click', onClickOneFilmCard)
+  : libraryGallery.addEventListener('click', onClickOneFilmCard);
 
 if (searchInput) {
   searchInput.addEventListener('input', e => {
@@ -89,7 +92,9 @@ async function render(currentPage) {
   // console.log('items', items);
   // const validMovieData = prepareMovieData(items);
   const createGAl = cardsMarkup(items);
-  gallery.innerHTML = createGAl;
+  if (gallery) {
+    gallery.innerHTML = createGAl;
+  }
 }
 render(page);
 
