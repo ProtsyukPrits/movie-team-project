@@ -5,10 +5,14 @@ const BASE_URL = 'https://api.themoviedb.org/3/';
 let page = 1;
 
 async function trendingFetch(page) {
-  const { data } = await axios.get(
-    `${BASE_URL}trending/all/day?api_key=${API_KEY}&page=${page}`
-  );
-  return data;
+ try {
+   const { data } = await axios.get(
+     `${BASE_URL}trending/movie/day?api_key=${API_KEY}&page=${page}`
+   );
+   return data;
+ } catch (error) {
+  console.log(error.message)
+ }
 }
 
 //
