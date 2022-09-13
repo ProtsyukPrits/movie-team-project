@@ -13,6 +13,7 @@ import * as basicLightbox from 'basiclightbox';
 
 // Тут додаємо ваші глобальні змінні
 let queryString = '';
+let genreValue = 0;
 let items = [];
 let page = 1;
 
@@ -22,26 +23,33 @@ const container = document.getElementById('pagination');
 const searchForm = document.querySelector('.header__search');
 const searchInput = document.querySelector('.header__search-input');
 const moviesContainer = document.querySelector('.movies__container');
+const searchByGenres = document.querySelector('.header__filter-genres');
 
 // Тут додаємо слухачі подій
 gallery.addEventListener('click', onClickOneFilmCard);
 
-searchInput.addEventListener('input', e => {
-  queryString = e.target.value;
-  searchForm.style.borderBottomColor = '#ffffff';
-});
+if (searchInput) {
+  searchInput.addEventListener('input', e => {
+    queryString = e.target.value;
+    searchForm.style.borderBottomColor = '#ffffff';
+  });
 
-searchForm.addEventListener('submit', e => {
-  e.preventDefault();
-  pagination.movePageTo(page);
-  if (queryString === '') {
-    searchForm.style.borderBottomColor = 'red';
-    return Notify.info(
-      'Please, type the title of the film, and click the search button'
-    );
-  }
-  return getMoviesByQueryKey(queryString).then(data => renderByQuery(data));
-});
+  searchForm.addEventListener('submit', e => {
+    e.preventDefault();
+
+    if (queryString === '') {
+      searchForm.style.borderBottomColor = 'red';
+      return Notify.info(
+        'Please, type the title of the film, and click the search button'
+      );
+    }
+    return getMoviesByQueryKey(queryString)
+      .then(data => filterByGenres(data))
+      .then(data => renderByQuery(data));
+  });
+
+  searchByGenres.addEventListener('change', onChangeByGenres);
+}
 
 // ========_____Пишемо сюди основні функції_____===============
 
@@ -96,6 +104,23 @@ function renderByQuery(filteredList) {
   return gallery.insertAdjacentHTML('afterbegin', listOfCards);
 }
 
+// Function searchByGenres
+
+function onChangeByGenres(e) {
+  genreValue = Number(e.target.value);
+}
+
+function filterByGenres(data) {
+  if (genreValue !== 0) {
+    const filteredDataByGenres = data.filter(film => {
+      const { genre_ids } = film;
+      return (findGenre = genre_ids.includes(genreValue));
+    });
+    return filteredDataByGenres;
+  }
+  return data;
+}
+
 // Функція створення noResults вікна
 function createNoResultsCard() {
   const noResults =
@@ -106,26 +131,26 @@ function createNoResultsCard() {
 // Функція-колбек для рендеру модалки по кліку
 async function onClickOneFilmCard(e) {
   e.preventDefault();
-  
+
   const filmCardElement = e.target.closest('.movie__card');
   if (!filmCardElement) return;
   const movieID = filmCardElement.dataset.movieid;
-// Забираємо обєкт фільму по ID
+  // Забираємо обєкт фільму по ID
   const data = await fetchByID(movieID);
-// Створюємо модалку
+  // Створюємо модалку
   const modalOneFilm = basicLightbox.create(modalOneFilmMarkup(data));
-// Показуємо модалку  
+  // Показуємо модалку
   modalOneFilm.show();
 
-///Закриваємо модалку по кнопці
+  ///Закриваємо модалку по кнопці
   const buttonModalClose = document.querySelector('.onefilm__icon--close');
   buttonModalClose.addEventListener('click', closeByClick);
   function closeByClick() {
     modalOneFilm.close();
-    window.removeEventListener('keydown', closeByKey);    
-  }    
+    window.removeEventListener('keydown', closeByKey);
+  }
 
-///Закриваємо модалку по 'Escape'
+  ///Закриваємо модалку по 'Escape'
   window.addEventListener('keydown', closeByKey);
   function closeByKey(e) {
     modalOneFilm.close();
@@ -138,7 +163,7 @@ async function onClickOneFilmCard(e) {
 //   if (!oneFilmCard) return;
 
 //   fetchByID(oneFilmCard.dataset.movieid)
-  
+
 //   console.log(fetchByID(oneFilmCard.dataset.movieid));
 // }
 
