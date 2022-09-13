@@ -56,20 +56,45 @@ const refs = {
 // collection reference
 const colRef = collection(db, 'users');
 // queries
-getDocs(colRef)
-  .then(snapshot => {
-    let users = [];
-    snapshot.docs.forEach(doc => {
-      users.push({ ...doc.data(), id: doc.id });
-    });
-  })
-  .catch(err => console.log(err.message));
+export async function getUserWatched() {
+  let films = [];
+  await getDocs(collection(colRef, auth.currentUser.uid, 'watched'))
+    .then(snapshot => {
+      snapshot.docs.forEach(doc => {
+        films.push({ ...doc.data(), id: doc.id });
+      });
+    })
+    .catch(err => console.log(err.message));
+  return films;
+}
+
+export async function getUserQueue() {
+  let films = [];
+  await getDocs(collection(colRef, auth.currentUser.uid, 'queue'))
+    .then(snapshot => {
+      snapshot.docs.forEach(doc => {
+        films.push({ ...doc.data(), id: doc.id });
+      });
+    })
+    .catch(err => console.log(err.message));
+  return films;
+}
+
+export async function getFilmById(id, col) {
+  let film;
+  await getDoc(doc(colRef, auth.currentUser.uid, col, id))
+    .then(doc => {
+      film = doc.data();
+    })
+    .catch(err => console.log(err.message));
+  return film;
+}
 
 //  getDoc(doc(db, 'users', auth.currentUser.uid)).then(doc => {
 //    console.log(doc.data());
 //  });
 
-// adding documents to the collection
+// adding and deleting documents to the collection
 
 function addUserCols() {
   setDoc(doc(colRef, auth.currentUser.uid), {});
@@ -95,6 +120,18 @@ export function addFilmToQueue(filmData) {
     doc(colRef, auth.currentUser.uid, 'queue', filmData.id.toString()),
     filmData
   );
+}
+
+export function deleteMovieFromQueue(filmData) {
+  deleteDoc(doc(colRef, auth.currentUser.uid, 'queue', filmData.id.toString()));
+}
+
+export function addtoWatchedAndDeleteFromQueue(filmData) {
+  setDoc(
+    doc(colRef, auth.currentUser.uid, 'watched', filmData.id.toString()),
+    filmData
+  );
+  deleteDoc(doc(colRef, auth.currentUser.uid, 'queue', filmData.id.toString()));
 }
 
 // signing users up
