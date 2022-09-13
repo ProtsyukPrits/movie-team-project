@@ -7,9 +7,7 @@ const refsFooter = {
   modal: document.querySelector('.begdrop'),
   link: document.querySelector('.footer__link'),
   modalContent: document.querySelector('.modal__content'),
-  footerButtonNext: document.querySelector('.swiper-button-next'),
-
-  modals: document.querySelector('.modal'),
+  footerClose: document.querySelector('.footer-close'),
 };
 
 refsFooter.link.addEventListener('click', () => {
@@ -28,17 +26,22 @@ refsFooter.modal.addEventListener('click', el => {
   }
 });
 
-refsFooter.footerButtonNext.addEventListener('click', () => {
-  timerId = setInterval(() => {}, 1000);
+refsFooter.footerClose.addEventListener('click', () => {
+  refsFooter.modal.classList.remove('position');
 });
 
 const swiper = new Swiper('.swiper', {
   slidesPerView: 3,
   spaceBetween: 11,
   loop: true,
+  autoplay: {
+    delay: 2500,
+    disableOnInteraction: false,
+  },
 
   pagination: {
     el: '.swiper-pagination',
+    dynamicBullets: true,
     clickable: true,
   },
 
