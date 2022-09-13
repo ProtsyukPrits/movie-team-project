@@ -8,9 +8,15 @@ const refs = {
   closeModalBtn: document.querySelector('.login-modal-close-btn'),
 };
 
-refs.loginBtn.addEventListener('click', openLoginModal);
-refs.showSignupFormBtn.addEventListener('click', showSignupForm);
-refs.showLoginFormBtn.addEventListener('click', showLoginForm);
+if (refs.loginBtn) {
+  refs.loginBtn.addEventListener('click', openLoginModal);
+}
+if (refs.showSignupFormBtn) {
+  refs.showSignupFormBtn.addEventListener('click', showSignupForm);
+}
+if (refs.showLoginFormBtn) {
+  refs.showLoginFormBtn.addEventListener('click', showLoginForm);
+}
 
 function openLoginModal() {
   refs.loginModal.classList.remove('is-hidden');
