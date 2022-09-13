@@ -13,34 +13,18 @@ const cardsMarkup = function (items) {
         first_air_date,
         release_date,
         id,
-        name,
-        genre_ids,
-        genres,
+        name
       }) => `
         <li class='movie__card' data-movieID='${id}'>
         <a href='#' class='movie__card-link'>
-        <picture>
-            <source
-            srcset="https://image.tmdb.org/t/p/w1280${poster_path}"
-            media='(min-width: 1280px)'
-            />
-            <source
-            srcset="https://image.tmdb.org/t/p/w780${poster_path}"
-            media='(min-width: 768px)'
-            />
-            <source
-            srcset="https://image.tmdb.org/t/p/w300${poster_path}"
-            media='(min-width: 320px)'
-            />
-            <img
+        <img
             class='movie__card-img'
-            src='/src/images/card1.jpg'
-            onerror="this.onerror=null;this.src='https://www.successforumedu.com/uploads/logo/default.png?tr=fo-auto,di-';"
+            src="https://image.tmdb.org/t/p/w500/${poster_path}" 
+            onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg';"
             alt='${title ? title : name}'
-            loading='lazy'
-            sizes="(min-width: 1280px) 33.3vw, (min-width: 768px) 50vw, 100vw"
-            />
-        </picture>
+            loading="lazy"
+            width='500'
+        />       
         <h2 class='movie__card-title'>${title ? title : name}</h2>
         <div class='movie__card-meta'>
             <div class='movie__card-details'>
@@ -71,8 +55,7 @@ function modalOneFilmMarkup({
   overview,
   id,
 }) {
-  return `<div class="backdrop active">
-                <div class="modal__onefilm">
+  return `     <div class="modal__onefilm">
                 <button class="onefilm__icon--close">
                     <svg class="icon--close" width="30" height="30" xmlns="http://www.w3.org/2000/svg">
                     <path d="M8 8L22 22"  stroke-width="2"/>
@@ -116,8 +99,8 @@ function modalOneFilmMarkup({
                         </ul>
                         </div>
                     </div>
-                    </div>
                 </div>
+                
             `;
 }
 
@@ -157,9 +140,8 @@ function modalOneFilmMarkupQueue({
                                 <p class="facts__value"><span class="facts__value-vote">${vote_average}</span> / ${vote_count}</p>
                                 <p class="facts__value facts__value-vot">${popularity}</p>
                                 <p class="facts__value facts__value-vo">${original_title}</p>
-                                <p class="facts__value facts__value-v">${genres
-                                  .map(genr => genr.name)
-                                  .join(', ')}</p>
+                                <p class="facts__value facts__value-v">
+                                  </p>
                             </div>
                         </div>
                         <div class="onefilm__about">
@@ -181,6 +163,10 @@ function modalOneFilmMarkupQueue({
                 </div>
             `;
 }
+// for future use
+// ${genres
+//                                   .map(genr => genr.name)
+//       .join(', ')}
 
 function modalOneFilmMarkupWatched({
   poster_path,
@@ -218,9 +204,7 @@ function modalOneFilmMarkupWatched({
                                 <p class="facts__value"><span class="facts__value-vote">${vote_average}</span> / ${vote_count}</p>
                                 <p class="facts__value facts__value-vot">${popularity}</p>
                                 <p class="facts__value facts__value-vo">${original_title}</p>
-                                <p class="facts__value facts__value-v">${genres
-                                  .map(genr => genr.name)
-                                  .join(', ')}</p>
+                                <p class="facts__value facts__value-v">
                             </div>
                         </div>
                         <div class="onefilm__about">
@@ -237,9 +221,4 @@ function modalOneFilmMarkupWatched({
 }
 
 // Сюди додавайте ваші розмітки і незабудьте змінити ще import
-export {
-  cardsMarkup,
-  modalOneFilmMarkup,
-  modalOneFilmMarkupQueue,
-  modalOneFilmMarkupWatched,
-};
+export { cardsMarkup, modalOneFilmMarkup, modalOneFilmMarkupQueue, modalOneFilmMarkupWatched };
