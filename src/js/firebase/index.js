@@ -56,16 +56,15 @@ const refs = {
 };
 // collection reference
 const colRef = collection(db, 'users');
-let docRef;
 // queries
-getDocs(colRef)
-  .then(snapshot => {
-    let users = [];
-    snapshot.docs.forEach(doc => {
-      users.push({ ...doc.data(), id: doc.id });
-    });
-  })
-  .catch(err => console.log(err.message));
+// getDocs(colRef)
+//   .then(snapshot => {
+//     let users = [];
+//     snapshot.docs.forEach(doc => {
+//       users.push({ ...doc.data(), id: doc.id });
+//     });
+//   })
+//   .catch(err => console.log(err.message));
 
 //  getDoc(doc(db, 'users', auth.currentUser.uid)).then(doc => {
 //    console.log(doc.data());
@@ -74,13 +73,32 @@ getDocs(colRef)
 // adding documents to the collection
 
 function addUserCols() {
-  setDoc(doc(colRef, auth.currentUser.uid), { watched: {}, queue: {} });
+  setDoc(doc(colRef, auth.currentUser.uid), {});
 }
 
-// export function addFilmToWatched() {
-//   // console.log();
-//   setDoc(doc(colRef, auth.currentUser.uid, 'watched', filmData.id), filmData);
-// }
+export function addFilmToWatched(filmData) {
+  if (!auth.currentUser) {
+    Notify.failure('You must login to add films');
+    return;
+  }
+  const userCol = doc(db, 'users', auth.currentUser.uid);
+  setDoc(
+    doc(colRef, auth.currentUser.uid, 'watched', filmData.id.toString()),
+    filmData
+  );
+}
+
+export function addFilmToQueue(filmData) {
+  if (!auth.currentUser) {
+    Notify.failure('You must login to add films');
+    return;
+  }
+  const userCol = doc(db, 'users', auth.currentUser.uid);
+  setDoc(
+    doc(colRef, auth.currentUser.uid, 'queue', filmData.id.toString()),
+    filmData
+  );
+}
 
 // signing users up
 refs.signupForm.addEventListener('submit', e => {
