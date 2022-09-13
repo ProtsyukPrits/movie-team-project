@@ -13,7 +13,9 @@ import * as basicLightbox from 'basiclightbox';
 
 // Тут додаємо ваші глобальні змінні
 let queryString = '';
+let yearValue = 0;
 let genreValue = 0;
+let votesValue = 1;
 let items = [];
 let page = 1;
 
@@ -24,6 +26,8 @@ const searchForm = document.querySelector('.header__search');
 const searchInput = document.querySelector('.header__search-input');
 const moviesContainer = document.querySelector('.movies__container');
 const searchByGenres = document.querySelector('.header__filter-genres');
+const searchByYears = document.querySelector('.header__filter-years');
+const searchByVotes = document.querySelector('.header__filter-votes');
 
 // Тут додаємо слухачі подій
 gallery.addEventListener('click', onClickOneFilmCard);
@@ -45,10 +49,14 @@ if (searchInput) {
     }
     return getMoviesByQueryKey(queryString)
       .then(data => filterByGenres(data))
+      .then(data => filterByYears(data))
+      .then(data => filterByVotes(data))
       .then(data => renderByQuery(data));
   });
 
   searchByGenres.addEventListener('change', onChangeByGenres);
+  searchByYears.addEventListener('change', onChangeByYears);
+  searchByVotes.addEventListener('change', onChangeByVotes);
 }
 
 // ========_____Пишемо сюди основні функції_____===============
@@ -117,6 +125,40 @@ function filterByGenres(data) {
       return (findGenre = genre_ids.includes(genreValue));
     });
     return filteredDataByGenres;
+  }
+  return data;
+}
+
+// Function SearchByYears
+
+function onChangeByYears(e) {
+  yearValue = Number(e.target.value);
+}
+
+function filterByYears(data) {
+  if (yearValue !== 0) {
+    const filteredDataByYears = data.filter(film => {
+      const { release_date } = film;
+      return yearValue === Number(release_date.slice(0, 4));
+    });
+    return filteredDataByYears;
+  }
+  return data;
+}
+
+// Function SearchByVotes
+
+function onChangeByVotes(e) {
+  votesValue = Number(e.target.value);
+}
+
+function filterByVotes(data) {
+  if (votesValue === 1) {
+    const filteredDataByVotes = data.sort(
+      (firstFilm, secondFilm) =>
+        secondFilm.vote_average - firstFilm.vote_average
+    );
+    return filteredDataByVotes;
   }
   return data;
 }
