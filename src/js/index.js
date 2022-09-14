@@ -17,6 +17,7 @@ import {
   modalOneFilmMarkupQueue,
   modalOneFilmMarkupWatched,
   getUserWatchedMovies,
+  LibraryCardsMarkup,
 } from './movie-cards-markup';
 
 import { prepareMovieData } from './prepare-movie-data';
@@ -381,13 +382,14 @@ function onQueueBtn() {
 // Функція рендеру карток за "Watched" списком
 
 async function renderLibraryWatched(films) {
+  console.log(films);
   if (films.length === 0) {
     if (galleryLibraryEl) {
       galleryLibraryEl.innerHTML =
         '<h2 style="margin-top:20px; margin-left:auto; margin-right:auto;">You have not added any films yet</h2>';
     }
   } else {
-    const createGAl = cardsMarkup(films);
+    const createGAl = LibraryCardsMarkup(films);
     if (galleryLibraryEl) {
       galleryLibraryEl.innerHTML = createGAl;
 
@@ -404,7 +406,7 @@ async function renderLibraryQueue(films) {
         '<h2 style="margin-top:20px; margin-left:auto; margin-right:auto;">You have not added any films yet</h2>';
     }
   } else {
-    const createGAl = cardsMarkup(films);
+    const createGAl = LibraryCardsMarkup(films);
     if (galleryLibraryEl) {
       galleryLibraryEl.innerHTML = createGAl;
       // galleryLibraryEl.removeEventListener('click', renderWatchedFilmModal);
