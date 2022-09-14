@@ -4,7 +4,12 @@
 
 // Імпорти сюди
 
-import { trendingFetch, getMoviesByQueryKey, fetchByID } from './apies';
+import {
+  trendingFetch,
+  getMoviesByQueryKey,
+  fetchByID,
+  getMoviesByGenresId,
+} from './apies';
 import { cardsMarkup, modalOneFilmMarkup } from './movie-cards-markup';
 import { prepareMovieData } from './prepare-movie-data';
 import Pagination from 'tui-pagination';
@@ -19,6 +24,7 @@ let votesValue = 1;
 let items = [];
 let page = 1;
 let currentFilmData = {};
+let genresArr = [];
 
 // Наш реф по якому ми звертаємось!
 const gallery = document.querySelector('.movies__gallery');
@@ -85,6 +91,32 @@ pagination.on('afterMove', event => {
 
 // ==================================================================
 
+// Отримання масиву жанрів
+getMoviesByGenresId().then(data => genresArr.push(...data));
+
+// Функція редагування отриманого респонсу
+function changeGenreArr(items) {
+  const arr = items.map(item => {
+    const { genre_ids } = item;
+
+    let allGenres = [];
+    genresArr.map(genreObj => {
+      if (genre_ids.includes(genreObj.id)) {
+        allGenres.push(genreObj.name);
+        item.genres = allGenres;
+      }
+      return;
+    });
+    if (!item.genres) {
+      item.genres = 'Other';
+    } else if (item.genres.length > 2) {
+      item.genres.splice(2, 10, 'Other');
+    }
+    return item;
+  });
+  return arr;
+}
+
 // Функція для виклику карток за популярним рейтингом
 async function render(currentPage) {
   const data = await trendingFetch(currentPage);
@@ -113,8 +145,9 @@ function renderByQuery(filteredList) {
   if (noResultsCard) {
     noResultsCard.classList.add('hidden');
   }
-  // const validFilteredList = prepareMovieData(filteredList);
-  const listOfCards = cardsMarkup(filteredList);
+
+  const newGenresArr = changeGenreArr(filteredList);
+  const listOfCards = cardsMarkup(newGenresArr);
   return gallery.insertAdjacentHTML('afterbegin', listOfCards);
 }
 
@@ -128,7 +161,8 @@ function filterByGenres(data) {
   if (genreValue !== 0) {
     const filteredDataByGenres = data.filter(film => {
       const { genre_ids } = film;
-      return (findGenre = genre_ids.includes(genreValue));
+      const findGenre = genre_ids.includes(genreValue);
+      return findGenre;
     });
     return filteredDataByGenres;
   }
