@@ -16,8 +16,8 @@ const cardsMarkup = function (items) {
         <img
             class='movie__card-img'
             src="https://image.tmdb.org/t/p/w500/${poster_path}" 
-            onerror="this.onerror=null;this.src='https://i.pinimg.com/originals/7b/3f/ba/7b3fba069b7942021bf680e2d3170bf8.jpg';"
-            alt='${title ? title : name}'
+            onerror="this.onerror=null;this.src='';"
+            alt=' '
             loading="lazy"
             width='500'
         />       
@@ -58,8 +58,8 @@ const LibraryCardsMarkup = function (items) {
         <img
             class='movie__card-img'
             src="https://image.tmdb.org/t/p/w500/${poster_path}" 
-            onerror="this.onerror=null;this.src='https://i.pinimg.com/originals/7b/3f/ba/7b3fba069b7942021bf680e2d3170bf8.jpg';"
-            alt='${title ? title : name}'
+            onerror="this.onerror=null;this.src='';"
+            alt=' '
             loading="lazy"
             width='500'
         />       
@@ -105,7 +105,7 @@ function modalOneFilmMarkup({
                 </button>
                 <div class ="onefilm__all">
                     <div class="onefilm__poster">
-                        <img class="img__poster" src="https://image.tmdb.org/t/p/w500/${poster_path}" alt="${original_title}">
+                        <img class="img__poster" src="https://image.tmdb.org/t/p/w500/${poster_path}" alt=" ">
                     </div>
                     <div class="onefilm__info">
                         <h1 class="onefilm__title">${title}</h1>
@@ -166,7 +166,7 @@ function modalOneFilmMarkupQueue({
                 </button>
                 <div class ="onefilm__all">
                     <div class="onefilm__poster">
-                        <img class="img__poster" src="https://image.tmdb.org/t/p/w500/${poster_path}" alt="${original_title}">
+                        <img class="img__poster" src="https://image.tmdb.org/t/p/w500/${poster_path}" alt=" ">
                     </div>
                     <div class="onefilm__info">
                         <h1 class="onefilm__title">${title}</h1>
@@ -232,7 +232,7 @@ function modalOneFilmMarkupWatched({
                 </button>
                 <div class ="onefilm__all">
                     <div class="onefilm__poster">
-                        <img class="img__poster" src="https://image.tmdb.org/t/p/w500/${poster_path}" alt="${original_title}">
+                        <img class="img__poster" src="https://image.tmdb.org/t/p/w500/${poster_path}" alt=" ">
                     </div>
                     <div class="onefilm__info">
                         <h1 class="onefilm__title">${title}</h1>

@@ -23,6 +23,7 @@ $basicLightbox__timing: ease !default;
   }
 
   &__placeholder {
+
     >img:first-child:last-child,
     >video:first-child:last-child,
     >iframe:first-child:last-child {
@@ -69,7 +70,7 @@ $basicLightbox__timing: ease !default;
 .icon--close {
   border-radius: 5px;
   transition: stroke 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-  background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   background: #ffffff;
   stroke: #000000;
 
@@ -127,6 +128,7 @@ $basicLightbox__timing: ease !default;
     height: 558px;
   }
 }
+
 .onefilm__poster {
   @media screen and (min-width: 768px) {
     width: 704px;
@@ -147,6 +149,11 @@ $basicLightbox__timing: ease !default;
   margin-left: auto;
   margin-right: auto;
   display: block;
+
+  background-image: url(../images/defoult.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 
   @media screen and (min-width: 768px) {
     width: 264px;
@@ -172,9 +179,11 @@ $basicLightbox__timing: ease !default;
     max-height: 478px;
   }
 }
+
 .onefilm__facts {
   display: flex;
 }
+
 .onefilm__title {
   color: #000000;
   font-size: 20px;
@@ -198,6 +207,7 @@ $basicLightbox__timing: ease !default;
   display: flex;
   flex-direction: column;
 }
+
 .onefilm__facts-name {
   color: #8c8c8c;
   margin-bottom: 8px;
@@ -206,17 +216,21 @@ $basicLightbox__timing: ease !default;
     margin-bottom: 8px;
   }
 }
+
 .facts__name {
   width: 110px;
   margin-bottom: 8px;
+
   @media screen and (min-width: 768px) {
     margin-bottom: 8px;
   }
 }
+
 .onefilm__facts-value {
   &:not(:last-child) {
     margin-bottom: 8px;
   }
+
   flex-direction: column;
 }
 
@@ -235,6 +249,7 @@ $basicLightbox__timing: ease !default;
     margin-bottom: 8px;
   }
 }
+
 .facts__value-vote {
   color: #fff;
   background-color: #ff6b01;
@@ -249,16 +264,19 @@ $basicLightbox__timing: ease !default;
   font-size: 12px;
   line-height: 16px;
 }
+
 .facts__value-vo {
   text-transform: uppercase;
   font-size: 12px;
   line-height: 16px;
+
   .facts__value-vot {
     text-transform: uppercase;
     font-size: 12px;
     line-height: 14px;
   }
 }
+
 .facts__val {
   width: 36px;
   color: #000;
@@ -273,6 +291,7 @@ $basicLightbox__timing: ease !default;
   margin-top: 20px;
   margin-bottom: 20px;
 }
+
 .about__title {
   text-transform: uppercase;
   margin-bottom: 8px;
@@ -281,6 +300,7 @@ $basicLightbox__timing: ease !default;
   font-size: 12px;
   line-height: 16px;
 }
+
 .about__text {
   width: 240px;
   overflow: auto;
@@ -326,10 +346,12 @@ $basicLightbox__timing: ease !default;
   @media screen and (min-width: 1280px) {
     width: 136px;
   }
+
   &:not(:last-child) {
     margin-right: 15px;
   }
 }
+
 .button__secondary:hover,
 .button__secondary:focus {
   color: #fff;
@@ -338,6 +360,7 @@ $basicLightbox__timing: ease !default;
   background-color: #ff6b08;
   border: 1px solid #ff6b08;
 }
+
 body.modal__onefilm .active {
   height: 100vh;
   overflow-y: hidden;
