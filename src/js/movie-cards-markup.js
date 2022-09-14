@@ -16,7 +16,7 @@ const cardsMarkup = function (items) {
         <img
             class='movie__card-img'
             src="https://image.tmdb.org/t/p/w500/${poster_path}" 
-            onerror="this.onerror=null;this.src='';"
+            onerror="this.onerror=null;this.src='https://i.pinimg.com/originals/7b/3f/ba/7b3fba069b7942021bf680e2d3170bf8.jpg';"
             alt=' '
             loading="lazy"
             width='500'
@@ -58,7 +58,7 @@ const LibraryCardsMarkup = function (items) {
         <img
             class='movie__card-img'
             src="https://image.tmdb.org/t/p/w500/${poster_path}" 
-            onerror="this.onerror=null;this.src='';"
+            onerror="this.onerror=null;this.src='https://i.pinimg.com/originals/7b/3f/ba/7b3fba069b7942021bf680e2d3170bf8.jpg';"
             alt=' '
             loading="lazy"
             width='500'
