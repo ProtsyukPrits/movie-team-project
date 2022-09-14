@@ -82,7 +82,7 @@ input:checked+.header-form__slider:before {
 
 body.dark {
   .login-modal {
-    background-color:#000;
+    background-color:#212121;
   }
 
   .login-modal-close-icon {
@@ -91,45 +91,43 @@ body.dark {
 
   .login-btn, .signup-btn {
     color:#8c8c8c;
-    background-color:#000;
+    background-color:#212121;
     border: 1px solid #8c8c8c;
   }
 
   .modal__onefilm {
-    background-color:#000;
+    background-color:#212121;
   }
 
   .onefilm__title {
     color:#8c8c8c;
   }
 
-
+  .about__title {
+    color:#8c8c8c;
+  }
   
   .facts__val {
     color:#8c8c8c;
-    background-color:#000;
+    background-color:#212121;
   }
 
 
   .button__secondary {
     color:#8c8c8c;
-    background-color:#000;
+    background-color:#212121;
     border: 1px solid #8c8c8c;
   }
 
-  .button__secondary {
-    color:#8c8c8c;
-    background-color:#000;
-    border: 1px solid #8c8c8c;
-  }
+ 
 
   .onefilm__icon--close {
-    background-color:#000;
+    background-color:#212121;
   }
 
   .icon--close  {
     stroke:#8c8c8c;
-    background-color:#000;
+    background-color:#212121;
   }
   
 
@@ -152,7 +150,7 @@ body.dark {
   }
 
   .modal {
-    background-color:#000;
+    background-color:#212121;
   }
 
   .footer__person {
