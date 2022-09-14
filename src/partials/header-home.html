@@ -1,12 +1,12 @@
 <header class="header__home" id="header">
-  <div class="header__container">
+  <div class="header__container container">
     <div class="header__wrapper">
       <!--LOGO-->
       <a href="./index.html" class="header__link">
         <svg class="header__icon" width="24" height="24">
           <use href="./images/header/sprite.svg#icon-film"></use>
         </svg>
-        <span class="header__name">FILMOTEKA</span>
+        <span class="header__name">Filmoteka</span>
       </a>
       <!--NAVIGATION-->
       <nav class="header__nav">
@@ -24,28 +24,26 @@
               >my library</a
             >
           </li>
-          <li class="header__nav-item">
-            <button
-              data-lang="log"
-              class="nav-text header__nav-btn lang-login"
-              id="login"
-              type="button"
-            >
-              LOG IN
-            </button>
-          </li>
-          <li class="header__nav-item">
-            <button
-              class="header__nav-btn is-hidden langout"
-              type="button"
-              data-lang="logoutBtn"
-              id="logout"
-            >
-              LOG OUT
-            </button>
-          </li>
         </ul>
       </nav>
+      <div class="header__log">
+        <button
+          data-lang="log"
+          class="nav-text header__log-btn lang-login"
+          id="login"
+          type="button"
+        >
+          LOG IN
+        </button>
+        <button
+          class="header__log-btn is-hidden langout"
+          type="button"
+          data-lang="logoutBtn"
+          id="logout"
+        >
+          LOG OUT
+        </button>
+      </div>
     </div>
     <div class="header__btns">
       <!--NIGHT MODE-->
