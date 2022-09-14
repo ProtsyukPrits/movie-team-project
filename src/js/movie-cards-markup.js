@@ -1,8 +1,3 @@
-// import { genreIdName } from './config/genre-id-name'
-// function createGenres() {
-//     return genreIdName.filter(arr => arr.id).map(arr => arr.name).join(', ')
-// }
-
 const cardsMarkup = function (items) {
   return items
     .map(
@@ -14,6 +9,7 @@ const cardsMarkup = function (items) {
         release_date,
         id,
         name,
+        genres,
       }) => `
         <li class='movie__card' data-movieID='${id}'>
         <a href='#' class='movie__card-link'>
@@ -28,7 +24,7 @@ const cardsMarkup = function (items) {
         <h2 class='movie__card-title'>${title ? title : name}</h2>
         <div class='movie__card-meta'>
             <div class='movie__card-details'>
-                <p class='movie__card-genre'></p>
+                <p class='movie__card-genre'>${genres}</p>
                 <p class='movie__card-year'>| ${(release_date
                   ? release_date
                   : first_air_date && first_air_date
