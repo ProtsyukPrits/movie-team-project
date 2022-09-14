@@ -35,4 +35,12 @@ async function fetchByID(movie_id) {
 }
 
 // Сюди додавайте ваші функції і незабудьте змінити ще import
-export { trendingFetch, fetchByID, getMoviesByQueryKey };
+export { trendingFetch, fetchByID, getMoviesByQueryKey, getMoviesByGenresId };
+
+const getMoviesByGenresId = () => {
+  return axios
+    .get(` ${BASE_URL}genre/movie/list?api_key=${API_KEY}&language=en-US`)
+    .then(response => {
+      return response.data.genres;
+    });
+};
