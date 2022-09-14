@@ -267,13 +267,19 @@ async function onClickOneFilmCard(e) {
 
   btnToWatchedEl.addEventListener(
     'click',
-    () => addFilmToWatched(currentFilmData),
+    () => {
+      addFilmToWatched(currentFilmData);
+      modalOneFilm.close();
+    },
     { once: true }
   );
 
   btnToQueueEl.addEventListener(
     'click',
-    () => addFilmToQueue(currentFilmData),
+    () => {
+      addFilmToQueue(currentFilmData);
+      modalOneFilm.close();
+    },
     { once: true }
   );
 
