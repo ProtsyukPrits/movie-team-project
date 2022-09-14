@@ -302,6 +302,7 @@ $basicLightbox__timing: ease !default;
 }
 
 .about__text {
+  max-height: 210px;
   width: 240px;
   overflow: auto;
   font-size: 12px;
