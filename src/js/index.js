@@ -40,7 +40,6 @@ let genreValue = 0;
 let votesValue = 1;
 let items = [];
 let page = 1;
-let currentPage = 1;
 let currentFilmData = {};
 let genresArr = [];
 let totalResults = [];
@@ -76,29 +75,27 @@ if (searchInput) {
 // ========_____Пишемо сюди основні функції_____===============
 
 // Pagination
-
-// Отримуємо номер сторінки яку обрав коистувач за допомогою (блок пагінації)
-
-const pagination = new Pagination(container, {
-  totalItems: 10000,
-  itemsPerPage: 10,
-  visiblePages: 5,
-  page: 1,
-  centerAlign: true,
-});
-pagination.on('afterMove', event => {
-  currentPage = event.page;
-  if (queryString) {
-    getMoviesByQueryKey(queryString, currentPage)
-      .then(data => filterByGenres(data))
-      .then(data => filterByYears(data))
-      .then(data => filterByVotes(data))
-      .then(data => renderByQuery(data))
-      .catch(err => console.error(err.message));
-  } else {
+if (window.location.pathname === '/movie-team-project/index.html') {
+  const pagination = new Pagination(container, {
+    totalItems: 10000,
+    itemsPerPage: 10,
+    visiblePages: 5,
+    page: 1,
+    centerAlign: true,
+  });
+  pagination.on('afterMove', event => {
+    const currentPage = event.page;
+    if (getMoviesByQueryKey) {
+      getMoviesByQueryKey(queryString, currentPage)
+        .then(data => filterByGenres(data))
+        .then(data => filterByYears(data))
+        .then(data => filterByVotes(data))
+        .then(data => renderByQuery(data))
+        .catch(err => console.error(err.message));
+    }
     render(currentPage);
-  }
-});
+  });
+}
 
 // Отримання масиву жанрів
 // getMoviesByGenresId()
@@ -141,7 +138,7 @@ async function render(currentPage) {
     gallery.innerHTML = createGAl;
   }
 }
-render(currentPage);
+render(page);
 
 // Функція пошуку фільмів
 function onSubmitSearchBtn(e) {
@@ -153,7 +150,7 @@ function onSubmitSearchBtn(e) {
       'Please, type the title of the film, and click the search button'
     );
   }
-  return getMoviesByQueryKey(queryString, currentPage)
+  return getMoviesByQueryKey(queryString)
     .then(data => filterByGenres(data))
     .then(data => filterByYears(data))
     .then(data => filterByVotes(data))
@@ -419,7 +416,7 @@ async function renderLibraryWatched(films) {
       galleryLibraryEl.innerHTML = createGAl;
     }
   }
-  console.log(films.length);
+
   if (films.length > 12) {
     loadMoreBtn.classList.add('show');
   }
@@ -438,7 +435,6 @@ async function renderLibraryQueue(films) {
       galleryLibraryEl.innerHTML = createGAl;
     }
   }
-  console.log(films.length < 12);
   if (films.length > 12) {
     loadMoreBtn.classList.add('show');
   }
@@ -468,10 +464,8 @@ async function renderWatchedFilmModal(e) {
   ///Закриваємо модалку по 'Escape'
   window.addEventListener('keydown', closeByKey);
   function closeByKey(e) {
-    if (e.code === 'Escape') {
-      modalOneFilm.close();
-      window.removeEventListener('keydown', closeByKey);
-    }
+    modalOneFilm.close();
+    window.removeEventListener('keydown', closeByKey);
   }
 }
 
@@ -499,10 +493,8 @@ async function renderQueueFilmModal(e) {
   ///Закриваємо модалку по 'Escape'
   window.addEventListener('keydown', closeByKey);
   function closeByKey(e) {
-    if (e.code === 'Escape') {
-      modalOneFilm.close();
-      window.removeEventListener('keydown', closeByKey);
-    }
+    modalOneFilm.close();
+    window.removeEventListener('keydown', closeByKey);
   }
 
   addtoWatchedBtn.addEventListener(
