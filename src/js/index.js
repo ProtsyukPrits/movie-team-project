@@ -320,7 +320,7 @@ if (btnWatchedEl) {
 }
 //onWatchedBtn
 // setTimeout(renderLibraryWatched(), 3000);
-if (window.location.pathname === '/library.html') {
+if (window.location.pathname === '/movie-team-project/library.html') {
   setTimeout(onWatchedBtn, 1000);
 }
 // Функція створення галереї списку "Watched"
