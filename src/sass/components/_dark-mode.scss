@@ -5,28 +5,28 @@
   width: 50px;
   height: 25px;
 }
-  
+
 .header-form__switch input {
   display: none;
 }
-  
+
 .header-form__slider {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  
+
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  
+
   cursor: pointer;
   background-color: #ffffff;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
-  
+
 .header-form__slider:before {
   position: absolute;
   left: 2px;
@@ -35,42 +35,42 @@
   content: '';
   height: 20px;
   width: 20px;
-  
+
   background-color: $border-color-accent;
-  -webkit-transition: .4s;
-  transition: .3s;
+  -webkit-transition: 0.4s;
+  transition: 0.3s;
 }
-  
+
 .header-slider__icon {
   margin-top: 4px;
-  fill: #e69b00; 
+  fill: #e69b00;
 }
-  
+
 .light {
   margin-left: 2px;
 }
-  
-input:checked+.header-form__slider {
-  background-color:#393939;
+
+input:checked + .header-form__slider {
+  background-color: #393939;
 }
-  
-input:focus+.header-form__slider {
+
+input:focus + .header-form__slider {
   box-shadow: 0 0 1px $border-color-accent;
   background-color: #ffffff;
 }
-  
-input:checked+.header-form__slider:before {
+
+input:checked + .header-form__slider:before {
   content: '';
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
   background-color: $border-color-accent;
 }
-  
+
 .header-form__slider.header-form__slider--round {
   border-radius: 30px;
 }
-  
+
 .header-form__slider.header-form__slider--round:before {
   border-radius: 50%;
 }
@@ -82,62 +82,80 @@ input:checked+.header-form__slider:before {
 
 body.dark {
   .login-modal {
-    background-color:#212121;
+    background-color: #212121;
   }
 
   .login-modal-close-icon {
-    fill:#8c8c8c;
+    fill: #8c8c8c;
   }
 
-  .login-btn, .signup-btn {
-    color:#8c8c8c;
-    background-color:#212121;
+  .login-modal-close-icon:hover,
+  .login-modal-close-icon:focus {
+    fill: $icon-color-accent;
+  }
+  .login-btn,
+  .signup-btn {
+    color: #8c8c8c;
+    background-color: #212121;
     border: 1px solid #8c8c8c;
   }
-
+  .login-btn:hover,
+  .login-btn:focus {
+    background-color: $button-color-accent-hover;
+    border: 1px solid $border-color-light;
+    color: $button-color-light-number;
+  }
   .modal__onefilm {
-    background-color:#212121;
+    background-color: #212121;
   }
 
   .onefilm__title {
-    color:#8c8c8c;
+    color: #8c8c8c;
   }
 
   .about__title {
-    color:#8c8c8c;
-  }
-  
-  .facts__val {
-    color:#8c8c8c;
-    background-color:#212121;
+    color: #8c8c8c;
   }
 
+  .facts__val {
+    color: #8c8c8c;
+    background-color: #212121;
+  }
 
   .button__secondary {
-    color:#8c8c8c;
-    background-color:#212121;
+    color: #8c8c8c;
+    background-color: #212121;
     border: 1px solid #8c8c8c;
   }
-
- 
+  .button__secondary:hover,
+  .button__secondary:focus {
+    color: #fff;
+    box-shadow: none;
+    cursor: auto;
+    background-color: #ff6b08;
+    border: 1px solid #ff6b08;
+  }
 
   .onefilm__icon--close {
-    background-color:#212121;
+    background-color: #212121;
   }
 
-  .icon--close  {
-    stroke:#8c8c8c;
-    background-color:#212121;
+  .icon--close {
+    stroke: #8c8c8c;
+    background-color: #212121;
   }
-  
-
+  .icon--close:hover,
+  .icon--close:focus {
+    background-color: #ff6b08;
+    stroke: #ffffff;
+  }
 
   .facts__value {
-    color:#8c8c8c;
+    color: #8c8c8c;
   }
 
   .about__text {
-    color:#8c8c8c;
+    color: #8c8c8c;
   }
 
   .footer {
@@ -146,15 +164,14 @@ body.dark {
   }
 
   .person__name {
-    color:#000;
+    color: #000;
   }
 
   .modal {
-    background-color:#212121;
+    background-color: #212121;
   }
 
   .footer__person {
-    background-color:#333;
+    background-color: #333;
   }
 }
-

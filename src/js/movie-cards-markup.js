@@ -180,7 +180,7 @@ function modalOneFilmMarkupQueue({
                             <div class="onefilm__facts-value">
                                 <p class="facts__value"><span class="facts__value-vote">${vote_average.toFixed(
                                   2
-                                )}</span> / ${vote_count}</p>
+                                )}</span> / <span class="facts__val"> ${vote_count} </span> </p>
                                 <p class="facts__value facts__value-vot">${popularity.toFixed(
                                   2
                                 )}</p>
