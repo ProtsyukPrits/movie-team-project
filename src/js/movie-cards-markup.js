@@ -137,7 +137,9 @@ function modalOneFilmMarkupQueue({
                                 <p class="facts__value"><span class="facts__value-vote">${vote_average}</span> / ${vote_count}</p>
                                 <p class="facts__value facts__value-vot">${popularity}</p>
                                 <p class="facts__value facts__value-vo">${original_title}</p>
-                                <p class="facts__value facts__value-v">
+                                <p class="facts__value facts__value-v">${genres
+                                  .map(genr => genr.name)
+                                  .join(', ')}
                                   </p>
                             </div>
                         </div>
@@ -160,10 +162,6 @@ function modalOneFilmMarkupQueue({
                 </div>
             `;
 }
-// for future use
-// ${genres
-//                                   .map(genr => genr.name)
-//       .join(', ')}
 
 function modalOneFilmMarkupWatched({
   poster_path,
@@ -201,7 +199,9 @@ function modalOneFilmMarkupWatched({
                                 <p class="facts__value"><span class="facts__value-vote">${vote_average}</span> / ${vote_count}</p>
                                 <p class="facts__value facts__value-vot">${popularity}</p>
                                 <p class="facts__value facts__value-vo">${original_title}</p>
-                                <p class="facts__value facts__value-v">
+                                <p class="facts__value facts__value-v">${genres
+                                  .map(genr => genr.name)
+                                  .join(', ')}
                             </div>
                         </div>
                         <div class="onefilm__about">
