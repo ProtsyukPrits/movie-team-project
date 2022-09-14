@@ -1,4 +1,9 @@
+html {
+    height: 100%;
+}
+
 body {
+    height: 100%;
     font-family: $primary-font-family, sans-serif;
     color: $text-color-primary;
 }
@@ -32,4 +37,16 @@ img {
 
 a {
     text-decoration: none;
+}
+
+.wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
 }
