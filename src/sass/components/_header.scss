@@ -1,7 +1,9 @@
 .header__home {
-  background-image: linear-gradient(90deg,
+  background-image: linear-gradient(
+      90deg,
       rgba(0, 0, 0, 0.56),
-      rgba(0, 0, 0, 0.56)),
+      rgba(0, 0, 0, 0.56)
+    ),
     url(../images/header/home-mob.jpg);
   background-position: center;
   background-size: cover;
@@ -11,46 +13,56 @@
   margin-right: auto;
 
   @media (min-device-pixel-ratio: 2),
-  (-webkit-min-device-pixel-ratio: 2),
-  (min-resolution: 192dpi),
-  (min-resolution: 2dppx) {
-    background-image: linear-gradient(90deg,
+    (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+    background-image: linear-gradient(
+        90deg,
         rgba(0, 0, 0, 0.56),
-        rgba(0, 0, 0, 0.56)),
+        rgba(0, 0, 0, 0.56)
+      ),
       url(../images/header/home-mob2x.jpg);
   }
 
   @media screen and (min-width: 768px) {
-    background-image: linear-gradient(90deg,
+    background-image: linear-gradient(
+        90deg,
         rgba(0, 0, 0, 0.56),
-        rgba(0, 0, 0, 0.56)),
+        rgba(0, 0, 0, 0.56)
+      ),
       url(../images/header/home-tab.jpg);
 
     @media (min-device-pixel-ratio: 2),
-    (-webkit-min-device-pixel-ratio: 2),
-    (min-resolution: 192dpi),
-    (min-resolution: 2dppx) {
-      background-image: linear-gradient(90deg,
+      (-webkit-min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: linear-gradient(
+          90deg,
           rgba(0, 0, 0, 0.56),
-          rgba(0, 0, 0, 0.56)),
+          rgba(0, 0, 0, 0.56)
+        ),
         url(../images/header/home-tab2x.jpg);
     }
   }
 
   @media screen and (min-width: 1280px) {
     width: 100%;
-    background-image: linear-gradient(90deg,
+    background-image: linear-gradient(
+        90deg,
         rgba(0, 0, 0, 0.56),
-        rgba(0, 0, 0, 0.56)),
+        rgba(0, 0, 0, 0.56)
+      ),
       url(../images/header/home-lap.jpg);
 
     @media (min-device-pixel-ratio: 2),
-    (-webkit-min-device-pixel-ratio: 2),
-    (min-resolution: 192dpi),
-    (min-resolution: 2dppx) {
-      background-image: linear-gradient(90deg,
+      (-webkit-min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: linear-gradient(
+          90deg,
           rgba(0, 0, 0, 0.56),
-          rgba(0, 0, 0, 0.56)),
+          rgba(0, 0, 0, 0.56)
+        ),
         url(../images/header/home-lap2x.jpg);
     }
   }
@@ -64,7 +76,6 @@
 }
 
 .header__link {
-
   margin-right: auto;
 }
 
@@ -80,7 +91,6 @@
     width: 100%;
     height: 3px;
     background-color: $border-color-accent;
-
   }
 }
 
@@ -128,8 +138,6 @@
 .is-hidden {
   display: none;
 }
-
-
 
 .header__btns {
   display: flex;
@@ -180,11 +188,11 @@
   width: 100%;
   font-size: 14px;
   cursor: pointer;
-  color: $text-color-secondary
+  color: $text-color-secondary;
 }
 
 ::placeholder {
-  color: $text-color-secondary
+  color: $text-color-secondary;
 }
 
 .header__search-btn {
@@ -208,7 +216,7 @@
 .header__filter {
   display: flex;
   margin: auto;
-  height: 20px;
+  height: 30px;
 }
 
 .header__filter-genres {
@@ -232,11 +240,11 @@
 }
 
 .header__filter-genres-option {
-  color: $text-color-primary
+  color: $text-color-primary;
 }
 
 .header__filter-sort {
-  color: $text-color-primary
+  color: $text-color-primary;
 }
 
 .headere-years {
@@ -279,9 +287,8 @@
     width: 150px;
     margin-left: 30px;
   }
-
 }
 
 .header-years {
-  color: $text-color-primary
+  color: $text-color-primary;
 }

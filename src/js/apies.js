@@ -43,5 +43,6 @@ const getMoviesByGenresId = () => {
     .get(` ${BASE_URL}genre/movie/list?api_key=${API_KEY}&language=en-US`)
     .then(response => {
       return response.data.genres;
-    });
+    })
+    .catch(err => console.error(err.message));
 };
