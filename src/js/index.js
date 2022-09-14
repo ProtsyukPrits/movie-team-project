@@ -46,6 +46,7 @@ let genresArr = [];
 const gallery = document.querySelector('.movies__gallery');
 const libraryGallery = document.querySelector('.library__gallery');
 const container = document.getElementById('pagination');
+const pagSection = container.parentNode;
 const searchForm = document.querySelector('.header__search');
 const searchInput = document.querySelector('.header__search-input');
 const moviesContainer = document.querySelector('.movies__container');
@@ -63,23 +64,7 @@ if (searchInput) {
     queryString = e.target.value;
     searchForm.style.borderBottomColor = '#ffffff';
   });
-
-  searchForm.addEventListener('submit', e => {
-    e.preventDefault();
-    pagination.movePageTo(page);
-    if (queryString === '') {
-      searchForm.style.borderBottomColor = 'red';
-      return Notify.info(
-        'Please, type the title of the film, and click the search button'
-      );
-    }
-    return getMoviesByQueryKey(queryString)
-      .then(data => filterByGenres(data))
-      .then(data => filterByYears(data))
-      .then(data => filterByVotes(data))
-      .then(data => renderByQuery(data));
-  });
-
+  searchForm.addEventListener('submit', onSubmitSearchBtn);
   searchByGenres.addEventListener('change', onChangeByGenres);
   searchByYears.addEventListener('change', onChangeByYears);
   searchByVotes.addEventListener('change', onChangeByVotes);
@@ -108,7 +93,9 @@ pagination.on('afterMove', event => {
 // ==================================================================
 
 // Отримання масиву жанрів
-getMoviesByGenresId().then(data => genresArr.push(...data));
+getMoviesByGenresId()
+  .then(data => genresArr.push(...data))
+  .catch(err => console.error(err.message));
 
 // Функція редагування отриманого респонсу
 function changeGenreArr(items) {
@@ -147,6 +134,24 @@ async function render(currentPage) {
 }
 render(page);
 
+// Функція пошуку фільмів
+function onSubmitSearchBtn(e) {
+  e.preventDefault();
+  pagination.movePageTo(page);
+  if (queryString === '') {
+    searchForm.style.borderBottomColor = 'red';
+    return Notify.info(
+      'Please, type the title of the film, and click the search button'
+    );
+  }
+  return getMoviesByQueryKey(queryString)
+    .then(data => filterByGenres(data))
+    .then(data => filterByYears(data))
+    .then(data => filterByVotes(data))
+    .then(data => renderByQuery(data))
+    .catch(err => console.error(err.message));
+}
+
 // Функція для виклику карток за ключовим словом
 function renderByQuery(filteredList) {
   const noResultsCard = document.querySelector('.movies__not-found');
@@ -156,6 +161,7 @@ function renderByQuery(filteredList) {
     }
     gallery.innerHTML = '';
     render(page);
+    // pagSection.classList.add('hidden');
     return createNoResultsCard();
   }
   gallery.innerHTML = '';

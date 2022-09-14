@@ -5,14 +5,14 @@ const BASE_URL = 'https://api.themoviedb.org/3/';
 let page = 1;
 
 async function trendingFetch(page) {
- try {
-   const { data } = await axios.get(
-     `${BASE_URL}trending/movie/day?api_key=${API_KEY}&page=${page}`
-   );
-   return data;
- } catch (error) {
-  console.log(error.message)
- }
+  try {
+    const { data } = await axios.get(
+      `${BASE_URL}trending/movie/day?api_key=${API_KEY}&page=${page}`
+    );
+    return data;
+  } catch (error) {
+    console.log(error.message);
+  }
 }
 
 //
@@ -23,7 +23,8 @@ const getMoviesByQueryKey = queryString => {
     )
     .then(response => {
       return response.data.results;
-    });
+    })
+    .catch(err => console.error(err.message));
 };
 
 //
