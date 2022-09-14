@@ -96,6 +96,7 @@ pagination.on('afterMove', event => {
       .then(data => renderByQuery(data))
       .catch(err => console.error(err.message));
   }
+  return
   render(currentPage);
 });
 
