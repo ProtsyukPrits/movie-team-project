@@ -1,5 +1,4 @@
 const cardsMarkup = function (items) {
-  console.log(items);
   return items
     .map(
       ({
