@@ -40,6 +40,7 @@ let genreValue = 0;
 let votesValue = 1;
 let items = [];
 let page = 1;
+let currentPage = 1;
 let currentFilmData = {};
 let genresArr = [];
 let totalResults = [];
@@ -87,16 +88,18 @@ const pagination = new Pagination(container, {
 
 // Отримуємо номер сторінки яку обрав коистувач за допомогою (блок пагінації)
 pagination.on('afterMove', event => {
-  const currentPage = event.page;
-  if (getMoviesByQueryKey) {
+  currentPage = event.page;
+  console.log(getMoviesByQueryKey);
+  if (queryString) {
     getMoviesByQueryKey(queryString, currentPage)
       .then(data => filterByGenres(data))
       .then(data => filterByYears(data))
       .then(data => filterByVotes(data))
       .then(data => renderByQuery(data))
       .catch(err => console.error(err.message));
+  } else {
+    render(currentPage);
   }
-  render(currentPage);
 });
 
 // ==================================================================
@@ -142,7 +145,7 @@ async function render(currentPage) {
     gallery.innerHTML = createGAl;
   }
 }
-render(page);
+render(currentPage);
 
 // Функція пошуку фільмів
 function onSubmitSearchBtn(e) {
@@ -154,7 +157,7 @@ function onSubmitSearchBtn(e) {
       'Please, type the title of the film, and click the search button'
     );
   }
-  return getMoviesByQueryKey(queryString)
+  return getMoviesByQueryKey(queryString, currentPage)
     .then(data => filterByGenres(data))
     .then(data => filterByYears(data))
     .then(data => filterByVotes(data))
