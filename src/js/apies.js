@@ -16,7 +16,7 @@ async function trendingFetch(page) {
 }
 
 //
-const getMoviesByQueryKey = queryString => {
+const getMoviesByQueryKey = (queryString, page) => {
   return axios
     .get(
       ` ${BASE_URL}search/movie?api_key=${API_KEY}&query=${queryString}&language=en-US&include_adult=false&page=${page}`
