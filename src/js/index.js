@@ -468,8 +468,10 @@ async function renderWatchedFilmModal(e) {
   ///Закриваємо модалку по 'Escape'
   window.addEventListener('keydown', closeByKey);
   function closeByKey(e) {
-    modalOneFilm.close();
-    window.removeEventListener('keydown', closeByKey);
+    if (e.code === 'Escape') {
+      modalOneFilm.close();
+      window.removeEventListener('keydown', closeByKey);
+    }
   }
 }
 
@@ -497,8 +499,10 @@ async function renderQueueFilmModal(e) {
   ///Закриваємо модалку по 'Escape'
   window.addEventListener('keydown', closeByKey);
   function closeByKey(e) {
-    modalOneFilm.close();
-    window.removeEventListener('keydown', closeByKey);
+    if (e.code === 'Escape') {
+      modalOneFilm.close();
+      window.removeEventListener('keydown', closeByKey);
+    }
   }
 
   addtoWatchedBtn.addEventListener(
