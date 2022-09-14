@@ -81,7 +81,10 @@ if (searchInput) {
 // Pagination
 
 // Отримуємо номер сторінки яку обрав коистувач за допомогою (блок пагінації)
-if (window.location.pathname === '/index.html') {
+if (
+  window.location.pathname === '/movie-team-project/index.html' ||
+  window.location.pathname === '/movie-team-project/'
+) {
   pagination = new Pagination(container, {
     totalItems: 10000,
     itemsPerPage: 10,
