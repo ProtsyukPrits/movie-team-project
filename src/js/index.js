@@ -3,6 +3,7 @@
 // =========____ЯКЩО КОД ЗАКРУЧЕНИЙ КОМЕНТУЄМО ВСЕ____==========
 
 // Імпорти сюди
+import loading from './spinner';
 
 import {
   trendingFetch,
@@ -33,6 +34,7 @@ import {
   addtoWatchedAndDeleteFromQueue,
   deleteMovieFromQueue,
 } from './firebase/index';
+import loading from './spinner.js';
 // Тут додаємо ваші глобальні змінні
 let queryString = '';
 let yearValue = 0;
@@ -291,7 +293,7 @@ async function onClickOneFilmCard(e) {
     if (e.code === 'Escape') {
       modalOneFilm.close();
       window.removeEventListener('keydown', closeByKey);
-    }      
+    }
   }
 }
 
@@ -377,13 +379,20 @@ if (btnWatchedEl) {
 }
 //onWatchedBtn
 // setTimeout(renderLibraryWatched(), 3000);
+
+if (window.location.pathname === '/movie-team-project/library.html') {
+  loading.show();
+}
+
 if (window.location.pathname === '/movie-team-project/library.html') {
   setTimeout(onWatchedBtn, 1000);
 }
+
 // Функція створення галереї списку "Watched"
 
 function onWatchedBtn() {
   getUserWatched().then(result => renderLibraryWatched(result));
+  loading.close();
   btnWatchedEl.classList.add('button__primary-accent');
   btnQueueEl.classList.remove('button__primary-accent');
   galleryLibraryEl.addEventListener('click', renderWatchedFilmModal);
