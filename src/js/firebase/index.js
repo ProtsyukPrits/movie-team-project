@@ -11,15 +11,8 @@ import {
 import {
   getFirestore,
   collection,
-  onSnapshot,
-  addDoc,
   deleteDoc,
   doc,
-  query,
-  where,
-  orderBy,
-  serverTimestamp,
-  updateDoc,
   getDocs,
   setDoc,
   getDoc,
@@ -52,7 +45,32 @@ const refs = {
   loginContainer: document.querySelector('.login-container'),
   logoutBtn: document.querySelector('[data-lang="logoutBtn"]'),
   loginBtn: document.querySelector('[data-lang = "log"]'),
+  libraryLink: document.querySelector('.lang-library'),
+  libraryLogOutBtn: document.querySelector('.library-header__log-btn'),
 };
+
+if (refs.libraryLink) {
+  refs.libraryLink.addEventListener('click', e => {
+    if (!auth.currentUser) {
+      e.preventDefault();
+      Notify.warning('Please log in or sign up to get access to your library');
+    }
+  });
+}
+
+if (refs.libraryLogOutBtn) {
+  refs.libraryLogOutBtn.addEventListener('click', () => {
+    signOut(auth)
+      .then(() => {
+        Notify.info('you have signed out');
+        window.location.href = './index';
+      })
+      .catch(err => {
+        console.log(err.message);
+      });
+  });
+}
+
 // collection reference
 const colRef = collection(db, 'users');
 // queries
@@ -153,9 +171,7 @@ if (refs.signupForm) {
             `Thank you for registration, ${auth.currentUser.displayName}. We've send you verification email. Please follow the link inside`
           );
           signOut(auth)
-            .then(() => {
-              console.log('user signed out');
-            })
+            .then(() => {})
             .catch(err => {
               console.log(err.message);
             });
@@ -176,7 +192,7 @@ if (refs.signupForm) {
     refs.logoutBtn.addEventListener('click', () => {
       signOut(auth)
         .then(() => {
-          console.log('user signed out');
+          Notify.info('you have signed out');
         })
         .catch(err => {
           console.log(err.message);

@@ -17,6 +17,7 @@ import {
   modalOneFilmMarkupQueue,
   modalOneFilmMarkupWatched,
   getUserWatchedMovies,
+  LibraryCardsMarkup,
 } from './movie-cards-markup';
 
 import { prepareMovieData } from './prepare-movie-data';
@@ -363,7 +364,7 @@ if (btnWatchedEl) {
 }
 //onWatchedBtn
 // setTimeout(renderLibraryWatched(), 3000);
-if (window.location.pathname === '/library.html') {
+if (window.location.pathname === '/movie-team-project/library.html') {
   setTimeout(onWatchedBtn, 1000);
 }
 // Функція створення галереї списку "Watched"
@@ -372,6 +373,8 @@ function onWatchedBtn() {
   getUserWatched().then(result => renderLibraryWatched(result));
   btnWatchedEl.classList.add('button__primary-accent');
   btnQueueEl.classList.remove('button__primary-accent');
+  galleryLibraryEl.addEventListener('click', renderWatchedFilmModal);
+  galleryLibraryEl.removeEventListener('click', renderQueueFilmModal);
 }
 
 // Функція створення галереї списку  "Queue"
@@ -382,6 +385,8 @@ function onQueueBtn() {
   });
   btnQueueEl.classList.add('button__primary-accent');
   btnWatchedEl.classList.remove('button__primary-accent');
+  galleryLibraryEl.addEventListener('click', renderQueueFilmModal);
+  galleryLibraryEl.removeEventListener('click', renderWatchedFilmModal);
 }
 // ========================================================================
 // Функція рендеру карток за "Watched" списком
@@ -393,11 +398,9 @@ async function renderLibraryWatched(films) {
         '<h2 style="margin-top:20px; margin-left:auto; margin-right:auto;">You have not added any films yet</h2>';
     }
   } else {
-    const createGAl = cardsMarkup(films);
+    const createGAl = LibraryCardsMarkup(films);
     if (galleryLibraryEl) {
       galleryLibraryEl.innerHTML = createGAl;
-
-      galleryLibraryEl.addEventListener('click', renderWatchedFilmModal);
     }
   }
 }
@@ -410,11 +413,9 @@ async function renderLibraryQueue(films) {
         '<h2 style="margin-top:20px; margin-left:auto; margin-right:auto;">You have not added any films yet</h2>';
     }
   } else {
-    const createGAl = cardsMarkup(films);
+    const createGAl = LibraryCardsMarkup(films);
     if (galleryLibraryEl) {
       galleryLibraryEl.innerHTML = createGAl;
-      // galleryLibraryEl.removeEventListener('click', renderWatchedFilmModal);
-      galleryLibraryEl.addEventListener('click', renderQueueFilmModal);
     }
   }
 }
@@ -455,7 +456,6 @@ async function renderQueueFilmModal(e) {
   const movieID = filmCardElement.dataset.movieid;
   // Забираємо обєкт фільму по ID
   const data = await getFilmById(movieID, 'queue');
-  console.log(data);
   // // Створюємо модалку
   const modalOneFilm = basicLightbox.create(modalOneFilmMarkupQueue(data));
   modalOneFilm.show();

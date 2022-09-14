@@ -40,6 +40,50 @@ const cardsMarkup = function (items) {
     .join('');
 };
 
+const LibraryCardsMarkup = function (items) {
+  return items
+    .map(
+      ({
+        poster_path,
+        title,
+        vote_average,
+        first_air_date,
+        release_date,
+        id,
+        name,
+        genres,
+      }) => `
+        <li class='movie__card' data-movieID='${id}'>
+        <a href='#' class='movie__card-link'>
+        <img
+            class='movie__card-img'
+            src="https://image.tmdb.org/t/p/w500/${poster_path}" 
+            onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg';"
+            alt='${title ? title : name}'
+            loading="lazy"
+            width='500'
+        />       
+        <h2 class='movie__card-title'>${title ? title : name}</h2>
+        <div class='movie__card-meta'>
+            <div class='movie__card-details'>
+                <p class='movie__card-genre'>${genres
+                  .map(genre => genre.name)
+                  .slice(0, 2)}</p>
+                <p class='movie__card-year'>| ${(release_date
+                  ? release_date
+                  : first_air_date && first_air_date
+                  ? first_air_date
+                  : ''
+                ).slice(0, 4)}</p>
+            </div>
+            <p class='movie__card-rating'>${vote_average.toFixed(1)}</p>
+        </div>
+        </a>
+    </li>`
+    )
+    .join('');
+};
+
 function modalOneFilmMarkup({
   poster_path,
   original_title,
@@ -134,10 +178,16 @@ function modalOneFilmMarkupQueue({
                                 <p class="facts__name">Genre</p>
                             </div>
                             <div class="onefilm__facts-value">
-                                <p class="facts__value"><span class="facts__value-vote">${vote_average}</span> / ${vote_count}</p>
-                                <p class="facts__value facts__value-vot">${popularity}</p>
+                                <p class="facts__value"><span class="facts__value-vote">${vote_average.toFixed(
+                                  2
+                                )}</span> / ${vote_count}</p>
+                                <p class="facts__value facts__value-vot">${popularity.toFixed(
+                                  2
+                                )}</p>
                                 <p class="facts__value facts__value-vo">${original_title}</p>
-                                <p class="facts__value facts__value-v">
+                                <p class="facts__value facts__value-v">${genres
+                                  .map(genr => genr.name)
+                                  .join(', ')}
                                   </p>
                             </div>
                         </div>
@@ -160,10 +210,6 @@ function modalOneFilmMarkupQueue({
                 </div>
             `;
 }
-// for future use
-// ${genres
-//                                   .map(genr => genr.name)
-//       .join(', ')}
 
 function modalOneFilmMarkupWatched({
   poster_path,
@@ -198,10 +244,16 @@ function modalOneFilmMarkupWatched({
                                 <p class="facts__name">Genre</p>
                             </div>
                             <div class="onefilm__facts-value">
-                                <p class="facts__value"><span class="facts__value-vote">${vote_average}</span> / ${vote_count}</p>
-                                <p class="facts__value facts__value-vot">${popularity}</p>
+                                <p class="facts__value"><span class="facts__value-vote">${vote_average.toFixed(
+                                  2
+                                )}</span> / ${vote_count}</p>
+                                <p class="facts__value facts__value-vot">${popularity.toFixed(
+                                  2
+                                )}</p>
                                 <p class="facts__value facts__value-vo">${original_title}</p>
-                                <p class="facts__value facts__value-v">
+                                <p class="facts__value facts__value-v">${genres
+                                  .map(genr => genr.name)
+                                  .join(', ')}
                             </div>
                         </div>
                         <div class="onefilm__about">
@@ -223,4 +275,5 @@ export {
   modalOneFilmMarkup,
   modalOneFilmMarkupQueue,
   modalOneFilmMarkupWatched,
+  LibraryCardsMarkup,
 };
