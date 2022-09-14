@@ -367,6 +367,8 @@ function onWatchedBtn() {
   getUserWatched().then(result => renderLibraryWatched(result));
   btnWatchedEl.classList.add('button__primary-accent');
   btnQueueEl.classList.remove('button__primary-accent');
+  galleryLibraryEl.addEventListener('click', renderWatchedFilmModal);
+  galleryLibraryEl.removeEventListener('click', renderQueueFilmModal);
 }
 
 // Функція створення галереї списку  "Queue"
@@ -377,12 +379,13 @@ function onQueueBtn() {
   });
   btnQueueEl.classList.add('button__primary-accent');
   btnWatchedEl.classList.remove('button__primary-accent');
+  galleryLibraryEl.addEventListener('click', renderQueueFilmModal);
+  galleryLibraryEl.removeEventListener('click', renderWatchedFilmModal);
 }
 // ========================================================================
 // Функція рендеру карток за "Watched" списком
 
 async function renderLibraryWatched(films) {
-  console.log(films);
   if (films.length === 0) {
     if (galleryLibraryEl) {
       galleryLibraryEl.innerHTML =
@@ -392,8 +395,6 @@ async function renderLibraryWatched(films) {
     const createGAl = LibraryCardsMarkup(films);
     if (galleryLibraryEl) {
       galleryLibraryEl.innerHTML = createGAl;
-
-      galleryLibraryEl.addEventListener('click', renderWatchedFilmModal);
     }
   }
 }
@@ -409,8 +410,6 @@ async function renderLibraryQueue(films) {
     const createGAl = LibraryCardsMarkup(films);
     if (galleryLibraryEl) {
       galleryLibraryEl.innerHTML = createGAl;
-      // galleryLibraryEl.removeEventListener('click', renderWatchedFilmModal);
-      galleryLibraryEl.addEventListener('click', renderQueueFilmModal);
     }
   }
 }
@@ -451,7 +450,6 @@ async function renderQueueFilmModal(e) {
   const movieID = filmCardElement.dataset.movieid;
   // Забираємо обєкт фільму по ID
   const data = await getFilmById(movieID, 'queue');
-  console.log(data);
   // // Створюємо модалку
   const modalOneFilm = basicLightbox.create(modalOneFilmMarkupQueue(data));
   modalOneFilm.show();
