@@ -89,14 +89,15 @@ const pagination = new Pagination(container, {
 pagination.on('afterMove', event => {
   const currentPage = event.page;
   if (getMoviesByQueryKey) {
-    getMoviesByQueryKey(queryString, currentPage)
+    
+   return getMoviesByQueryKey(queryString, currentPage)
       .then(data => filterByGenres(data))
       .then(data => filterByYears(data))
       .then(data => filterByVotes(data))
       .then(data => renderByQuery(data))
       .catch(err => console.error(err.message));
   }
-  return
+
   render(currentPage);
 });
 
