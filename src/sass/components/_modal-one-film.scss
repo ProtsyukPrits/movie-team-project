@@ -1,6 +1,6 @@
-$basicLightbox__background: rgba(0, 0, 0, .8) !default;
+$basicLightbox__background: rgba(0, 0, 0, 0.8) !default;
 $basicLightbox__zIndex: 1000 !default;
-$basicLightbox__duration: .4s !default;
+$basicLightbox__duration: 0.4s !default;
 $basicLightbox__timing: ease !default;
 
 .basicLightbox {
@@ -13,7 +13,7 @@ $basicLightbox__timing: ease !default;
   width: 100%;
   height: 100vh;
   background: $basicLightbox__background;
-  opacity: .01; // Start with .01 to avoid the repaint that happens from 0 to .01
+  opacity: 0.01; // Start with .01 to avoid the repaint that happens from 0 to .01
   transition: opacity $basicLightbox__duration $basicLightbox__timing;
   z-index: $basicLightbox__zIndex;
   will-change: opacity;
@@ -23,10 +23,9 @@ $basicLightbox__timing: ease !default;
   }
 
   &__placeholder {
-
-    >img:first-child:last-child,
-    >video:first-child:last-child,
-    >iframe:first-child:last-child {
+    > img:first-child:last-child,
+    > video:first-child:last-child,
+    > iframe:first-child:last-child {
       display: block;
       position: absolute;
       top: 0;
@@ -38,13 +37,13 @@ $basicLightbox__timing: ease !default;
       max-height: 95%;
     }
 
-    >video:first-child:last-child,
-    >iframe:first-child:last-child {
+    > video:first-child:last-child,
+    > iframe:first-child:last-child {
       pointer-events: auto;
     }
 
-    >img:first-child:last-child,
-    >video:first-child:last-child {
+    > img:first-child:last-child,
+    > video:first-child:last-child {
       width: auto;
       height: auto;
     }
@@ -218,11 +217,12 @@ $basicLightbox__timing: ease !default;
 }
 
 .facts__name {
-  width: 110px;
+  width: 85px;
   margin-bottom: 8px;
 
   @media screen and (min-width: 768px) {
     margin-bottom: 8px;
+    width: 110px;
   }
 }
 
@@ -240,6 +240,7 @@ $basicLightbox__timing: ease !default;
   font-size: 12px;
   line-height: 1.4;
   margin-bottom: 8px;
+  width: 160px;
 
   @media screen and (min-width: 768px) {
     margin-bottom: 8px;
@@ -254,10 +255,12 @@ $basicLightbox__timing: ease !default;
   color: #fff;
   background-color: #ff6b01;
   border-radius: 5px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
   font-size: 12px;
   line-height: 14px;
+  align-items: center;
+  display: flex;
 }
 
 .facts__value-v {
