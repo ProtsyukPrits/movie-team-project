@@ -50,7 +50,7 @@ if (searchInput) {
 
   searchForm.addEventListener('submit', e => {
     e.preventDefault();
-
+    pagination.movePageTo(page);
     if (queryString === '') {
       searchForm.style.borderBottomColor = 'red';
       return Notify.info(
@@ -123,7 +123,8 @@ async function render(currentPage) {
   items = data.results;
   // console.log('items', items);
   // const validMovieData = prepareMovieData(items);
-  const createGAl = cardsMarkup(items);
+  const newItems = changeGenreArr(items);
+  const createGAl = cardsMarkup(newItems);
   if (gallery) {
     gallery.innerHTML = createGAl;
   }
