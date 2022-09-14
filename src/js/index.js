@@ -55,7 +55,7 @@ const moviesContainer = document.querySelector('.movies__container');
 const searchByGenres = document.querySelector('.header__filter-genres');
 const searchByYears = document.querySelector('.header__filter-years');
 const searchByVotes = document.querySelector('.header__filter-votes');
-
+const loadMoreBtn = document.querySelector('.container__load-more');
 // Тут додаємо слухачі подій
 if (gallery) {
   gallery.addEventListener('click', onClickOneFilmCard);
@@ -75,33 +75,27 @@ if (searchInput) {
 // ========_____Пишемо сюди основні функції_____===============
 
 // Pagination
-// ==============================================================
-// створюємо pagination event на  основі коструктора, та додаємо опції
-const pagination = new Pagination(container, {
-  totalItems: 10000,
-  itemsPerPage: 10,
-  visiblePages: 5,
-  page: 1,
-  centerAlign: true,
-});
-
-// Отримуємо номер сторінки яку обрав коистувач за допомогою (блок пагінації)
-pagination.on('afterMove', event => {
-  const currentPage = event.page;
-  if (getMoviesByQueryKey) {
-    
-   return getMoviesByQueryKey(queryString, currentPage)
-      .then(data => filterByGenres(data))
-      .then(data => filterByYears(data))
-      .then(data => filterByVotes(data))
-      .then(data => renderByQuery(data))
-      .catch(err => console.error(err.message));
-  }
-
-  render(currentPage);
-});
-
-// ==================================================================
+if (window.location.pathname === '/index.html') {
+  const pagination = new Pagination(container, {
+    totalItems: 10000,
+    itemsPerPage: 10,
+    visiblePages: 5,
+    page: 1,
+    centerAlign: true,
+  });
+  pagination.on('afterMove', event => {
+    const currentPage = event.page;
+    if (getMoviesByQueryKey) {
+      getMoviesByQueryKey(queryString, currentPage)
+        .then(data => filterByGenres(data))
+        .then(data => filterByYears(data))
+        .then(data => filterByVotes(data))
+        .then(data => renderByQuery(data))
+        .catch(err => console.error(err.message));
+    }
+    render(currentPage);
+  });
+}
 
 // Отримання масиву жанрів
 // getMoviesByGenresId()
@@ -422,6 +416,10 @@ async function renderLibraryWatched(films) {
       galleryLibraryEl.innerHTML = createGAl;
     }
   }
+  console.log(films.length);
+  if (films.length > 12) {
+    loadMoreBtn.classList.add('show');
+  }
 }
 
 // Функція рендеру карток за "Queue" списком
@@ -436,6 +434,10 @@ async function renderLibraryQueue(films) {
     if (galleryLibraryEl) {
       galleryLibraryEl.innerHTML = createGAl;
     }
+  }
+  console.log(films.length < 12);
+  if (films.length > 12) {
+    loadMoreBtn.classList.add('show');
   }
 }
 
