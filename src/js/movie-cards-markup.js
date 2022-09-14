@@ -117,8 +117,8 @@ function modalOneFilmMarkup({
                                 <p class="facts__name ">Genre</p>
                             </div>
                             <div class="onefilm__facts-value">
-                                <p class="facts__value "><span class="facts__value-vote">${vote_average}</span> / <span class="facts__val"> ${vote_count} </span> </p>
-                                <p class="facts__value facts__value-vot">${popularity}</p>
+                                <p class="facts__value "><span class="facts__value-vote">${vote_average.toFixed(1)}</span> / <span class="facts__val"> ${vote_count} </span> </p>
+                                <p class="facts__value facts__value-vot">${popularity.toFixed(2)}</p>
                                 <p class="facts__value facts__value-vo">${original_title}</p>
                                 <p class="facts__value facts__value-v">${genres
                                   .map(genr => genr.name)
@@ -245,7 +245,7 @@ function modalOneFilmMarkupWatched({
                             </div>
                             <div class="onefilm__facts-value">
                                 <p class="facts__value"><span class="facts__value-vote">${vote_average.toFixed(
-                                  2
+                                  1
                                 )}</span> / ${vote_count}</p>
                                 <p class="facts__value facts__value-vot">${popularity.toFixed(
                                   2
