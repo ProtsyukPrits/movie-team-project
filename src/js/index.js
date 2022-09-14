@@ -56,7 +56,7 @@ const moviesContainer = document.querySelector('.movies__container');
 const searchByGenres = document.querySelector('.header__filter-genres');
 const searchByYears = document.querySelector('.header__filter-years');
 const searchByVotes = document.querySelector('.header__filter-votes');
-
+const loadMoreBtn = document.querySelector('.container__load-more');
 // Тут додаємо слухачі подій
 if (gallery) {
   gallery.addEventListener('click', onClickOneFilmCard);
@@ -76,8 +76,9 @@ if (searchInput) {
 // ========_____Пишемо сюди основні функції_____===============
 
 // Pagination
-// ==============================================================
-// створюємо pagination event на  основі коструктора, та додаємо опції
+
+// Отримуємо номер сторінки яку обрав коистувач за допомогою (блок пагінації)
+
 const pagination = new Pagination(container, {
   totalItems: 10000,
   itemsPerPage: 10,
@@ -85,11 +86,8 @@ const pagination = new Pagination(container, {
   page: 1,
   centerAlign: true,
 });
-
-// Отримуємо номер сторінки яку обрав коистувач за допомогою (блок пагінації)
 pagination.on('afterMove', event => {
   currentPage = event.page;
-  console.log(getMoviesByQueryKey);
   if (queryString) {
     getMoviesByQueryKey(queryString, currentPage)
       .then(data => filterByGenres(data))
@@ -101,8 +99,6 @@ pagination.on('afterMove', event => {
     render(currentPage);
   }
 });
-
-// ==================================================================
 
 // Отримання масиву жанрів
 // getMoviesByGenresId()
@@ -268,13 +264,19 @@ async function onClickOneFilmCard(e) {
 
   btnToWatchedEl.addEventListener(
     'click',
-    () => addFilmToWatched(currentFilmData),
+    () => {
+      addFilmToWatched(currentFilmData);
+      modalOneFilm.close();
+    },
     { once: true }
   );
 
   btnToQueueEl.addEventListener(
     'click',
-    () => addFilmToQueue(currentFilmData),
+    () => {
+      addFilmToQueue(currentFilmData);
+      modalOneFilm.close();
+    },
     { once: true }
   );
 
@@ -289,8 +291,10 @@ async function onClickOneFilmCard(e) {
   ///Закриваємо модалку по 'Escape'
   window.addEventListener('keydown', closeByKey);
   function closeByKey(e) {
-    modalOneFilm.close();
-    window.removeEventListener('keydown', closeByKey);
+    if (e.code === 'Escape') {
+      modalOneFilm.close();
+      window.removeEventListener('keydown', closeByKey);
+    }
   }
 }
 
@@ -415,6 +419,10 @@ async function renderLibraryWatched(films) {
       galleryLibraryEl.innerHTML = createGAl;
     }
   }
+  console.log(films.length);
+  if (films.length > 12) {
+    loadMoreBtn.classList.add('show');
+  }
 }
 
 // Функція рендеру карток за "Queue" списком
@@ -429,6 +437,10 @@ async function renderLibraryQueue(films) {
     if (galleryLibraryEl) {
       galleryLibraryEl.innerHTML = createGAl;
     }
+  }
+  console.log(films.length < 12);
+  if (films.length > 12) {
+    loadMoreBtn.classList.add('show');
   }
 }
 
