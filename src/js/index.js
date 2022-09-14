@@ -42,6 +42,7 @@ let items = [];
 let page = 1;
 let currentFilmData = {};
 let genresArr = [];
+let totalResults = [];
 
 // Наш реф по якому ми звертаємось!
 const gallery = document.querySelector('.movies__gallery');
@@ -77,7 +78,7 @@ if (searchInput) {
 // ==============================================================
 // створюємо pagination event на  основі коструктора, та додаємо опції
 const pagination = new Pagination(container, {
-  totalItems: 1000,
+  totalItems: 10000,
   itemsPerPage: 10,
   visiblePages: 5,
   page: 1,
@@ -87,7 +88,14 @@ const pagination = new Pagination(container, {
 // Отримуємо номер сторінки яку обрав коистувач за допомогою (блок пагінації)
 pagination.on('afterMove', event => {
   const currentPage = event.page;
-  // console.log(currentPage);
+  if (getMoviesByQueryKey) {
+    getMoviesByQueryKey(queryString, currentPage)
+      .then(data => filterByGenres(data))
+      .then(data => filterByYears(data))
+      .then(data => filterByVotes(data))
+      .then(data => renderByQuery(data))
+      .catch(err => console.error(err.message));
+  }
   render(currentPage);
 });
 
@@ -120,11 +128,12 @@ function changeGenreArr(items) {
   });
   return arr;
 }
-
 // Функція для виклику карток за популярним рейтингом
 async function render(currentPage) {
   const data = await trendingFetch(currentPage);
   items = data.results;
+  totalResults.push(data.total_results);
+
   // console.log('items', items);
   // const validMovieData = prepareMovieData(items);
   const newItems = changeGenreArr(items);
