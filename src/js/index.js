@@ -80,27 +80,28 @@ if (searchInput) {
 // Pagination
 
 // Отримуємо номер сторінки яку обрав коистувач за допомогою (блок пагінації)
-
-const pagination = new Pagination(container, {
-  totalItems: 10000,
-  itemsPerPage: 10,
-  visiblePages: 5,
-  page: 1,
-  centerAlign: true,
-});
-pagination.on('afterMove', event => {
-  currentPage = event.page;
-  if (queryString) {
-    getMoviesByQueryKey(queryString, currentPage)
-      .then(data => filterByGenres(data))
-      .then(data => filterByYears(data))
-      .then(data => filterByVotes(data))
-      .then(data => renderByQuery(data))
-      .catch(err => console.error(err.message));
-  } else {
-    render(currentPage);
-  }
-});
+if (window.location.pathname === '/movie-team-project/index.html') {
+  const pagination = new Pagination(container, {
+    totalItems: 10000,
+    itemsPerPage: 10,
+    visiblePages: 5,
+    page: 1,
+    centerAlign: true,
+  });
+  pagination.on('afterMove', event => {
+    currentPage = event.page;
+    if (queryString) {
+      getMoviesByQueryKey(queryString, currentPage)
+        .then(data => filterByGenres(data))
+        .then(data => filterByYears(data))
+        .then(data => filterByVotes(data))
+        .then(data => renderByQuery(data))
+        .catch(err => console.error(err.message));
+    } else {
+      render(currentPage);
+    }
+  });
+}
 
 // Отримання масиву жанрів
 // getMoviesByGenresId()
@@ -428,7 +429,7 @@ async function renderLibraryWatched(films) {
       galleryLibraryEl.innerHTML = createGAl;
     }
   }
-  console.log(films.length);
+  // console.log(films.length);
   if (films.length > 12) {
     loadMoreBtn.classList.add('show');
   }
@@ -447,7 +448,7 @@ async function renderLibraryQueue(films) {
       galleryLibraryEl.innerHTML = createGAl;
     }
   }
-  console.log(films.length < 12);
+  // console.log(films.length < 12);
   if (films.length > 12) {
     loadMoreBtn.classList.add('show');
   }
