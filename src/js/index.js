@@ -40,6 +40,7 @@ let genreValue = 0;
 let votesValue = 1;
 let items = [];
 let page = 1;
+let currentPage = 1;
 let currentFilmData = {};
 let genresArr = [];
 let totalResults = [];
@@ -75,27 +76,29 @@ if (searchInput) {
 // ========_____Пишемо сюди основні функції_____===============
 
 // Pagination
-if (window.location.pathname === '/index.html') {
-  const pagination = new Pagination(container, {
-    totalItems: 10000,
-    itemsPerPage: 10,
-    visiblePages: 5,
-    page: 1,
-    centerAlign: true,
-  });
-  pagination.on('afterMove', event => {
-    const currentPage = event.page;
-    if (getMoviesByQueryKey) {
-      getMoviesByQueryKey(queryString, currentPage)
-        .then(data => filterByGenres(data))
-        .then(data => filterByYears(data))
-        .then(data => filterByVotes(data))
-        .then(data => renderByQuery(data))
-        .catch(err => console.error(err.message));
-    }
+
+// Отримуємо номер сторінки яку обрав коистувач за допомогою (блок пагінації)
+
+const pagination = new Pagination(container, {
+  totalItems: 10000,
+  itemsPerPage: 10,
+  visiblePages: 5,
+  page: 1,
+  centerAlign: true,
+});
+pagination.on('afterMove', event => {
+  currentPage = event.page;
+  if (queryString) {
+    getMoviesByQueryKey(queryString, currentPage)
+      .then(data => filterByGenres(data))
+      .then(data => filterByYears(data))
+      .then(data => filterByVotes(data))
+      .then(data => renderByQuery(data))
+      .catch(err => console.error(err.message));
+  } else {
     render(currentPage);
-  });
-}
+  }
+});
 
 // Отримання масиву жанрів
 // getMoviesByGenresId()
@@ -138,7 +141,7 @@ async function render(currentPage) {
     gallery.innerHTML = createGAl;
   }
 }
-render(page);
+render(currentPage);
 
 // Функція пошуку фільмів
 function onSubmitSearchBtn(e) {
@@ -150,7 +153,7 @@ function onSubmitSearchBtn(e) {
       'Please, type the title of the film, and click the search button'
     );
   }
-  return getMoviesByQueryKey(queryString)
+  return getMoviesByQueryKey(queryString, currentPage)
     .then(data => filterByGenres(data))
     .then(data => filterByYears(data))
     .then(data => filterByVotes(data))
@@ -291,7 +294,7 @@ async function onClickOneFilmCard(e) {
     if (e.code === 'Escape') {
       modalOneFilm.close();
       window.removeEventListener('keydown', closeByKey);
-    }      
+    }
   }
 }
 
