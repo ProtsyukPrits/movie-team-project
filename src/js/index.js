@@ -46,6 +46,7 @@ let currentPage = 1;
 let currentFilmData = {};
 let genresArr = [];
 let totalResults = [];
+let pagination;
 
 // Наш реф по якому ми звертаємось!
 const gallery = document.querySelector('.movies__gallery');
@@ -80,8 +81,8 @@ if (searchInput) {
 // Pagination
 
 // Отримуємо номер сторінки яку обрав коистувач за допомогою (блок пагінації)
-if (window.location.pathname === '/movie-team-project/index.html') {
-  const pagination = new Pagination(container, {
+if (window.location.pathname === '/index.html') {
+  pagination = new Pagination(container, {
     totalItems: 10000,
     itemsPerPage: 10,
     visiblePages: 5,
