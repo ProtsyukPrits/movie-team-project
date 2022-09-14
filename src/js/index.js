@@ -96,6 +96,7 @@ if (window.location.pathname === '/index.html') {
     render(currentPage);
   });
 }
+
 // Отримання масиву жанрів
 // getMoviesByGenresId()
 //   .then(data => genresArr.push(...data))
@@ -260,13 +261,19 @@ async function onClickOneFilmCard(e) {
 
   btnToWatchedEl.addEventListener(
     'click',
-    () => addFilmToWatched(currentFilmData),
+    () => {
+      addFilmToWatched(currentFilmData);
+      modalOneFilm.close();
+    },
     { once: true }
   );
 
   btnToQueueEl.addEventListener(
     'click',
-    () => addFilmToQueue(currentFilmData),
+    () => {
+      addFilmToQueue(currentFilmData);
+      modalOneFilm.close();
+    },
     { once: true }
   );
 
@@ -281,8 +288,10 @@ async function onClickOneFilmCard(e) {
   ///Закриваємо модалку по 'Escape'
   window.addEventListener('keydown', closeByKey);
   function closeByKey(e) {
-    modalOneFilm.close();
-    window.removeEventListener('keydown', closeByKey);
+    if (e.code === 'Escape') {
+      modalOneFilm.close();
+      window.removeEventListener('keydown', closeByKey);
+    }      
   }
 }
 
