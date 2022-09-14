@@ -81,9 +81,82 @@ input:checked+.header-form__slider:before {
 }
 
 body.dark {
+  .login-modal {
+    background-color:#000;
+  }
+
+  .login-modal-close-icon {
+    fill:#8c8c8c;
+  }
+
+  .login-btn, .signup-btn {
+    color:#8c8c8c;
+    background-color:#000;
+    border: 1px solid #8c8c8c;
+  }
+
+  .modal__onefilm {
+    background-color:#000;
+  }
+
+  .onefilm__title {
+    color:#8c8c8c;
+  }
+
+
+  
+  .facts__val {
+    color:#8c8c8c;
+    background-color:#000;
+  }
+
+
+  .button__secondary {
+    color:#8c8c8c;
+    background-color:#000;
+    border: 1px solid #8c8c8c;
+  }
+
+  .button__secondary {
+    color:#8c8c8c;
+    background-color:#000;
+    border: 1px solid #8c8c8c;
+  }
+
+  .onefilm__icon--close {
+    background-color:#000;
+  }
+
+  .icon--close  {
+    stroke:#8c8c8c;
+    background-color:#000;
+  }
+  
+
+
+  .facts__value {
+    color:#8c8c8c;
+  }
+
+  .about__text {
+    color:#8c8c8c;
+  }
+
   .footer {
     background: #000;
     color: #fff;
+  }
+
+  .person__name {
+    color:#000;
+  }
+
+  .modal {
+    background-color:#000;
+  }
+
+  .footer__person {
+    background-color:#333;
   }
 }
 
