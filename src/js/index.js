@@ -19,7 +19,7 @@ import {
   getUserWatchedMovies,
   LibraryCardsMarkup,
 } from './movie-cards-markup';
-
+import { genreIdName } from './config/genre-id-name';
 import { prepareMovieData } from './prepare-movie-data';
 import Pagination from 'tui-pagination';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
@@ -102,9 +102,9 @@ pagination.on('afterMove', event => {
 // ==================================================================
 
 // Отримання масиву жанрів
-getMoviesByGenresId()
-  .then(data => genresArr.push(...data))
-  .catch(err => console.error(err.message));
+// getMoviesByGenresId()
+//   .then(data => genresArr.push(...data))
+//   .catch(err => console.error(err.message));
 
 // Функція редагування отриманого респонсу
 function changeGenreArr(items) {
@@ -112,7 +112,7 @@ function changeGenreArr(items) {
     const { genre_ids } = item;
 
     let allGenres = [];
-    genresArr.map(genreObj => {
+    genreIdName.map(genreObj => {
       if (genre_ids.includes(genreObj.id)) {
         allGenres.push(genreObj.name);
         item.genres = allGenres;
@@ -167,18 +167,18 @@ function renderByQuery(filteredList) {
   const noResultsCard = document.querySelector('.movies__not-found');
   if (filteredList.length === 0) {
     if (noResultsCard) {
-      noResultsCard.classList.add('hidden');
+      noResultsCard.remove();
     }
     gallery.innerHTML = '';
-    render(page);
-    // pagSection.classList.add('hidden');
+    // render(page);
+    pagSection.classList.add('visually-hidden');
     return createNoResultsCard();
   }
   gallery.innerHTML = '';
   if (noResultsCard) {
-    noResultsCard.classList.add('hidden');
+    noResultsCard.remove();
   }
-
+  pagSection.classList.remove('visually-hidden');
   const newGenresArr = changeGenreArr(filteredList);
   const listOfCards = cardsMarkup(newGenresArr);
   return gallery.insertAdjacentHTML('afterbegin', listOfCards);
