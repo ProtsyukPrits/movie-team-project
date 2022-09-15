@@ -33,6 +33,7 @@ import {
   getFilmById,
   addtoWatchedAndDeleteFromQueue,
   deleteMovieFromQueue,
+  deleteMovieFromWatched,
 } from './firebase/index';
 import loading from './spinner.js';
 // Тут додаємо ваші глобальні змінні
@@ -470,6 +471,17 @@ async function renderWatchedFilmModal(e) {
   // // Створюємо модалку
   const modalOneFilm = basicLightbox.create(modalOneFilmMarkupWatched(data));
   modalOneFilm.show();
+  const deleteMovieBtn = document.querySelector('[data-to-delete-watched]');
+
+  deleteMovieBtn.addEventListener(
+    'click',
+    () => {
+      deleteMovieFromWatched(data);
+      modalOneFilm.close();
+      onWatchedBtn();
+    },
+    { once: true }
+  );
 
   ///Закриваємо модалку по кнопці
   const buttonModalClose = document.querySelector('.onefilm__icon--close');

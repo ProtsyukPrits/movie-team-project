@@ -144,6 +144,12 @@ export function deleteMovieFromQueue(filmData) {
   deleteDoc(doc(colRef, auth.currentUser.uid, 'queue', filmData.id.toString()));
 }
 
+export function deleteMovieFromWatched(filmData) {
+  deleteDoc(
+    doc(colRef, auth.currentUser.uid, 'watched', filmData.id.toString())
+  );
+}
+
 export function addtoWatchedAndDeleteFromQueue(filmData) {
   setDoc(
     doc(colRef, auth.currentUser.uid, 'watched', filmData.id.toString()),

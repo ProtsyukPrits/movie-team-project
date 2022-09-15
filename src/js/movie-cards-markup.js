@@ -117,8 +117,12 @@ function modalOneFilmMarkup({
                                 <p class="facts__name ">Genre</p>
                             </div>
                             <div class="onefilm__facts-value">
-                                <p class="facts__value "><span class="facts__value-vote">${vote_average.toFixed(1)}</span> / <span class="facts__val"> ${vote_count} </span> </p>
-                                <p class="facts__value facts__value-vot">${popularity.toFixed(2)}</p>
+                                <p class="facts__value "><span class="facts__value-vote">${vote_average.toFixed(
+                                  1
+                                )}</span> / <span class="facts__val"> ${vote_count} </span> </p>
+                                <p class="facts__value facts__value-vot">${popularity.toFixed(
+                                  2
+                                )}</p>
                                 <p class="facts__value facts__value-vo">${original_title}</p>
                                 <p class="facts__value facts__value-v">${genres
                                   .map(genr => genr.name)
@@ -198,7 +202,7 @@ function modalOneFilmMarkupQueue({
                         <div class="actions">
                         <ul class="card__button-wrap">
                             <li class="card__button">
-                                <button type="button" class="button__secondary lang-to-watched" id="to-watched" data-to-watched-library data-movieID='${id}'>add to watched</button>
+                                <button type="button" class="button__secondary lang-to-watched" id="to-watched" data-to-watched-library data-movieID='${id}'>move to watched</button>
                             </li>
                             <li class="card__button">
                                 <button type="button" class="button__secondary lang-to-delete" id="to-delete" data-to-delete data-movieID='${id}'>delete</button>
@@ -261,7 +265,11 @@ function modalOneFilmMarkupWatched({
                             <p class="about__text">${overview}</p>
                         </div>
                         <div class="actions">
-                    
+                        <ul class="card__button-wrap">
+                            <li class="card__button">
+                                <button type="button" class="button__secondary lang-to-delete" id="to-delete" data-to-delete-watched data-movieID='${id}'>delete</button>
+                            </li>
+                        </ul>
                         </div>
                     </div>
                     </div>
