@@ -33,7 +33,7 @@ initializeApp(firebaseConfig);
 
 // init services
 
-const auth = getAuth();
+export const auth = getAuth();
 const db = getFirestore();
 
 // inner references

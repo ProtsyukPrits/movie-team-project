@@ -1,3 +1,5 @@
+import { auth } from './firebase/index';
+
 const cardsMarkup = function (items) {
   return items
     .map(
@@ -134,14 +136,18 @@ function modalOneFilmMarkup({
                             <p class="about__text">${overview}</p>
                         </div>
                         <div class="actions">
-                        <ul class="card__button-wrap">
+                        ${
+                          auth.currentUser
+                            ? `<ul class="card__button-wrap">
                             <li class="card__button">
                                 <button type="button" class="button__secondary lang-to-watched" id="to-watched" data-to-watched data-movieID='${id}'>add to watched</button>
                             </li>
                             <li class="card__button">
                                 <button type="button" class="button__secondary lang-to-queue" id="to-queue" data-to-queue data-movieID='${id}'>add to queue</button>
                             </li>
-                        </ul>
+                        </ul>`
+                            : `<p style="color:red; font-size:12px">Please log in to add films</p>`
+                        }
                         </div>
                     </div>
                     </div>

@@ -34,6 +34,7 @@ import {
   addtoWatchedAndDeleteFromQueue,
   deleteMovieFromQueue,
   deleteMovieFromWatched,
+  auth,
 } from './firebase/index';
 import loading from './spinner.js';
 import { doc } from 'firebase/firestore';
@@ -271,7 +272,7 @@ async function onClickOneFilmCard(e) {
 
   if (currentFilmData.genres.length === 0) {
     genre.classList.add('zero-element');
-  } 
+  }
   if (currentFilmData.overview === '') {
     about.classList.add('zero-element');
   }
@@ -280,46 +281,55 @@ async function onClickOneFilmCard(e) {
   const btnToWatchedEl = document.querySelector('[data-to-watched]');
   const btnToQueueEl = document.querySelector('[data-to-queue]');
 
-  const isFilmInUserQueueCol = await getFilmById(
-    currentFilmData.id.toString(),
-    'queue'
-  );
+  let isFilmInUserQueueCol;
+  let isFilmInUserWatchedCol;
 
-  const isFilmInUserWatchedCol = await getFilmById(
-    currentFilmData.id.toString(),
-    'watched'
-  );
+  if (auth.currentUser) {
+    isFilmInUserQueueCol = await getFilmById(
+      currentFilmData.id.toString(),
+      'queue'
+    );
 
-  if (isFilmInUserWatchedCol) {
-    btnToWatchedEl.textContent = 'is already in watched';
-    btnToWatchedEl.disabled = true;
-    btnToWatchedEl.classList.remove('button__secondary');
-    btnToWatchedEl.classList.add('disabled-btn');
-  } else {
-    btnToWatchedEl.addEventListener(
-      'click',
-      () => {
-        addFilmToWatched(currentFilmData);
-        modalOneFilm.close();
-      },
-      { once: true }
+    isFilmInUserWatchedCol = await getFilmById(
+      currentFilmData.id.toString(),
+      'watched'
     );
   }
 
-  if (isFilmInUserQueueCol) {
-    btnToQueueEl.textContent = 'is already in queue';
-    btnToQueueEl.disabled = true;
-    btnToQueueEl.classList.remove('button__secondary');
-    btnToQueueEl.classList.add('disabled-btn');
-  } else {
-    btnToQueueEl.addEventListener(
-      'click',
-      () => {
-        addFilmToQueue(currentFilmData);
-        modalOneFilm.close();
-      },
-      { once: true }
-    );
+  if (btnToWatchedEl) {
+    if (isFilmInUserWatchedCol) {
+      btnToWatchedEl.textContent = 'is already in watched';
+      btnToWatchedEl.disabled = true;
+      btnToWatchedEl.classList.remove('button__secondary');
+      btnToWatchedEl.classList.add('disabled-btn');
+    } else {
+      btnToWatchedEl.addEventListener(
+        'click',
+        () => {
+          addFilmToWatched(currentFilmData);
+          modalOneFilm.close();
+        },
+        { once: true }
+      );
+    }
+  }
+
+  if (btnToQueueEl) {
+    if (isFilmInUserQueueCol) {
+      btnToQueueEl.textContent = 'is already in queue';
+      btnToQueueEl.disabled = true;
+      btnToQueueEl.classList.remove('button__secondary');
+      btnToQueueEl.classList.add('disabled-btn');
+    } else {
+      btnToQueueEl.addEventListener(
+        'click',
+        () => {
+          addFilmToQueue(currentFilmData);
+          modalOneFilm.close();
+        },
+        { once: true }
+      );
+    }
   }
 
   ///Закриваємо модалку по кнопці
@@ -544,10 +554,10 @@ async function renderQueueFilmModal(e) {
   const data = await getFilmById(movieID, 'queue');
   // // Створюємо модалку
   const modalOneFilm = basicLightbox.create(modalOneFilmMarkupQueue(data));
-  modalOneFilm.show();   
+  modalOneFilm.show();
   const addtoWatchedBtn = document.querySelector('[data-to-watched-library]');
   const deleteMovieBtn = document.querySelector('[data-to-delete]');
-  
+
   ///Закриваємо модалку по кнопці
   const buttonModalClose = document.querySelector('.onefilm__icon--close');
   buttonModalClose.addEventListener('click', closeByClick);
