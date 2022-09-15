@@ -33,6 +33,7 @@ import {
   getFilmById,
   addtoWatchedAndDeleteFromQueue,
   deleteMovieFromQueue,
+  deleteMovieFromWatched,
 } from './firebase/index';
 import loading from './spinner.js';
 import { doc } from 'firebase/firestore';
@@ -262,8 +263,6 @@ async function onClickOneFilmCard(e) {
   currentFilmData = data;
   // Створюємо модалку
   const modalOneFilm = basicLightbox.create(modalOneFilmMarkup(data));
-
-  // Показуємо модалку
   modalOneFilm.show();
   console.log(currentFilmData);
 
@@ -281,23 +280,47 @@ async function onClickOneFilmCard(e) {
   const btnToWatchedEl = document.querySelector('[data-to-watched]');
   const btnToQueueEl = document.querySelector('[data-to-queue]');
 
-  btnToWatchedEl.addEventListener(
-    'click',
-    () => {
-      addFilmToWatched(currentFilmData);
-      modalOneFilm.close();
-    },
-    { once: true }
+  const isFilmInUserQueueCol = await getFilmById(
+    currentFilmData.id.toString(),
+    'queue'
   );
 
-  btnToQueueEl.addEventListener(
-    'click',
-    () => {
-      addFilmToQueue(currentFilmData);
-      modalOneFilm.close();
-    },
-    { once: true }
+  const isFilmInUserWatchedCol = await getFilmById(
+    currentFilmData.id.toString(),
+    'watched'
   );
+
+  if (isFilmInUserWatchedCol) {
+    btnToWatchedEl.textContent = 'is already in watched';
+    btnToWatchedEl.disabled = true;
+    btnToWatchedEl.classList.remove('button__secondary');
+    btnToWatchedEl.classList.add('disabled-btn');
+  } else {
+    btnToWatchedEl.addEventListener(
+      'click',
+      () => {
+        addFilmToWatched(currentFilmData);
+        modalOneFilm.close();
+      },
+      { once: true }
+    );
+  }
+
+  if (isFilmInUserQueueCol) {
+    btnToQueueEl.textContent = 'is already in queue';
+    btnToQueueEl.disabled = true;
+    btnToQueueEl.classList.remove('button__secondary');
+    btnToQueueEl.classList.add('disabled-btn');
+  } else {
+    btnToQueueEl.addEventListener(
+      'click',
+      () => {
+        addFilmToQueue(currentFilmData);
+        modalOneFilm.close();
+      },
+      { once: true }
+    );
+  }
 
   ///Закриваємо модалку по кнопці
   const buttonModalClose = document.querySelector('.onefilm__icon--close');
@@ -482,6 +505,17 @@ async function renderWatchedFilmModal(e) {
   // // Створюємо модалку
   const modalOneFilm = basicLightbox.create(modalOneFilmMarkupWatched(data));
   modalOneFilm.show();
+  const deleteMovieBtn = document.querySelector('[data-to-delete-watched]');
+
+  deleteMovieBtn.addEventListener(
+    'click',
+    () => {
+      deleteMovieFromWatched(data);
+      modalOneFilm.close();
+      onWatchedBtn();
+    },
+    { once: true }
+  );
 
   ///Закриваємо модалку по кнопці
   const buttonModalClose = document.querySelector('.onefilm__icon--close');
