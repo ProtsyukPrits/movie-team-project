@@ -114,7 +114,7 @@ function modalOneFilmMarkup({
                                 <p class="facts__name">Vote/Votes</p>
                                 <p class="facts__name">Popularity</p>
                                 <p class="facts__name">Original Title</p>
-                                <p class="facts__name ">Genre</p>
+                                <p class="facts__name-genre facts__name">Genre</p>
                             </div>
                             <div class="onefilm__facts-value">
                                 <p class="facts__value "><span class="facts__value-vote">${vote_average.toFixed(
