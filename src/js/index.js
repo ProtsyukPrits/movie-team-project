@@ -35,6 +35,7 @@ import {
   deleteMovieFromQueue,
 } from './firebase/index';
 import loading from './spinner.js';
+import { doc } from 'firebase/firestore';
 // Тут додаємо ваші глобальні змінні
 let queryString = '';
 let yearValue = 0;
@@ -264,6 +265,17 @@ async function onClickOneFilmCard(e) {
 
   // Показуємо модалку
   modalOneFilm.show();
+  console.log(currentFilmData);
+
+  const about = document.querySelector('.about__title');
+  const genre = document.querySelector('.facts__name-genre');
+
+  if (currentFilmData.genres.length === 0) {
+    genre.classList.add('zero-element');
+  } 
+  if (currentFilmData.overview === '') {
+    about.classList.add('zero-element');
+  }
 
   // Вішаємо слухачів на кнопки
   const btnToWatchedEl = document.querySelector('[data-to-watched]');
@@ -498,10 +510,10 @@ async function renderQueueFilmModal(e) {
   const data = await getFilmById(movieID, 'queue');
   // // Створюємо модалку
   const modalOneFilm = basicLightbox.create(modalOneFilmMarkupQueue(data));
-  modalOneFilm.show();
+  modalOneFilm.show();   
   const addtoWatchedBtn = document.querySelector('[data-to-watched-library]');
   const deleteMovieBtn = document.querySelector('[data-to-delete]');
-
+  
   ///Закриваємо модалку по кнопці
   const buttonModalClose = document.querySelector('.onefilm__icon--close');
   buttonModalClose.addEventListener('click', closeByClick);
