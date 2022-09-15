@@ -264,7 +264,7 @@ async function onClickOneFilmCard(e) {
   // Створюємо модалку
   const modalOneFilm = basicLightbox.create(modalOneFilmMarkup(data));
   modalOneFilm.show();
-  console.log(currentFilmData);
+  // console.log(currentFilmData);
 
   const about = document.querySelector('.about__title');
   const genre = document.querySelector('.facts__name-genre');
