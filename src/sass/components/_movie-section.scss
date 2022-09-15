@@ -51,3 +51,11 @@
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
+
+.library__gallery>.movie__card:nth-child(n + 13) {
+  visibility: hidden;
+}
+
+.movie__card.is-visible {
+  visibility: visible;
+}

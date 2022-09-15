@@ -85,7 +85,8 @@ if (searchInput) {
 // Отримуємо номер сторінки яку обрав коистувач за допомогою (блок пагінації)
 if (
   window.location.pathname === '/movie-team-project/index.html' ||
-  window.location.pathname === '/movie-team-project/'
+  window.location.pathname === '/movie-team-project/' ||
+  window.location.pathname === '/index.html'
 ) {
   pagination = new Pagination(container, {
     totalItems: 10000,
@@ -271,7 +272,7 @@ async function onClickOneFilmCard(e) {
 
   if (currentFilmData.genres.length === 0) {
     genre.classList.add('zero-element');
-  } 
+  }
   if (currentFilmData.overview === '') {
     about.classList.add('zero-element');
   }
@@ -468,10 +469,10 @@ async function renderLibraryWatched(films) {
       galleryLibraryEl.innerHTML = createGAl;
     }
   }
-  // console.log(films.length);
-  if (films.length > 12) {
-    loadMoreBtn.classList.add('show');
-  }
+  console.log(films.length);
+  // if (films.length > 12) {
+  //   loadMoreBtn.classList.add('show');
+  // }
 }
 
 // Функція рендеру карток за "Queue" списком
@@ -488,9 +489,9 @@ async function renderLibraryQueue(films) {
     }
   }
   // console.log(films.length < 12);
-  if (films.length > 12) {
-    loadMoreBtn.classList.add('show');
-  }
+  // if (films.length > 12) {
+  //   loadMoreBtn.classList.add('show');
+  // }
 }
 
 async function renderWatchedFilmModal(e) {
@@ -544,10 +545,10 @@ async function renderQueueFilmModal(e) {
   const data = await getFilmById(movieID, 'queue');
   // // Створюємо модалку
   const modalOneFilm = basicLightbox.create(modalOneFilmMarkupQueue(data));
-  modalOneFilm.show();   
+  modalOneFilm.show();
   const addtoWatchedBtn = document.querySelector('[data-to-watched-library]');
   const deleteMovieBtn = document.querySelector('[data-to-delete]');
-  
+
   ///Закриваємо модалку по кнопці
   const buttonModalClose = document.querySelector('.onefilm__icon--close');
   buttonModalClose.addEventListener('click', closeByClick);

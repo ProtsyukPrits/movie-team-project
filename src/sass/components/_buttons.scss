@@ -105,34 +105,17 @@
 
 .button__load-more {
   @extend %button;
-  @include btn-color($button-color, $text-color-primary);
-  @include border($border-color-dark);
-
+  @extend %button__primary;
+  @include btn-color($button-color-accent, $text-color-secondary);
+  border: 0;
   margin-left: auto;
   margin-right: auto;
-  display: none;
-  min-width: 110px;
-  height: 44px;
-  text-transform: uppercase;
-
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 1.33;
 
   &:hover,
   &:focus {
-    border: 0;
-    color: $text-color-secondary;
-    background-color: $button-color-accent;
+    background-color: $button-color-accent-hover;
   }
 
-  @media screen and (min-width: 768px) {
-    min-width: 125px;
-  }
-
-  @media screen and (min-width: 1280px) {
-    min-width: 136px;
-  }
 }
 
 .card__button:not(:last-child) {
@@ -146,6 +129,8 @@
 }
 
 .container__load-more {
+  display: flex;
+  align-items: center;
   padding-top: 40px;
   padding-bottom: 20px;
 }
