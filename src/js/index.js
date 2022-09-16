@@ -494,7 +494,7 @@ async function renderLibraryWatched(films) {
   // if (films.length > 12) {
   //   loadMoreBtn.classList.add('show');
   // }
-  loadMoreFilmOnPage(cardsLenght);
+  // loadMoreFilmOnPage(cardsLenght);
 }
 
 // Функція рендеру карток за "Queue" списком
@@ -517,32 +517,32 @@ async function renderLibraryQueue(films) {
   //   loadMoreBtn.classList.add('show');
   // }
 
-  loadMoreFilmOnPage(cardsLenght);
+  // loadMoreFilmOnPage(cardsLenght);
 }
 
 // Функція load more
 
-function loadMoreFilmOnPage(cardsLenght) {
-  // const cardsLenght = document.querySelectorAll('.movie__card').length;
-  console.log(cardsLenght);
-  if (cardsLenght === 0 || cardsLenght <= cards) {
-    loadMore.style.display = 'none';
-  } else {
-    loadMore.style.display = 'block';
-    loadMore.addEventListener('click', e => {
-      cards += 12;
-      const array = Array.from(
-        document.querySelector('.library__gallery').children
-      );
-      const visItems = array.slice(0, cards);
+// function loadMoreFilmOnPage(cardsLenght) {
+//   // const cardsLenght = document.querySelectorAll('.movie__card').length;
+//   console.log(cardsLenght);
+//   if (cardsLenght === 0 || cardsLenght <= cards) {
+//     loadMore.style.display = 'none';
+//   } else {
+//     loadMore.style.display = 'block';
+//     loadMore.addEventListener('click', e => {
+//       cards += 12;
+//       const array = Array.from(
+//         document.querySelector('.library__gallery').children
+//       );
+//       const visItems = array.slice(0, cards);
 
-      visItems.forEach(el => el.classList.add('is-visible'));
-      if (visItems.length === cardsLenght) {
-        loadMore.style.display = 'none';
-      }
-    });
-  }
-}
+//       visItems.forEach(el => el.classList.add('is-visible'));
+//       if (visItems.length === cardsLenght) {
+//         loadMore.style.display = 'none';
+//       }
+//     });
+//   }
+// }
 
 async function renderWatchedFilmModal(e) {
   e.preventDefault();
