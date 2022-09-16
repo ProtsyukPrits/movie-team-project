@@ -53,9 +53,9 @@
 }
 
 .library__gallery>.movie__card:nth-child(n + 13) {
-  visibility: hidden;
+  display: none;
 }
 
-.movie__card.is-visible {
-  visibility: visible;
+.library__gallery>.movie__card.is-visible {
+  display: block;
 }

@@ -49,6 +49,7 @@ let currentFilmData = {};
 let genresArr = [];
 let totalResults = [];
 let pagination;
+let cards = 12;
 
 // Наш реф по якому ми звертаємось!
 const gallery = document.querySelector('.movies__gallery');
@@ -61,7 +62,9 @@ const moviesContainer = document.querySelector('.movies__container');
 const searchByGenres = document.querySelector('.header__filter-genres');
 const searchByYears = document.querySelector('.header__filter-years');
 const searchByVotes = document.querySelector('.header__filter-votes');
-const loadMoreBtn = document.querySelector('.container__load-more');
+const loadMore = document.querySelector('.button__load-more');
+// const loadMoreBtn = document.querySelector('.container__load-more');
+
 // Тут додаємо слухачі подій
 if (gallery) {
   gallery.addEventListener('click', onClickOneFilmCard);
@@ -85,8 +88,12 @@ if (searchInput) {
 // Отримуємо номер сторінки яку обрав коистувач за допомогою (блок пагінації)
 if (
   window.location.pathname === '/movie-team-project/index.html' ||
-  window.location.pathname === '/movie-team-project/' ||
-  window.location.pathname === '/index.html'
+  window.location.pathname === '/movie-team-project/'
+
+  // щоб працювало локально
+  // window.location.pathname === '/movie-team-project/index.html' ||
+  // window.location.pathname === '/movie-team-project/' ||
+  // window.location.pathname === '/index.html'
 ) {
   pagination = new Pagination(container, {
     totalItems: 10000,
@@ -437,6 +444,7 @@ if (window.location.pathname === '/movie-team-project/library.html') {
 function onWatchedBtn() {
   getUserWatched().then(result => renderLibraryWatched(result));
   loading.close();
+
   btnWatchedEl.classList.add('button__primary-accent');
   btnQueueEl.classList.remove('button__primary-accent');
   galleryLibraryEl.addEventListener('click', renderWatchedFilmModal);
@@ -455,9 +463,11 @@ function onQueueBtn() {
   galleryLibraryEl.removeEventListener('click', renderWatchedFilmModal);
 }
 // ========================================================================
+
 // Функція рендеру карток за "Watched" списком
 
 async function renderLibraryWatched(films) {
+  cardsLenght = films.length;
   if (films.length === 0) {
     if (galleryLibraryEl) {
       galleryLibraryEl.innerHTML =
@@ -469,14 +479,18 @@ async function renderLibraryWatched(films) {
       galleryLibraryEl.innerHTML = createGAl;
     }
   }
-  console.log(films.length);
+
+  // console.log(films.length);
   // if (films.length > 12) {
   //   loadMoreBtn.classList.add('show');
   // }
+  loadMoreFilmOnPage(cardsLenght);
 }
 
 // Функція рендеру карток за "Queue" списком
 async function renderLibraryQueue(films) {
+  cardsLenght = films.length;
+
   if (films.length === 0) {
     if (galleryLibraryEl) {
       galleryLibraryEl.innerHTML =
@@ -492,6 +506,32 @@ async function renderLibraryQueue(films) {
   // if (films.length > 12) {
   //   loadMoreBtn.classList.add('show');
   // }
+
+  loadMoreFilmOnPage(cardsLenght);
+}
+
+// Функція load more
+
+function loadMoreFilmOnPage(cardsLenght) {
+  // const cardsLenght = document.querySelectorAll('.movie__card').length;
+  console.log(cardsLenght);
+  if (cardsLenght === 0 || cardsLenght <= cards) {
+    loadMore.style.display = 'none';
+  } else {
+    loadMore.style.display = 'block';
+    loadMore.addEventListener('click', e => {
+      cards += 12;
+      const array = Array.from(
+        document.querySelector('.library__gallery').children
+      );
+      const visItems = array.slice(0, cards);
+
+      visItems.forEach(el => el.classList.add('is-visible'));
+      if (visItems.length === cardsLenght) {
+        loadMore.style.display = 'none';
+      }
+    });
+  }
 }
 
 async function renderWatchedFilmModal(e) {
