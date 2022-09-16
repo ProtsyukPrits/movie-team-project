@@ -477,7 +477,7 @@ function onQueueBtn() {
 // Функція рендеру карток за "Watched" списком
 
 async function renderLibraryWatched(films) {
-  cardsLenght = films.length;
+  // cardsLenght = films.length;
   if (films.length === 0) {
     if (galleryLibraryEl) {
       galleryLibraryEl.innerHTML =
@@ -499,7 +499,7 @@ async function renderLibraryWatched(films) {
 
 // Функція рендеру карток за "Queue" списком
 async function renderLibraryQueue(films) {
-  cardsLenght = films.length;
+  // cardsLenght = films.length;
 
   if (films.length === 0) {
     if (galleryLibraryEl) {
